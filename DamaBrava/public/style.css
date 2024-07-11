@@ -228,3 +228,65 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+/*Estilos de la seccion de FOOTER*/
+
+
+.footer{
+    height: 45vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #a32121;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.contactos{
+    color: white;
+    padding-left: 10vw;
+    align-items: center;
+}
+.contacto1{
+    font-size: 2vw;
+    padding: 0;
+    display: flex;
+    padding: 1vw;
+}
+.contacto1 h4{
+    font-weight: bold;
+    margin: 0;
+}
+.contacto1 img{
+    width: 4vw;
+    padding:0.7vw;
+}
+.contacto1 a{
+    color: white;
+    font-weight: normal;
+}
+
+
+.direccion{
+    padding-left: 10vw;
+}
+
+.bandera{
+    display: flex;
+    flex: 1;
+    margin-top: 20px;
+    height: 2vh;
+}
+.rojo{
+    background-color: red;
+    height: 2vh;
+    width: 100%;
+}
+.amarillo{
+    background-color: yellow;
+    height: 2vh;
+    width: 100%;
+}
+.verde{
+    background-color: green;
+    height: 2vh;
+    width: 100%;
+}
