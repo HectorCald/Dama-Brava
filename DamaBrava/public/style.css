@@ -11,14 +11,18 @@
     height: 100px;
     justify-content: space-between;
     background-color: white;
+    z-index: 1;
 }
 .links{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    height: 50px;
+    height: 1vw;
     margin-right: 30px;
+}
+.links a{
+    font-size: 1.4vw;
 }
 .button{
     border-radius: 0;
@@ -32,6 +36,9 @@
     text-decoration: none;
     font-size: 18px;
 }
+.button:hover{
+    background-color: #808B96;
+}
 .logo img{
     height: 80px;
     margin-left: 50px;
@@ -41,15 +48,22 @@
     width: 90px;
 }
 .elemento{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4vw;
     margin-left: 30px;
-    margin-right: 30px;
+    margin-right: 4vw;
     text-decoration: none;
     color: black;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-
+.elemento:hover{
+    font-size: 1.5vw;
+    color: red;
+    font-weight: bold;
+}
 /*Estilos de la seccion 1 de la pagina de inicio*/
 
 .Seccion1inicio{
@@ -60,6 +74,8 @@
     justify-content: center;
     align-items: center;
     height: 45vw;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
 }
 .principalImagen{
     height: 40vw;
@@ -71,6 +87,7 @@
     font-weight: lighter;
     margin-right: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    
 }
 .Seccion1inicio .botones{
     display: flex;
@@ -100,6 +117,8 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2vw;
     height: 10vw;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
 }
 .Eslogan span{
     color: red;
@@ -117,6 +136,8 @@
     align-items: center;
     height: 45vw;
     background-color: #a32121;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
 }
 .ProductosPrevios img{
     margin-top: 1.5vw;
@@ -179,6 +200,8 @@
     height: 45vw;
     justify-content: center;
     align-items: center;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
 }
 .imagenseccion3 img{
     width: 40vw;
@@ -207,6 +230,22 @@
     font-weight: bold;
     font-size: 1.4vw;
 }
+.textoseccion3 a{
+    width: 15vw;
+    height: 3.5vw;
+    margin-top: 5px;
+    padding: 5px;
+    color: white;
+    border: none;
+    background-color: red;
+    font-weight: bold;
+    font-size: 1.6vw;
+    text-decoration: none;
+    padding: 10px;
+}
+.textoseccion3 a:hover{
+    background-color: #808B96;
+}
 
 
 /*Estilos de la seccion SIGUENOS EN REDES de la pagina de inicio*/
@@ -233,7 +272,7 @@
 
 
 .footer{
-    height: 26.5vw;
+    height: 30vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     background-color: #a32121;
@@ -249,6 +288,9 @@
 .contactos h2{
     margin: 0;
     padding: 1vw;
+}
+.contactos h1{
+    font-size: 2.5vw;
 }
 .contacto1{
     display: flex;
@@ -269,7 +311,6 @@
     color: white;
     font-weight: normal;
 }
-
 
 .direccion{
     padding-left: 10vw;
@@ -295,4 +336,94 @@
     background-color: green;
     height: 2vh;
     width: 100%;
+}
+
+/*Estilos de la PAGINA de NOSOTROS seccion HISTORIA*/
+
+.NOSOTROS{
+    margin-top: 100px;
+    margin-right: none;
+    justify-content: center;
+    align-items: center;
+    height: 45vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.historia{
+    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
+}
+.historia h1{
+    font-size: 4vw;
+    margin-bottom: 0;
+}
+.historia p{
+    font-size: 2vw;
+}
+.cuadroRojo{
+    background-color: red;
+    width: 130vw;
+    height: 100%;
+    margin-left:20vw ;
+}
+.imagenHistoria{
+    position: absolute;
+    margin-left: 60vw;
+    height: 37vw;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+/*Estilos de la PAGINA de NOSOTROS seccion MISION y VISION*/
+
+.mision-vision{
+    color: white;
+    display: flex;
+    background-color: #a32121;
+    padding: 50px;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
+}
+.mision-vision img{
+    height: 25vw;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+.mision-vision h1{
+    display: inline;
+    font-size: 4vw;
+    border-bottom:5px solid red;
+}
+.mision-vision p{
+    font-size: 1.5vw;
+}
+.mision, .vision{
+    padding: 20px;
+}
+
+/*Estilos de la PAGINA de NOSOTROS seccion VALORES*/
+
+.valores{
+    display: flex;
+    justify-content: left;
+    padding: 50px;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
+}
+.valores img{
+    height: 30vw;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    margin-left: 10vw;
+}
+.valores h1{
+    font-size: 4vw;
+}
+.valores ul{
+    font-size: 3vw;
+}
+
+.show {
+    opacity: 1; /* Mostrar la div al añadir la clase 'show' */
 }

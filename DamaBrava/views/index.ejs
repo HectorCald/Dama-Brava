@@ -48,8 +48,27 @@
         <div class="textoseccion3">
             <h1>NOSOTROS</h1>
             <p>"Somos la esencia de la cocina boliviana en cada frasco. Con nuestros condimentos, llevamos el autentico sabor de Bolivia a tu mesa. desde los sabores tradicionales hasta las creaciones mas innovadoras, cada vocado es un viaje a traves de nuestra rica herencia culinaria. Unete a nosotros y descubre como nuestras especias transforman tus platos en experienciaas inolvidables, elevando tu cocina al nivel nacional."</p>
-            <button>Más de Nosotros</button>
+            <a href="/nosotros">Más de Nosotros</a>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var sections = document.querySelectorAll(".Eslogan, .Seccion2inicio, .Seccion3inicio, .Seccion1inicio");
+            function showOnScroll() {
+                for (var i = 0; i < sections.length; i++) {
+                    var section = sections[i];
+                    var positionFromTop = section.getBoundingClientRect().top;
+                    var windowHeight = window.innerHeight;
+                    if (positionFromTop - windowHeight <= 0) {
+                        section.classList.add("show");
+                    }
+                }
+            }
+            window.addEventListener("scroll", showOnScroll);
+            window.dispatchEvent(new Event("scroll")); // Mostrar las secciones visibles inicialmente
+        });
+    </script>
     <%- include("./Partials/footer.ejs") %> 
     

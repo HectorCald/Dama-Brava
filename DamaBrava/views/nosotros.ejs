@@ -1,5 +1,53 @@
 <%- include("./Partials/header.ejs") %>    
 <body>
-    <h1>Productos aquinewrnjiwenijewncjieneij!</h1>
+    
+    <div class="historia NOSOTROS">
+        <div>
+            <h1>NUESTRA HISTORIA</h1>
+        <p>La historia de damabrava inicia con nuestra abuelita “Amapolita” originaria de Sucre, quién a sus 60 años de edad luchaba por su libertad personal y financiera a través de la adquisición de molinos de ají. Posteriormente siguió este camino nuestro papá y actualmente nosotros con sueños de que esté emprendimiento crezca se decidió dar el brinco de ser “molineros” a “empresa industrial y comercializadora de especias y condimentos” automatizando y trabajando en cada detalle para garantizar la calidad de nuestros productos, siempre con la meta de mejorar.
+            <br>DamaBrava es una empresa boliviana especialista en el rubro del ají. Nos dedicamos al procesamiento industrial de: condimentos, especias, plantas aromáticas y ajíes</p>
+        </div>
+        <div class="cuadroRojo"></div>
+        <img class="imagenHistoria" src="./Imagenes/historia.png" alt="">
+    </div>
+    <div class="mision-vision NOSOTROS">
+        <img src="./Imagenes/Imagen Vision Mision.jpeg" alt="">
+        <div class="mision">
+            <h1>MISIÓN</h1>
+            <p>Brindar excelentes sabores tradicionales de especias y condimentos. Trabajamos para mejorar la calidad de nuestros productos que marquen la diferencia, contribuyendo a la cálida de vida, a un futuro más saludable y desarrollo del pais</p>
+        </div>
+        <div class="vision">
+            <h1>VISIÓN</h1>
+            <p>Ser una empresa líder en el procesamiento y comercialización de especias, condimentos para la industria alimentaria, ofreciendo productos y servicios de alta calidad para diferentes mercados, que satisfagan las necesidades de los clientes marcando la diferencia en sus vidas. Lograr ser líderes en el mercado nacional y referente a nivel mundial</p>
+        </div>
+    </div>
+    <div class="valores NOSOTROS">
+        <div class="textoValores">
+            <h1>VALORES</h1>
+            <ul>
+                <li>Compromiso con la calidad</li>
+                <li>Trabajo en equipo</li>
+                <li>Honestidad</li>
+            </ul>
+        </div>
+        <img src="./Imagenes/imagen seccion Valores.jpeg" alt="">
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var sections = document.querySelectorAll(".historia, .valores, .mision-vision");
+            function showOnScroll() {
+                for (var i = 0; i < sections.length; i++) {
+                    var section = sections[i];
+                    var positionFromTop = section.getBoundingClientRect().top;
+                    var windowHeight = window.innerHeight;
+                    if (positionFromTop - windowHeight <= 0) {
+                        section.classList.add("show");
+                    }
+                }
+            }
+            window.addEventListener("scroll", showOnScroll);
+            window.dispatchEvent(new Event("scroll")); // Mostrar las secciones visibles inicialmente
+        });
+    </script>
 </body>
 <%- include("./Partials/footer.ejs") %> 
