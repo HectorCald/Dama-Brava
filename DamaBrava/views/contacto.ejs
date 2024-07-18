@@ -1,5 +1,68 @@
 <%- include("./Partials/header.ejs") %>    
-<body>
-    <h1>Productos aquinewrnjiwenijewncjieneij!</h1>
+
+    <h1 class="titulo-contactos">CONTACTANOS</h1>
+    <div class="contactos-ubicacion">
+        <div class="contactos">
+            <h1>NUESTRAS REDES</h1>
+            <div class="contacto1">
+                <img src="./Imagenes/Icon-Whatsapp.png" alt="">
+                <div>
+                    <h4>WHATSAPP</h4>
+                    <a href="">+591 70325449</a>
+                </div>
+            </div>
+            <div class="contacto1">
+                <img src="./Imagenes/Icon-gmail.png" alt="">
+                <div>
+                    <h4>CORREO ELECTRONICO</h4>
+                    <a href="">@damabrava.com</a>
+                </div>
+            </div>
+            <div class="contacto1">
+                <img src="./Imagenes/Icon-facebook.png" alt="">
+                <div>
+                    <h4>FACEBOOK</h4>
+                    <a href="">@Damabrava</a>
+                </div>
+            </div>
+            <div class="contacto1">
+                <img src="./Imagenes/Icon-instagram.png" alt="">
+                <div>
+                    <h4>INSTAGRAM</h4>
+                    <a href="">@damabrava_bolivia</a>
+                </div>
+            </div>
+            <div class="contacto1">
+                <img src="./Imagenes/Icon-youtube.png" alt="">
+                <div>
+                    <h4>YOUTUBE</h4>
+                    <a href="">@damabrava</a>
+                </div>
+            </div>
+        </div>
+        <div class="direccion">
+            <h2 class="titulo-direccion">DIRECCION</h2>
+            <h4 class="texto-ubicacion">Planta: Plazuela Bolivia libre #2 Sucre, Bolivia</h4>
+            <a class="boton-maps" href="https://maps.app.goo.gl/yebvy5XFCSAiXHZj6">Ir a Google Maps</a>
+        </div>
+    </div>
+    <img class="condimento1" src="./Imagenes/condimento2.png" alt="">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var sections = document.querySelectorAll(".titulo-contactos, .condimento1, .contactos-ubicacion");
+            function showOnScroll() {
+                for (var i = 0; i < sections.length; i++) {
+                    var section = sections[i];
+                    var positionFromTop = section.getBoundingClientRect().top;
+                    var windowHeight = window.innerHeight;
+                    if (positionFromTop - windowHeight <= 0) {
+                        console.log("Adding show class to:", section);
+                        section.classList.add("show");
+                    }
+                }
+            }
+            window.addEventListener("scroll", showOnScroll);
+            window.dispatchEvent(new Event("scroll")); // Mostrar las secciones visibles inicialmente
+        });
+    </script>
 </body>
-<%- include("./Partials/footer.ejs") %> 

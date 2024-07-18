@@ -425,5 +425,67 @@
 }
 
 .show {
-    opacity: 1; /* Mostrar la div al añadir la clase 'show' */
+    opacity: 1 !important; /* Mostrar la div al añadir la clase 'show' */
+}
+
+
+/* Estilos de la Pagina CONTACTOS*/
+
+.titulo-contactos{
+    margin-top: 100px;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4vw;
+    color: #a32121;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
+}
+
+.contactos-ubicacion{
+    display: flex;
+    height: 45vh;
+    justify-content: center;
+    align-items: top;
+    color: #a32121;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
+}
+.contactos-ubicacion a{
+    color: #a32121;
+}
+.contactos-ubicacion h4{
+    color: #a32121;
+}
+.contactos-ubicacion img{
+    margin-right: 10px;
+    background-color: #a32121;
+    border-radius: 10px;
+}
+.contactos-ubicacion h1{
+    color: #a32121;
+}
+.contactos-ubicacion .contacto1{
+    margin: 10px;
+}
+.boton-maps{
+    height: 2vh;
+    background-color: red;
+    color: white !important;
+    padding: 1vw;
+    text-decoration: none;
+    font-weight: bold;
+}
+.titulo-direccion{
+    font-size: 2.5vw;
+}
+.texto-ubicacion{
+    font-size: 1vw;
+}
+.condimento1{
+    width: 100%;
+    top: 60vh;
+    margin-top: 0;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 3s ease; /* Transición suave de la opacidad */
 }
