@@ -1,5 +1,113 @@
 <%- include("./Partials/header.ejs") %>    
 <body>
-    <h1>Productos aquinewrnjiwenijewncjieneij!</h1>
+    <h1 class="tituloProductos">PRODUCTOS</h1>
+    <div class="principalProductos">
+        <div class="Buscador">
+            <h2>Buscar</h2>
+            <input type="text" name="buscardor" id="buscador" placeholder="Buscar...">
+            <ul class="opciones">
+                <li>Ajies</li>
+                <li>Condimentos</li>
+                <li>Especias</li>
+                <li>Frutos secos</li>
+                <li>Semillas</li>
+            </ul>
+        </div>
+        <div class="Productos">
+            <ul id="ListaArticulos">
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+            </ul>
+            <ul id="ListaArticulos">
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+            </ul>
+            <ul id="ListaArticulos">
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">HECTOR</li>
+                    </div>
+                </div>
+            </ul>
+            <ul id="ListaArticulos">
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">HUGO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+                <div class="cuadroProducto">
+                    <img src="" alt="">
+                    <div>
+                        <li class="articulo">AJI AMARILLO</li>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("keyup", e=>{
+            if(e.target.matches("#buscador")){
+                var name=document.querySelectorAll
+                document.querySelectorAll(".articulo").forEach(fruta=>{
+                fruta.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                    ?fruta.classList.remove("filtro")
+                    :fruta.classList.add("filtro")
+    })
+}
+        })
+    </script>
 </body>
 <%- include("./Partials/footer.ejs") %> 
+

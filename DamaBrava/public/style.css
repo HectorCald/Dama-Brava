@@ -78,12 +78,12 @@
     transition: opacity 3s ease; /* Transición suave de la opacidad */
 }
 .principalImagen{
-    height: 40vw;
+    height: 35vw;
     border-top-left-radius: 150px;
     border-bottom-left-radius: 150px;
 }
 .textoPrincipal{
-    font-size: 3.5vw;
+    font-size: 3.1vw;
     font-weight: lighter;
     margin-right: 10px;
     font-family: Arial, Helvetica, sans-serif;
@@ -115,7 +115,7 @@
     justify-content: center;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2vw;
+    font-size: 1.5vw;
     height: 10vw;
     opacity: 0; /* Inicialmente invisible */
     transition: opacity 3s ease; /* Transición suave de la opacidad */
@@ -141,11 +141,11 @@
 }
 .ProductosPrevios img{
     margin-top: 1.5vw;
-    width: 14vw;
+    width: 13vw;
 }
 .textoseccion2{
     width: 50vw;
-    font-size: 2.2vw;
+    font-size: 1.8vw;
     margin-right: 10px;
     margin-left: 50px;
     color: white;
@@ -154,23 +154,23 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    width: 50vw;
+    width: 45vw;
     margin-right: 80px;
 }
 .textoseccion2 button{
-    width: 15vw;
-    height: 3.5vw;
+    width: 13vw;
+    height: 3vw;
     margin-top: 5px;
     padding: 5px;
     color: white;
     border: none;
     background-color: red;
     font-weight: bold;
-    font-size: 1.4vw;
+    font-size: 1vw;
 }
 .productoinicio{
-    width: 16vw;
-    height: 19vw;
+    width: 14vw;
+    height: 17vw;
     margin: 10px;
     border-radius: 10px;
     background-color: #e58b8b;
@@ -189,7 +189,7 @@
     padding-bottom: 0.5vw;
     border-radius: 5px;
     border: solid white 1px;
-    font-size: 1.5vw ;
+    font-size: 1vw ;
 }
 
 
@@ -361,7 +361,7 @@
     margin-bottom: 0;
 }
 .historia p{
-    font-size: 2vw;
+    font-size: 1.6vw;
 }
 .cuadroRojo{
     background-color: red;
@@ -372,7 +372,7 @@
 .imagenHistoria{
     position: absolute;
     margin-left: 60vw;
-    height: 37vw;
+    height: 30vw;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
     z-index: 0;
 }
@@ -488,4 +488,83 @@
     margin-top: 0;
     opacity: 0; /* Inicialmente invisible */
     transition: opacity 3s ease; /* Transición suave de la opacidad */
+}
+.filtro{
+    display: none;
+}
+
+/* Estilos de la PAGINA de PRODUCTOS */
+
+.tituloProductos{
+    margin-top: 100px;
+}
+.principalProductos{
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    
+}
+.Buscador{
+    background-color: #E8E8E8;
+    width: 20%;
+    height: 35vh;
+}
+.Productos{
+    display: flex !important;
+    background-color: #E8E8E8;
+    margin-left: 30px;
+    width: 65%;
+    height: 97vh;
+}
+#buscador{
+    width: 80%;
+    height: 2.5vw;
+    margin-left: 1.5vw;
+}
+.opciones{
+    list-style-type: none;
+    margin:0;
+    padding: 1.5vw;
+}
+.opciones li{
+    padding: 0.5vh;
+}
+.Buscador h2{
+    margin-left: 1.5vw;
+}
+#ListaArticulos{
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+}
+.cuadroProducto{
+    display: flex;
+    flex-direction: column;
+    width: 13vw;
+    height: 29vh;
+    background-color: #ffffff;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.cuadroProducto div{
+    display: flex;
+    flex-direction: column;
+    background-color:#d6d6d6 ;
+    justify-content: center;
+    align-items: center;
+    width: 11vw;
+    height: 6vh;
+    padding: 0.5vw;
+}
+.cuadroProducto div li{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1vw;
+}
+.cuadroProducto img{
+    width: 12vw;
+    height: 19vh;
+    background-color:#d6d6d6;
+    margin-bottom: 0.5vh;
 }
