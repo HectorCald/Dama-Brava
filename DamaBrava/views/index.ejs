@@ -3,10 +3,10 @@
     <div class="Seccion1inicio">
         <div class="textoseccion1">
             <h1 class="textoPrincipal">"Da sabor a la vida con nuestros condimentos. Descubre el secreto detras de cada delicioso plato!"</h1>
-            <h4 class="textoSecundario">Mas de 50 productos: condimentos, ajies, especias y hierbas aromaticas.</h4>
+            <p class="textoSecundario">Mas de 50 productos: condimentos, ajies, especias y hierbas aromaticas.</p>
         <div class="botones">
-            <button>Contactanos</button>
-            <button>Ver Catálogo</button>
+            <a class="botonesg" href="/contacto">Contactanos</a>
+            <a class="botonesg" href="">Ver Catalogo</a>
         </div>
         </div>
         <div class="imagenPrincipal">
@@ -20,26 +20,46 @@
         <div class="textoseccion2">
             <h1>NUESTROS <br>PRODUCTOS</h1>
             <p>"Deja que nuestros condimentos <br> transformen tus platos simples en <br>obras maestras culinarias. Haz de <br>cada comida una experiencia <br>extraordinaria"</p>
-            <button>Todos los Productos</button>
+            <a class="botonesg" href="/productos">Todos los Productos</a>
         </div>
         <div class="ProductosPrevios">
             <div class="productoinicio">
                 <img src="./Imagenes/Producto 1.png" alt="">
-                <P>AJI ROJO</P>
+                <P>AJI PICANTE</P>
             </div>
             <div class="productoinicio">
-                <img src="./Imagenes/Producto 1.png" alt="">
-                <P>AJI ROJO</P>
+                <img src="./Imagenes/Productos/albaca.png" alt="">
+                <P>ALBACA</P>
             </div>
             <div class="productoinicio">
-                <img src="./Imagenes/Producto 1.png" alt="">
-                <P>AJI ROJO</P>
+                <img src="./Imagenes/Productos/Coco rallado.png" alt="">
+                <P>COCO RALLADO</P>
             </div>
             <div class="productoinicio">
-                <img src="./Imagenes/Producto 1.png" alt="">
-                <P>AJI ROJO</P>
+                <img src="./Imagenes/Productos/Curcuma.png" alt="">
+                <P>CURCUMA</P>
             </div>
+            <div class="productoinicio">
+                <img src="./Imagenes/Productos/Linaza.png" alt="">
+                <P>LINAZA</P>
+            </div>
+            <div class="productoinicio">
+                <img src="./Imagenes/Productos/Canela.png" alt="">
+                <P>CANELA MOLIDA</P>
         </div>
+    </div>
+    <div class="tarjeta1">
+    </div>
+    <div class="tarjeta2">
+    </div>
+    <div class="tarjeta3">
+    </div>
+    <div class="tarjeta4">
+    </div>
+    <div class="tarjeta5">
+    </div>
+    <div class="tarjeta6">
+    </div>
     </div>
     <div class="Seccion3inicio">
         <div class="imagenseccion3">
@@ -48,7 +68,7 @@
         <div class="textoseccion3">
             <h1>NOSOTROS</h1>
             <p>"Somos la esencia de la cocina boliviana en cada frasco. Con nuestros condimentos, llevamos el autentico sabor de Bolivia a tu mesa. desde los sabores tradicionales hasta las creaciones mas innovadoras, cada vocado es un viaje a traves de nuestra rica herencia culinaria. Unete a nosotros y descubre como nuestras especias transforman tus platos en experienciaas inolvidables, elevando tu cocina al nivel nacional."</p>
-            <a href="/nosotros">Más de Nosotros</a>
+            <a class="botonesg" href="/nosotros">Más de Nosotros</a>
         </div>
     </div>
 
@@ -69,6 +89,23 @@
             window.addEventListener("scroll", showOnScroll);
             window.dispatchEvent(new Event("scroll")); // Mostrar las secciones visibles inicialmente
         });
+
+
+
+        let currentIndex = 0;
+const items = document.querySelectorAll('.productoinicio');
+const totalItems = items.length;
+
+function showNextItem() {
+    items[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + 1) % totalItems;
+    items[currentIndex].classList.add('active');
+}
+
+setInterval(showNextItem, 3000); // Cambia cada 3 segundos
+
+// Inicializa el carrusel mostrando el primer elemento
+items[currentIndex].classList.add('active');
     </script>
     <%- include("./Partials/footer.ejs") %> 
     

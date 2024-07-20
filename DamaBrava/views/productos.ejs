@@ -4,110 +4,167 @@
     <div class="principalProductos">
         <div class="Buscador">
             <h2>Buscar</h2>
-            <input type="text" name="buscardor" id="buscador" placeholder="Buscar...">
-            <ul class="opciones">
-                <li>Ajies</li>
-                <li>Condimentos</li>
-                <li>Especias</li>
-                <li>Frutos secos</li>
-                <li>Semillas</li>
-            </ul>
+            <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+            <div class="opciones">
+                <a href="#" id="numeroDeDivs"></a>
+                <a href="#" onclick="ajies()">Ajies</a>
+                <a href="#" onclick="condimentos()">Condimentos</a>
+                <a href="#" onclick="especias()">Especias</a>
+                <a href="#" onclick="frutosSecos()">Frutos secos</a>
+                <a href="#" onclick="semillas()">Semillas</a>
+            </div>
         </div>
-        <div class="Productos">
-            <ul id="ListaArticulos">
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-            </ul>
-            <ul id="ListaArticulos">
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-            </ul>
-            <ul id="ListaArticulos">
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">HECTOR</li>
-                    </div>
-                </div>
-            </ul>
-            <ul id="ListaArticulos">
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">HUGO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-                <div class="cuadroProducto">
-                    <img src="" alt="">
-                    <div>
-                        <li class="articulo">AJI AMARILLO</li>
-                    </div>
-                </div>
-            </ul>
-        </div>
+        <div class="Productos"></div>
+    </div>
+    <div class="Eslogan">
+        <h1>Con <span>damabrava</span><br> todo es mas rico!</h1>
     </div>
     <script>
-        document.addEventListener("keyup", e=>{
-            if(e.target.matches("#buscador")){
-                var name=document.querySelectorAll
-                document.querySelectorAll(".articulo").forEach(fruta=>{
-                fruta.textContent.toLowerCase().includes(e.target.value.toLowerCase())
-                    ?fruta.classList.remove("filtro")
-                    :fruta.classList.add("filtro")
-    })
-}
-        })
+        // Datos de los productos
+        const productos = [
+            { nombre: "AJI AMARILLO DULCE", imagen: "img1.jpg" },
+            { nombre: "AJI AMARILLO PICANTE", imagen: "img2.jpg" },
+            { nombre: "AJI AMARILLO SEMIPICANTE", imagen: "img3.jpg" },
+            { nombre: "AJI ROJO DULCE", imagen: "img4.jpg" },
+            { nombre: "AJI ROJO PICANTE", imagen: "img1.jpg" },
+            { nombre: "AJI ROJO SEMIPICANTE", imagen: "img2.jpg" },
+            { nombre: "AJI-NO-MOTO", imagen: "img3.jpg" },
+            { nombre: "AJI MOLIDO", imagen: "img4.jpg" },
+            { nombre: "ALBACA", imagen: "img1.jpg" },
+            { nombre: "ALMENDRA", imagen: "img2.jpg" },
+            { nombre: "ANIS", imagen: "img3.jpg" },
+            { nombre: "AZAFRAN", imagen: "img4.jpg" },
+            { nombre: "CANELA", imagen: "img1.jpg" },
+            { nombre: "CANELA MOLIDA", imagen: "img2.jpg" },
+            { nombre: "CEBOLLA MOLIDA BLANCA", imagen: "img3.jpg" },
+            { nombre: "CEBOLLA MOLIDA VERDE", imagen: "img4.jpg" },
+            { nombre: "CILANTRO MOLIDO", imagen: "img1.jpg" },
+            { nombre: "CLAVO DE OLOR", imagen: "img2.jpg" },
+            { nombre: "CLAVO DE OLOR MOLIDO", imagen: "img3.jpg" },
+            { nombre: "COCO RALLADO", imagen: "img4.jpg" },
+            { nombre: "COLORANTE ROJO", imagen: "img1.jpg" },
+            { nombre: "COMINO ENTERO", imagen: "img2.jpg" },
+            { nombre: "COMINO MOLIDO", imagen: "img3.jpg" },
+            { nombre: "CURCUMA", imagen: "img4.jpg" },
+            { nombre: "CURRY", imagen: "img1.jpg" },
+            { nombre: "HARINA DE ALMENDRA", imagen: "img2.jpg" },
+            { nombre: "HOJAS DE LAUREL", imagen: "img3.jpg" },
+            { nombre: "JENGIBRE MOLIDO", imagen: "img4.jpg" },
+            { nombre: "LINAZA ENTERA", imagen: "img1.jpg" },
+            { nombre: "LINAZA MOLIDA", imagen: "img2.jpg" },
+            { nombre: "LOCOTO EN POLVO", imagen: "img3.jpg" },
+            { nombre: "NUEZ MOSCADA", imagen: "img4.jpg" },
+            { nombre: "NUEZ MOSCADA MOLIDA", imagen: "img1.jpg" },
+            { nombre: "OREGANO", imagen: "img2.jpg" },
+            { nombre: "OREGANO SECO", imagen: "img3.jpg" },
+            { nombre: "PALILLO", imagen: "img4.jpg" },
+            { nombre: "PAN DURO MOLIDO", imagen: "img1.jpg" },
+            { nombre: "PAPRIKA", imagen: "img2.jpg" },
+            { nombre: "PIMIENTA BLANCA MOLIDA", imagen: "img3.jpg" },
+            { nombre: "PIMIENTA DULCE", imagen: "img4.jpg" },
+            { nombre: "PIMIENTA DULCE MOLIDA", imagen: "img1.jpg" },
+            { nombre: "PIMIENTA NEGRA ENTERA", imagen: "img2.jpg" },
+            { nombre: "PIMIENTA NEGRA MOLIDA", imagen: "img3.jpg" },
+            { nombre: "PIPOCA", imagen: "img4.jpg" },
+            { nombre: "ROMERO", imagen: "img1.jpg" },
+            { nombre: "SEMILLA DE AJI", imagen: "img2.jpg" },
+            { nombre: "SESAMO", imagen: "img3.jpg" },
+            { nombre: "TOMILLO", imagen: "img4.jpg" },
+            { nombre: "UVAS PASAS", imagen: "img1.jpg" }
+        ];
+
+        // Obtener el contenedor de productos
+        const contenedorProductos = document.querySelector(".Productos");
+
+        // Función para generar los productos
+        function generarProductos() {
+            contenedorProductos.innerHTML = '';
+            productos.forEach(producto => {
+                const cuadroProducto = document.createElement("div");
+                cuadroProducto.className = "cuadroProducto";
+                const img = document.createElement("img");
+                img.src = producto.imagen;
+                cuadroProducto.appendChild(img);
+                const contenedorNombre = document.createElement("div");
+                contenedorNombre.className = "nombreProducto";
+                const nombre = document.createElement("p");
+                nombre.textContent = producto.nombre;
+                contenedorNombre.appendChild(nombre);
+                cuadroProducto.appendChild(contenedorNombre);
+                contenedorProductos.appendChild(cuadroProducto);
+            });
+            actualizacion();
+        }
+
+        // Función para actualizar el número de divs
+        function actualizacion() {
+            const todosLosDivs = contenedorProductos.querySelectorAll(".cuadroProducto");
+            const cantidadDeDivsVisibles = Array.from(todosLosDivs).filter(div => getComputedStyle(div).display !== 'none').length;
+            const elementoNumeroDeDivs = document.querySelector("#numeroDeDivs");
+            elementoNumeroDeDivs.textContent = `Todos(${cantidadDeDivsVisibles})`;
+        }
+
+        // Función para filtrar productos
+        function filtrarProductos() {
+            const valorBusqueda = document.querySelector("#buscador").value.toLowerCase();
+            const elementos = document.querySelectorAll(".Productos .cuadroProducto");
+            elementos.forEach(elemento => {
+                const texto = elemento.querySelector(".nombreProducto p").textContent.toLowerCase();
+                texto.includes(valorBusqueda)
+                    ? elemento.classList.remove("filtro")
+                    : elemento.classList.add("filtro");
+            });
+            actualizacion();
+        }
+
+        // Función para filtrar ajíes
+        function ajies() {
+            event.preventDefault();
+            const texto = "AJI";
+            const input = document.querySelector("#buscador");
+            input.value = texto;
+            filtrarProductos();
+        }
+
+        // Función para filtrar condimentos
+        function condimentos() {
+            event.preventDefault();
+            const texto = "CONDIMENTO";
+            const input = document.querySelector("#buscador");
+            input.value = texto;
+            filtrarProductos();
+        }
+
+        // Función para filtrar especias
+        function especias() {
+            event.preventDefault();
+            const texto = "ESPECIA";
+            const input = document.querySelector("#buscador");
+            input.value = texto;
+            filtrarProductos();
+        }
+
+        // Función para filtrar frutos secos
+        function frutosSecos() {
+            event.preventDefault();
+            const texto = "FRUTO SECO";
+            const input = document.querySelector("#buscador");
+            input.value = texto;
+            filtrarProductos();
+        }
+
+        // Función para filtrar semillas
+        function semillas() {
+            event.preventDefault();
+            const texto = "SEMILLA";
+            const input = document.querySelector("#buscador");
+            input.value = texto;
+            filtrarProductos();
+        }
+
+        // Inicializar los productos y agregar el evento de búsqueda
+        generarProductos();
+        document.querySelector("#buscador").addEventListener("keyup", filtrarProductos);
     </script>
 </body>
-<%- include("./Partials/footer.ejs") %> 
-
+<%- include("./Partials/footer.ejs") %>
