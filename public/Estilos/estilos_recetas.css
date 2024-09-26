@@ -1,0 +1,123 @@
+.seccionRecetas{
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 5vw;
+    margin-top: 50px;
+}
+.tituloRecetas{
+    width: 95vw;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: white;
+    background-color: rgb(60, 60, 60);
+    font-size: 40px;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 1px;
+    margin: 0;
+    text-align: center;
+    padding-block: 15px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+.recetas{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw;
+    justify-content: left;
+    align-items: center;
+    margin-block: 2vw;
+}
+.cuadroReceta{
+    display: flex;
+    border: 1px solid gray;
+    width: 28vw;
+    height: 15vw;
+    justify-content: left;
+}
+.cuadroReceta img{
+    width: 15vw;
+    height: 15vw;
+}
+.textoReceta{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-around;
+}
+.textoReceta h1{
+    margin: 0;
+    font-size: 1.4vw;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1;
+}
+.textoReceta p{
+    margin: 0;
+    font-size: 1vw;
+}
+.textoReceta a{
+    margin-top: 0.5vw;
+    width: 7.5vw;
+    padding: 0.5vw;
+    text-align: center;
+    text-decoration: none;
+}
+@media (max-width: 1200px){
+    .recetas{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2vw;
+        justify-content: center;
+        align-items: center;
+    }
+    .cuadroReceta{
+        display: flex;
+        border: 1px solid gray;
+        width: 340px;
+        height: 180px;
+        justify-content: left;
+    }
+    .cuadroReceta img{
+        width: 180px;
+        height: 180px;
+    }
+    .textoReceta{
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: space-around;
+    }
+    .textoReceta h1{
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: 'Nunito', sans-serif;
+        line-height: 1;
+    }
+    .textoReceta p{
+        margin: 0;
+        font-size: 11px;
+    }
+    .textoReceta a{
+        margin-top: 10px;
+        padding: 4px 3px;
+        width: 80px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

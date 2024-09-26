@@ -1,0 +1,205 @@
+.seccionProductos{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding-inline: 5vw;
+    padding-bottom: 3vw;
+    padding-top: 10px;
+    margin: 0;
+    margin-top: 50px;
+}
+.tituloProductos{
+    width: 95vw;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: white;
+    background-color: rgb(60, 60, 60);
+    font-size: 40px;
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    text-align: center;
+    padding-block: 15px;
+    border-radius: 50px;
+    margin-bottom: 5px;
+}
+.buscador{
+    width: 100%;
+    padding-inline: 20px;
+}
+.cuadroBuscar{
+    display: flex;
+    position: relative;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+.fixed {
+    position: fixed;
+    top: 48px; /* Fija el cuadro a 50px del borde superior */
+    left: 0;
+    right: 0;
+    z-index: 1; /* Asegura que esté por encima de otros elementos */
+    background-color: white;
+    padding-block: 5px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+.fixedNav{
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(195, 194, 194);
+}
+.cuadroBuscar button{
+    height: 45px;
+    width: 45px;
+    font-size: 1vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 45px;
+}
+#busquedaInput{
+    margin-block: 15px;
+    width: 160px;
+    height: 30px;
+    font-size: 16px;
+    transition: font-size 0.3s ease;
+    padding: 5px;
+    border-radius: 30px;
+    border: 1px solid rgb(175, 175, 175);
+}
+.clearBoton{
+    display: none;
+    position: absolute;
+    left: 160px ;
+    top: 20px;
+    font-size: 20px;
+    color: rgb(193, 193, 193);
+    font-family: sans-serif;
+    cursor: pointer;
+}
+.filtrosLista{
+    font-size: 14px;
+    font-family: sans-serif;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    background-color: white;
+    padding: 20px;
+    gap: 5px;
+    width: 200px;
+    height: 400px;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.3);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 2;
+}
+.filtrosLista::-webkit-scrollbar{
+    width: 5px;
+}
+.filtrosLista::-webkit-scrollbar-track{
+    background: #f1f1f1;
+}
+.filtrosLista::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 10px;
+}
+.filtrosLista p{
+    margin: 0;
+    border-bottom: 1px solid rgb(187, 186, 186);
+    padding: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+.filtrosLista p:hover{
+    background-color: rgb(81, 81, 81);
+    color: white;
+}
+.hidden{
+    display: none;
+}
+#productos-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1vw;
+    gap: 1vw;
+}
+.producto{
+    width: 23vw;
+    height: 38vw;
+    border: 1px solid rgb(203, 202, 202);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    padding: 1vw;
+    border-radius: 20px;
+}
+.producto:hover{
+    border: 1px solid red;
+}
+.producto img{
+    width: 20vw;
+    height: 20vw;
+}
+.producto p{
+    font-family: sans-serif;
+    font-size: 1.5vw;
+    margin: 0;
+}
+.cantidad{
+    display: flex;
+    gap: 1vw;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(173, 173, 173);
+    width: 75%;
+    height: 4.5;
+    padding: 0.2vw;
+    border-radius: 2vw;
+}
+.cantidad button{
+    width: 3.5vw;
+    height: 3.5vw;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    border: none;
+    background: none;
+}
+.nombre-producto{
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+.producto .botonPage{
+    border-radius: 2vw;
+    width: 77%;
+    height: 4.5vw;
+    font-size: 1.5vw;
+}
+.producto svg{
+    width: 2.5vw;
+    height: 2.5vw;
+}
+@media (max-width: 1200px){
+    .cuadroBuscar button{
+        height: 45px;
+        border-radius: 45px;
+        font-size: 17px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

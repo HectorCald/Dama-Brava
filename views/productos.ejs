@@ -1,0 +1,66 @@
+    <%- include("./Partials/header.ejs") %>    
+    <div class="seccionProductos seccion">  
+        <h1 class="tituloProductos">PRODUCTOS</h1>
+        <div class="buscador">
+            <div class="cuadroBuscar">
+                <input type="text" class="cuadroBusqueda" placeholder="PRODUCTOS" id="busquedaInput">
+                <button class="botones" id="buscarButton" onclick="botonBuscar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+                <span class="clearBoton">x</span>
+                <div class="filtrosLista" id="nombresProductos"></div>
+            </div>
+        </div>
+        <div id="productos-container"></div> <!-- Eliminar producto vacío aquí -->
+    </div>
+    <script>
+        // Función para obtener productos de la API
+        async function obtenerProductos() {
+            try {
+                const response = await fetch('/api/productos');
+                
+                if (!response.ok) {
+                    throw new Error('Error al obtener productos');
+                }
+    
+                const productos = await response.json();
+                mostrarProductos(productos);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    
+        // Función para mostrar los productos en el DOM
+        function mostrarProductos(productos) {
+            const contenedorProductos = document.getElementById('productos-container');
+    
+            // Limpiar el contenedor antes de agregar nuevos productos
+            contenedorProductos.innerHTML = '';
+    
+            productos.forEach(producto => {
+                const divProducto = document.createElement('div');
+                divProducto.classList.add('producto');
+                divProducto.innerHTML = `
+                    <img class='imagenProducto' src="${producto.imagenUrl}" alt="">
+                    <p class="nombre-producto">${producto.nombre} ${producto.gramaje} gr.</p>
+                    <p> <span class="precio">Bs/${producto.precio}</span></p>
+                    <div class="cantidad">
+                        <button>-</button>
+                        <p>0</p>
+                        <button>+</button>
+                    </div>
+                    <button class="botonPage">Añadir al carrito</button>
+                `;
+    
+                contenedorProductos.appendChild(divProducto);
+            });
+        }
+    
+        // Llamar a la función para obtener los productos al cargar la página
+        obtenerProductos();
+    </script>
+    
+    <%- include("./Partials/footer.ejs") %>
+    

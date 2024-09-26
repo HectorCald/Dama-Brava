@@ -1,0 +1,39 @@
+<%- include("./Partials/header.ejs") %> 
+<div class="seccionLogin">
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm" action="/adm" method="POST">
+            <!-- Campo de usuario oculto como contraseña -->
+            <input type="password" name="username" placeholder="Nombre de Usuario" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+</div>
+
+
+<script type="module" src="">
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+const auth = getAuth();
+signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Obtiene el token de ID
+        return userCredential.user.getIdToken();
+    })
+    .then((idToken) => {
+        // Envía el token al servidor
+        fetch('/adm', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${idToken}`
+            },
+            body: JSON.stringify({ email }) // Puedes enviar el email si lo necesitas
+        });
+    })
+    .catch((error) => {
+        console.error('Error al iniciar sesión:', error);
+    });
+
+</script>
+<%- include("./Partials/footer.ejs") %> 
