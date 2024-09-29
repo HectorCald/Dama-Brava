@@ -1,10 +1,23 @@
 <%- include("./Partials/header.ejs") %>
-<div class="db-administrador" id="administrador" style="display: flex;">
+<div class="logoAdm">
+    <p>ADMINISTRADOR</p>
+    <img src="./Imagenes2/imgInicio/Logo Dama Brava2.webp" alt="">
+</div>
+<div class="db-administrador" id="administrador">
     <!-- Sección db productos -->
-    <div class="db-productos">
+    <div class="db-productos div-animado" style="display: none;">
+        <img src="./Imagenes2/imgAdm/formProductos.jpg" alt="">
         <h1>Productos</h1>
-        <form id="productForm" onsubmit="event.preventDefault(); agregarProducto(nombre.value, precio.value, gramaje.value, imagen.files[0]);">
-            <h1 class="titulo-agregar-producto">Agregar Producto</h1>
+        <div>
+            <input type="text" class="buscar-producto-adm">
+            <button class="buscar-adm">Buscar</button>
+            <div class="btn-contenedor">
+                <button class="btn-agregar-producto" id="mostrarForm" onclick="animacionAgregarProducto()">+</button>
+                <p class="vista-previa">Agregar producto</p>
+            </div>
+        </div>
+        <form id="productForm" class="formProduct2 targetSection" style="display: none;" onsubmit="event.preventDefault(); agregarProducto(nombre.value, precio.value, gramaje.value, imagen.files[0]);">
+            <h1 class="titulo-agregar-producto">Agregar</h1>
             <input type="text" id="nombre" placeholder="Nombre" required oninput="this.value = this.value.toUpperCase();">
             <input type="number" id="precio" placeholder="Precio" step="0.01" required>
             <input type="number" id="gramaje" placeholder="Gramaje" required step="0.01" required>
@@ -16,21 +29,28 @@
         </form>
         <div class="info-productos">
             <div class="titulos-consulta">
-                <p>NOMBRE</p>
-                <p>PRECIO</p>
-                <p>GRAMAJE</p>
-                <p>IMAGEN</p>
-                <p>ACCIONES</p>
+                <p class="tituloNombre">Nombre</p>
+                <p class="tituloPrecio">Precio</p>
+                <p class="tituloGramaje">Gramaje</p>
+                <p class="tituloAcciones">Acciones</p>
             </div>
             <div id="productList"></div>
         </div>
     </div>
-    
     <!-- Sección db recetas -->
-    <div class="db-recetas">
+    <div class="db-recetas div-animado">
+        <img src="./Imagenes2/imgAdm/formRecetas2.jpeg" alt="">
         <h1>Recetas</h1>
-        <form id="recetaForm" onsubmit="event.preventDefault(); agregarReceta(nombreReceta.value, descripcion.value, linkReceta.value, imagenReceta.files[0]);">
-            <h1 class="titulo-agregar-receta">Agregar Receta</h1>
+        <div>
+            <input type="text" class="buscar-producto-adm">
+            <button class="buscar-adm">Buscar</button>
+            <div class="btn-contenedor">
+                <button class="btn-agregar-producto" id="mostrarForm" onclick="animacionAgregarReceta()">+</button>
+                <p class="vista-previa">Agregar producto</p>
+            </div>
+        </div>
+        <form style="display: none;" id="recetaForm" class="formReceta targetSection" onsubmit="event.preventDefault(); agregarReceta(nombreReceta.value, descripcion.value, linkReceta.value, imagenReceta.files[0]);">
+            <h1 class="titulo-agregar-receta">Agregar</h1>
             <input type="text" id="nombreReceta" placeholder="Nombre de la Receta" required oninput="this.value = this.value.toUpperCase();">
             <input type="text" id="descripcion" placeholder="Descripción" required>
             <input type="url" id="linkReceta" placeholder="Enlace a YouTube" required>
@@ -42,439 +62,69 @@
         </form>
         <div class="info-productos">
             <div class="titulos-consulta">
-                <p>NOMBRE</p>
-                <p>DESCRIPCIÓN</p>
-                <p>    </p>
-                <p>ACCIONES</p>
+                <p>Nombre</p>
+                <p>Descripción</p>
+                <p>Acciones</p>
             </div>
             <div id="recetaList"></div>
         </div>
     </div>
-    
+    <!-- Sección cambiar contrseña -->
+    <div class="db-contraseña div-animado">
+        <form id="edit-password-form" class="formContraseña"></form>
+            <h1>Cambiar contraseña</h1>
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="current-password">Contraseña actual:</label>
+            <input type="password" id="current-password" name="current-password" required>
+            <label for="new-password">Nueva contraseña:</label>
+            <input type="password" id="new-password" name="new-password" required>
+            <label for="confirm-password">Confirmar nueva contraseña:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <button type="submit" class="boton-adm" onclick="editarContraseña()">Actualizar contraseña</button>
+        </form>
+    </div>
 </div>
-<div class="anuncio">
+<!-- Sección anuncio emergenete -->
+<div class="anuncio div-animado">
     <h1 class="titulo-anuncio">TITULO</h1>
-    <p class="mensaje-anuncio">Descripcion a validar</p>
+    <p class="mensaje-anuncio"></p>
     <div class="boton-anuncio">
         <button class="si-anuncio btn-anuncio">Si</button>
         <button class="cancelar-anuncio btn-anuncio">Cancelar</button>
     </div>
     <div id="loadingScreen" style="display: none;">
         <img src="./Imagenes2/imgIconos/21-18-05-265_512.webp" alt="">
-    </div> <!-- Puedes agregar un spinner o una imagen aquí -->
+    </div>
 </div>
-</div>
-<script>
-// Función para agregar un producto
-async function agregarProducto(nombre, precio, gramaje, imagen) {
-    const formData = new FormData();
-    formData.append('nombre', nombre);
-    formData.append('precio', precio);
-    formData.append('gramaje', gramaje);
-    formData.append('imagen', imagen);
-    anuncio('agregarProducto', formData, nombre, 1);
-}
+    <!-- Sección navbar Adm -->
+    <div class="navAdm">
+        <button class="btnAcceso boton-con-tooltip" data-action="productos"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+            <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z"/>
+          </svg>
+          <p class="tooltip">Productos</p>
+        </button>
+        <button class="btnAcceso boton-con-tooltip" data-action="recetas"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
+            <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27m.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0z"/>
+            <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
+          </svg>
+          <p class="tooltip">Recetas</p>
+        </button>
+        <button class="btnAcceso boton-con-tooltip" data-action="contraseña"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key" viewBox="0 0 16 16">
+            <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"/>
+            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+          </svg>
+          <p class="tooltip">Contraseña</p>
+        </button>
+        <!-- Sección cerrar sesion -->
+        <button id="cerrarSesion" class="btnAcceso boton-con-tooltip" type="button" onclick="anuncio('cerrarSesion', 1, 1, 1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+            </svg>
+            <p class="tooltip">Cerrar sesión</p>
+        </button>
+    </div>
 
-// Función para mostrar la lista de productos
-async function mostrarProductos() {
-    const response = await fetch('/api/productos');
-    const productos = await response.json();
-    const productList = document.getElementById("productList");
-    productList.innerHTML = ""; // Limpiar la lista actual
+<script src="./Scripts/index.js" defer></script>
 
-    productos.forEach(producto => {
-        const div = document.createElement("div");
-        div.innerHTML = `
-            <p class="nombre">${producto.nombre}</p>
-            <p class="precio">Bs/ ${producto.precio}</p>
-            <p class="gramaje">${producto.gramaje} gr.</p>
-            <a  href="${producto.imagenUrl}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
-  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"/>
-</svg></a>
-            <button class="botonGral" onclick="prepararEdicionProducto('${producto.id}', '${producto.nombre}', ${producto.precio}, '${producto.gramaje}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
-</svg></button>
-            <button class="botonGral" onclick="anuncio('eliminarProducto', '${producto.id}', '${producto.nombre}', '1')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-</svg></button>
-        `;
-        productList.appendChild(div);
-        document.querySelector('.titulo-agregar-producto').textContent = "Agregar Producto"
-    });
-}
-
-// Función para preparar la edición de un producto
-function prepararEdicionProducto(id, nombre, precio, gramaje) {
-    document.getElementById("editarId").value = id;
-    document.getElementById("nombre").value = nombre;
-    document.getElementById("precio").value = precio;
-    document.getElementById("gramaje").value = gramaje;
-    
-    document.getElementById("agregarBtn").style.display = "none";
-    document.getElementById("actualizarBtn").style.display = "block";
-    document.getElementById("cancelarEdicionBtn").style.display = "block";
-    document.querySelector('.titulo-agregar-producto').textContent = "Editar Producto"
-}
-
-// Función para actualizar un producto
-async function actualizarProducto() {
-    const id = document.getElementById("editarId").value;
-    const nombre = document.getElementById("nombre").value;
-    const precio = document.getElementById("precio").value;
-    const gramaje = document.getElementById("gramaje").value;
-    const imagenInput = document.getElementById("imagen"); // Asumiendo que tienes un input para la imagen
-
-    const formData = new FormData();
-    formData.append('nombre', nombre);
-    formData.append('precio', precio);
-    formData.append('gramaje', gramaje);
-
-    // Verificamos si hay una nueva imagen y la agregamos al FormData
-    if (imagenInput.files.length > 0) {
-        formData.append('imagen', imagenInput.files[0]);
-    }
-    anuncio('actualizarProducto', id, nombre, formData);
-}
-
-// Función para eliminar un producto
-async function eliminarProducto(id) {
-    const admVentana = document.querySelector('.db-administrador');
-    const anuncio = document.querySelector('.anuncio');
-    document.getElementById("loadingScreen").style.display = "flex";
-    try {
-        const response = await fetch(`/api/productos/${id}`, {
-            method: 'DELETE'
-        });
-        if (response.ok) {
-            mostrarProductos();
-        } else {
-            console.error("Error al eliminar producto");
-        }
-    } catch (error) {
-        console.error("Error al eliminar producto:", error);
-    }finally{
-        document.getElementById("loadingScreen").style.display = "none";
-        admVentana.style.filter = 'none';
-        anuncio.style.display = 'none';
-    }
-}
-
-// Función para restablecer el formulario
-function resetForm() {
-    document.getElementById("productForm").reset();
-    document.getElementById("editarId").value = "";
-    document.getElementById("agregarBtn").style.display = "block";
-    document.getElementById("actualizarBtn").style.display = "none";
-    document.getElementById("cancelarEdicionBtn").style.display = "none";
-    mostrarProductos(); // Mostrar la lista de productos
-}
-
-// Función para agregar una receta
-async function agregarReceta(nombreReceta, descripcion, linkReceta, imagen) {
-    const formData = new FormData();
-    formData.append('nombreReceta', nombreReceta);
-    formData.append('descripcion', descripcion);
-    formData.append('linkReceta', linkReceta);
-    formData.append('imagen', imagen);
-    anuncio('agregarReceta', formData, nombreReceta, 1);
-}
-
-// Función para mostrar la lista de recetas
-async function mostrarRecetas() {
-    const response = await fetch('/api/recetas');
-    const recetas = await response.json();
-    const recetaList = document.getElementById("recetaList");
-    recetaList.innerHTML = ""; // Limpiar la lista actual
-
-    recetas.forEach(receta => {
-        const div = document.createElement("div");
-        div.innerHTML = `
-            <p class="nombre">${receta.nombreReceta}</p>
-            <p class="descripcion">${receta.descripcion}</p>
-            <a href="${receta.linkReceta}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
-  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
-</svg></a>
-            <button class="botonGral" onclick="prepararEdicionReceta('${receta.id}', '${receta.nombreReceta}', '${receta.descripcion}', '${receta.linkReceta}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
-</svg></button>
-            <button class="botonGral" onclick="anuncio('eliminarReceta', '${receta.id}', '${receta.nombreReceta}', '1')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-</svg></button>
-        `;
-        recetaList.appendChild(div);
-        document.querySelector('.titulo-agregar-receta').textContent = "Agregar Receta"
-    });
-}
-
-// Función para preparar la edición de una receta
-function prepararEdicionReceta(id, nombreReceta, descripcion, linkReceta) {
-    document.getElementById("editarRecetaId").value = id;
-    document.getElementById("nombreReceta").value = nombreReceta;
-    document.getElementById("descripcion").value = descripcion;
-    document.getElementById("linkReceta").value = linkReceta;
-    
-    document.getElementById("agregarRecetaBtn").style.display = "none";
-    document.getElementById("actualizarRecetaBtn").style.display = "block";
-    document.getElementById("cancelarEdicionRecetaBtn").style.display = "block";
-    document.querySelector('.titulo-agregar-receta').textContent = "Editar Receta";
-}
-
-// Función para actualizar una receta
-async function actualizarReceta() {
-    const id = document.getElementById("editarRecetaId").value;
-    const nombreReceta = document.getElementById("nombreReceta").value;
-    const descripcion = document.getElementById("descripcion").value;
-    const linkReceta = document.getElementById("linkReceta").value;
-    const imagenRecetaInput = document.getElementById("imagenReceta"); // Asumiendo que tienes un input para la imagen
-
-    const formData = new FormData();
-    formData.append('nombreReceta', nombreReceta);
-    formData.append('descripcion', descripcion);
-    formData.append('linkReceta', linkReceta);
-    
-    // Verificamos si hay una nueva imagen y la agregamos al FormData
-    if (imagenRecetaInput.files.length > 0) {
-        formData.append('imagen', imagenRecetaInput.files[0]);
-    }
-    anuncio('actualizarReceta', id, nombreReceta, formData);
-}
-
-// Función para eliminar una receta
-async function eliminarReceta(id) {
-    const admVentana = document.querySelector('.db-administrador');
-    const anuncio = document.querySelector('.anuncio');
-    document.getElementById("loadingScreen").style.display = "flex";
-    try {
-        const response = await fetch(`/api/recetas/${id}`, {
-            method: 'DELETE'
-        });
-        if (response.ok) {
-            mostrarRecetas();
-        } else {
-            console.error("Error al eliminar receta");
-        }
-    } catch (error) {
-        console.error("Error al eliminar receta:", error);
-    }finally{
-        document.getElementById("loadingScreen").style.display = "none";
-        admVentana.style.filter = 'none';
-        anuncio.style.display = 'none';
-    }
-}
-
-// Función para restablecer el formulario de recetas
-function resetFormReceta() {
-    document.getElementById("recetaForm").reset();
-    document.getElementById("editarRecetaId").value = "";
-    document.getElementById("agregarRecetaBtn").style.display = "block";
-    document.getElementById("actualizarRecetaBtn").style.display = "none";
-    document.getElementById("cancelarEdicionRecetaBtn").style.display = "none";
-    mostrarRecetas(); // Mostrar la lista de recetas
-}
-// Delegación de eventos en el contenedor de botones
-document.querySelector('.anuncio').addEventListener('click', (event) => {
-    if (event.target.classList.contains('btn-anuncio')) {
-        handleClick(event);
-    }
-});
-
-function anuncio(req, id, nombre, otro) {
-    const anuncio = document.querySelector('.anuncio');
-    const admVentana = document.querySelector('.db-administrador');
-    const titulo = document.querySelector('.titulo-anuncio');
-    const mensaje = document.querySelector('.mensaje-anuncio');
-    
-
-    // Configuración del título y mensaje
-    if(req==='eliminarProducto'){
-        titulo.textContent = 'Eliminar';
-        mensaje.textContent = '¿Estás seguro que quieres eliminar ' + nombre+ ' de los productos?';
-        document.getElementById("loadingScreen").style.display = "none";
-    }
-    else if(req==='eliminarReceta'){
-        titulo.textContent = 'Eliminar';
-        mensaje.textContent = '¿Estás seguro que quieres eliminar ' + nombre+ ' de las recetas?';
-    }
-    else if(req==='agregarProducto'){
-        titulo.textContent = 'Agregar';
-        mensaje.textContent = '¿Estás seguro que quieres agregar ' + nombre + ' a la lista de productos?';
-    }
-    else if(req==='agregarReceta'){
-        titulo.textContent = 'Agregar';
-        mensaje.textContent = '¿Estás seguro que quieres agregar ' + nombre + ' a la lista de recetas?';
-    }
-    else if(req==='actualizarReceta'){
-        titulo.textContent = 'Actualizar';
-        mensaje.textContent = '¿Estás seguro que quieres actualizar la receta: ' + nombre ;
-    }
-    else if(req==='actualizarProducto'){
-        titulo.textContent = 'Actualizar';
-        mensaje.textContent = '¿Estás seguro que quieres actualizar el producto: ' + nombre ;
-    }
-    else{
-        titulo.textContent = 'indefinido';
-        mensaje.textContent = 'indefinido';
-    }
-    
-    
-    
-
-    admVentana.style.filter = 'blur(8px)';
-    anuncio.style.display = 'flex';
-
-    // Guardar el id del producto a eliminar en una variable global
-    window.otros=otro;
-    window.validacion=req;
-    window.productoId = id; // Usar una variable global para almacenar el ID
-}
-
-function handleClick(event) {
-    const admVentana = document.querySelector('.db-administrador');
-    const anuncio = document.querySelector('.anuncio');
-    if (event.target.textContent === 'Si') {
-        if(window.validacion==='eliminarProducto'){
-            eliminarProducto(window.productoId) // Usar la variable global
-            .then(() => {
-                mostrarProductos(); // Actualizar la lista de productos después de la eliminación
-            })
-            .catch((error) => {
-                console.error("Error al eliminar el producto:", error);
-            });
-        }
-        else if(window.validacion==='eliminarReceta'){
-            eliminarReceta(window.productoId) // Usar la variable global
-            .then(() => {
-                admVentana.style.filter = 'none';
-                anuncio.style.display = 'none';
-                mostrarRecetas(); // Actualizar la lista de productos después de la eliminación
-            })
-            .catch((error) => {
-                console.error("Error al eliminar el producto:", error);
-            });
-        }
-        else if(window.validacion==='agregarProducto'){
-            agregar();
-            async function agregar() {
-                document.getElementById("loadingScreen").style.display = "flex";
-                try {
-                    const response = await fetch('/api/productos', {
-                    method: 'POST',
-                    body: window.productoId
-                });
-                const data = await response.json();
-                if (response.ok) {
-                    resetForm();
-                    mostrarProductos(); // Asegúrate de mostrar los productos después de agregar
-                } else {
-                console.error("Error al agregar producto:", data);
-                }
-                } catch (error) {
-                    console.error("Error al agregar producto:", error);
-                }finally    {
-                    admVentana.style.filter = 'none';
-                    anuncio.style.display = 'none';
-                    document.getElementById("loadingScreen").style.display = "none";
-                }
-            }
-            mostrarProductos();
-        }
-        else if(window.validacion==='agregarReceta'){
-            agregar();
-            async function agregar() {
-                document.getElementById("loadingScreen").style.display = "flex";
-                try {
-                    const response = await fetch('/api/recetas', {
-                        method: 'POST',
-                        body: window.productoId
-                    });
-                    const data = await response.json();
-                    if (response.ok) {
-                        resetFormReceta();
-                        mostrarRecetas(); // Asegúrate de mostrar las recetas después de agregar
-                    } else {
-                        console.error("Error al agregar receta:", data);
-                    }
-                } catch (error) {
-                    console.error("Error al agregar receta:", error);
-                }finally    {
-                    admVentana.style.filter = 'none';
-                    anuncio.style.display = 'none';
-                    document.getElementById("loadingScreen").style.display = "none";
-                }
-            }
-            mostrarRecetas();
-        }
-        else if(window.validacion==='actualizarReceta'){
-            agregar();
-            async function agregar() {
-                document.getElementById("loadingScreen").style.display = "flex";
-                try {
-                    const response = await fetch(`/api/recetas/${window.productoId}`, {
-                        method: 'PUT',
-                        body: window.otros
-                    });
-
-                    if (response.ok) {
-                        mostrarRecetas(); // Llama a la función para mostrar las recetas actualizadas
-                        resetFormReceta(); // Reinicia el formulario después de la actualización
-                    } else {
-                        const errorData = await response.json();
-                        console.error("Error al actualizar receta:", errorData.error);
-                    }
-                } catch (error) {
-                    console.error("Error al actualizar receta:", error);
-                }finally    {
-                    admVentana.style.filter = 'none';
-                    anuncio.style.display = 'none';
-                    document.getElementById("loadingScreen").style.display = "none";
-                }
-            }
-            mostrarRecetas();
-        }
-        else if(window.validacion==='actualizarProducto'){
-            agregar();
-            async function agregar() {
-                document.getElementById("loadingScreen").style.display = "flex";
-                try {
-                    const response = await fetch(`/api/productos/${window.productoId}`, {
-                        method: 'PUT',
-                        body: window.otros
-                    });
-
-                    if (response.ok) {
-                        mostrarProductos(); // Llama a la función para mostrar las recetas actualizadas
-                        resetForm(); // Reinicia el formulario después de la actualización
-                    } else {
-                        const errorData = await response.json();
-                        console.error("Error al actualizar receta:", errorData.error);
-                    }
-                } catch (error) {
-                    console.error("Error al actualizar receta:", error);
-                }finally    {
-                    admVentana.style.filter = 'none';
-                    anuncio.style.display = 'none';
-                    document.getElementById("loadingScreen").style.display = "none";
-                }
-            }
-            mostrarProductos();
-        }
-    } else if (event.target.textContent === 'Cancelar') {
-        const admVentana = document.querySelector('.db-administrador');
-        const anuncio = document.querySelector('.anuncio');
-
-        admVentana.style.filter = 'none';
-        anuncio.style.display = 'none';
-    }
-}
-
-
-
-// Carga inicial de productos y recetas
-document.addEventListener("DOMContentLoaded", function() {
-    mostrarProductos();
-    mostrarRecetas();
-});
-
-</script>
-<%- include("./Partials/footer.ejs") %>

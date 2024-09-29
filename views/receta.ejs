@@ -1,49 +1,6 @@
 <%- include("./Partials/header.ejs") %>    
 <div class="seccionRecetas seccion">
     <h1 class="tituloRecetas">RECETAS</h1>
-    <div id="recetasPrincipal" class="recetas">
-        <!-- Aquí se llenarán las recetas dinámicamente -->
-    </div>
+    <div id="recetasPrincipal" class="recetas"></div>
 </div>
 <%- include("./Partials/footer.ejs") %>
-
-<script type="module">
-    // Función para obtener recetas de la API
-    async function obtenerRecetas() {
-        try {
-            const response = await fetch('/api/recetas');
-            if (!response.ok) {
-                throw new Error('Error al obtener recetas');
-            }
-            const recetas = await response.json();
-            mostrarRecetas(recetas);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    // Función para mostrar las recetas en el DOM
-    function mostrarRecetas(recetas) {
-        const contenedorRecetas = document.getElementById('recetasPrincipal');
-
-        // Limpiar el contenedor antes de agregar nuevas recetas
-        contenedorRecetas.innerHTML = '';
-
-        recetas.forEach(receta => {
-            const divReceta = document.createElement('div');
-            divReceta.classList.add('cuadroReceta'); // Clase para estilo, ajusta según tu CSS
-
-            divReceta.innerHTML = `
-                <img src="${receta.imagenUrl}" alt="${receta.nombreReceta}"> <!-- Asegúrate de que la propiedad sea correcta -->
-                <div class="textoReceta">
-                    <h1>${receta.nombreReceta}</h1>
-                    <p>${receta.descripcion}</p>
-                    <a class="botonPage" href="${receta.linkReceta}" target="_blank">VER VIDEO</a> <!-- Asegúrate de que la propiedad sea correcta -->
-                </div>
-            `;
-            contenedorRecetas.appendChild(divReceta);
-        });
-    }
-    // Llamar a la función para obtener las recetas al cargar la página
-    obtenerRecetas();
-</script>

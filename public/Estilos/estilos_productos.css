@@ -11,6 +11,7 @@
     padding-top: 10px;
     margin: 0;
     margin-top: 50px;
+    position: relative;
 }
 .tituloProductos{
     width: 95vw;
@@ -135,8 +136,8 @@
     gap: 1vw;
 }
 .producto{
-    width: 23vw;
-    height: 38vw;
+    width: 19vw;
+    height: 36vw;
     border: 1px solid rgb(203, 202, 202);
     display: flex;
     flex-direction: column;
@@ -150,13 +151,15 @@
     border: 1px solid red;
 }
 .producto img{
-    width: 20vw;
-    height: 20vw;
+    width: 19vw;
+    height: 19vw;
 }
 .producto p{
     font-family: sans-serif;
-    font-size: 1.5vw;
+    font-size: 1.3vw;
     margin: 0;
+    text-align: center;
+    padding-inline: 1vw;
 }
 .cantidad{
     display: flex;
@@ -192,14 +195,375 @@
     width: 2.5vw;
     height: 2.5vw;
 }
+
+
+
+
+
+
+/* estilos del carrito */
+.carrito{
+    position: absolute;
+    top: 10%;
+    left: calc(50% - 170px);
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    display: none;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    font-family: sans-serif;
+    z-index: 9;
+    margin-top: 150;
+    overflow: hidden;
+    overflow-y: auto;
+}
+hr{
+    border: 0.5px solid rgb(202, 202, 202);
+}
+.tituloCompra{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+.tituloCompra h1{
+    margin: 0;
+    font-size: 30px;
+    text-align: left;
+    width: 250px;
+}
+.carrito p{
+    margin: 0;
+    font-size: 15px;
+}
+.carrito .cerrarCompra{
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    text-align: center;
+    background: none;
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.cerrarCompra:hover{
+    background-color: gray;
+    color: white;
+}
+.compra{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.compra button{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+.contenidoCompra{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding-block: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(217, 217, 217);
+    padding-left: 10px;
+}
+.compra img{
+    width: 50px;
+    height: 50px;
+}
+.textoCompra{
+    display: flex;
+    flex-direction: column;
+    padding-inline: 10px;
+    width: 100%;
+}
+.texto1Compra{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    text-align: left;
+}
+.texto2Compra{
+    display: flex;
+    gap: 5px;
+}
+.subtotal{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.lineaSub{
+    color: black !important;
+    width: 100%;
+}
+.botonComprar{
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+
+
+
+
+/* estilos boton del carrito */
+.carritoBoton{
+    position: fixed;
+    top: 180px;
+    right: 0;
+    z-index: 3;
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 5px;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.3);
+    z-index: 2;
+}
+.fondoBotonCarrito{
+    height: 65px;
+    width: 65px;
+    background-color: red;
+    border: none;
+    border-radius: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: fixed;
+    right: 10px;
+    top: 185px;
+    z-index: 2  
+}
+.fondoBotonCarrito svg{
+    color: white;
+    width: 35px;
+    height: 35px;
+}
+.contador{
+    position: fixed;
+    top: 175px;
+    right: 55px;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: red;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;font-family: sans-serif;
+}
+#accionBoton {
+    position: fixed;
+    right: -100px; /* Empieza fuera de la vista, a la derecha */
+    opacity: 0; /* Oculto inicialmente */
+    transition: all 0.5s ease; /* Animación suave */
+}
+
+#accionBoton.visible {
+    right: 0; /* Aparece desde la derecha a su posición natural */
+    opacity: 1; /* Se hace visible */
+    position: fixed;
+}
+#accionBoton2 {
+    position: fixed;
+    right: -100px; /* Empieza fuera de la vista, a la derecha */
+    opacity: 0; /* Oculto inicialmente */
+    transition: all 0.5s ease; /* Animación suave */
+}
+
+#accionBoton2.visible {
+    right: 10px; /* Aparece desde la derecha a su posición natural */
+    opacity: 1; /* Se hace visible */
+    position: fixed;
+}
+#accionBoton3 {
+    position: fixed;
+    right: -100px; /* Empieza fuera de la vista, a la derecha */
+    opacity: 0; /* Oculto inicialmente */
+    transition: all 0.5s ease; /* Animación suave */
+}
+#accionBoton3.visible {
+    right: 60px; /* Aparece desde la derecha a su posición natural */
+    opacity: 1; /* Se hace visible */
+    position: fixed;
+}
+
+
 @media (max-width: 1200px){
-    .cuadroBuscar button{
-        height: 45px;
-        border-radius: 45px;
-        font-size: 17px;
-        text-align: center;
+    #productos-container{
+        width: 100%;
+        height: auto;
         display: flex;
+        flex-wrap: wrap;
+        padding: 1vw;
+        gap: 1vw;
+    }
+    .producto{
+        width: 26vw;
+        height: 40vw;
+        border: 1px solid rgb(203, 202, 202);
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 1vw;
+        padding: 1vw;
+        border-radius: 20px;
+    }
+    .producto:hover{
+        border: 1px solid red;
+    }
+    .producto img{
+        width: 22vw;
+        height: 22vw;
+    }
+    .producto p{
+        font-family: sans-serif;
+        font-size: 2vw;
+        margin: 0;
+        text-align: center;
+        padding-inline: 1vw;
+    }
+    .cantidad{
+        display: flex;
+        gap: 1vw;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgb(173, 173, 173);
+        width: 75%;
+        height: 4.5;
+        padding: 0.2vw;
+        border-radius: 2vw;
+    }
+    .cantidad button{
+        width: 3.5vw;
+        height: 3.5vw;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5vw;
+        border: none;
+        background: none;
+    }
+    .nombre-producto{
+        font-size: 1.5vw;
+        font-weight: bold;
+    }
+    .producto .botonPage{
+        border-radius: 2vw;
+        width: 77%;
+        height: 4.5vw;
+        font-size: 1.5vw;
+    }
+    .producto svg{
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+}
+@media (max-width: 750px){
+    #productos-container{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 15px;
+        justify-content: center;
+    }
+    .producto{
+        width: 300px;
+        height: 460px;
+        border: 1px solid rgb(203, 202, 202);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .producto:hover{
+        border: 1px solid red;
+    }
+    .producto img{
+        width: 270px;
+        height: 270px;
+    }
+    .producto p{
+        font-family: sans-serif;
+        font-size: 20px;
+        margin: 0;
+        text-align: center;
+        padding-inline: 10px;
+    }
+    .cantidad{
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgb(173, 173, 173);
+        width: 75%;
+        height: 45px;
+        padding: 5px;
+        border-radius: 20px;
+    }
+    .cantidad button{
+        width: 35px;
+        height: 35px;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        border: none;
+        background: none;
+    }
+    .nombre-producto{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .producto .botonPage{
+        border-radius: 2vw;
+        width: 77%;
+        height: 45px;
+        font-size:20px;
+        border-radius: 20px;
+        padding: 5;
+    }
+    .producto svg{
+        width: 2.5vw;
+        height: 2.5vw;
     }
 }

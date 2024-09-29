@@ -160,7 +160,7 @@ svg{
 
 .slide-in{
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(50%);
     transition: transform 1.3s ease-out, opacity 1.2s ease-out;
 }
 .slide-in.from-left{

@@ -1,39 +1,24 @@
-<%- include("./Partials/header.ejs") %> 
+<%- include("./Partials/header.ejs") %>
 <div class="seccionLogin">
-    <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <form id="loginForm" action="/adm" method="POST">
-            <!-- Campo de usuario oculto como contraseña -->
-            <input type="password" name="username" placeholder="Nombre de Usuario" required>
-            <button type="submit">Iniciar Sesión</button>
+    <div class="container">
+        <form class="login-form" action="/login" method="POST">
+            <h2>Iniciar Sesión</h2>
+            <div class="input-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button class="btn-login" type="submit">Iniciar Sesión</button>
+            <% if (usuarioAutenticado) { %>
+            <a href="/adm" class="inicioRapido btn-login" style="display: block; text-decoration: none;">Inicio Rápido</a>
+            <% } else { %>
+            <span class="inicioRapido btn-login" style="display: none;">Inicio Rápido</span> <!-- O simplemente no renders esto -->
+            <% } %>
         </form>
     </div>
-</div>
-
-
-<script type="module" src="">
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
-const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Obtiene el token de ID
-        return userCredential.user.getIdToken();
-    })
-    .then((idToken) => {
-        // Envía el token al servidor
-        fetch('/adm', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${idToken}`
-            },
-            body: JSON.stringify({ email }) // Puedes enviar el email si lo necesitas
-        });
-    })
-    .catch((error) => {
-        console.error('Error al iniciar sesión:', error);
-    });
-
-</script>
+    
+</div> 
 <%- include("./Partials/footer.ejs") %> 
