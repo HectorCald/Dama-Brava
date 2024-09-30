@@ -8,7 +8,47 @@ document.addEventListener('DOMContentLoaded', () => {
     botonNavbarAdm();
     setInterval(actualizarContador, 500);
     setInterval(verificarImagenesYActualizarBoton, 500);
+    agregarEventosBusqueda();
+    agregarEventosBusqueda2();
+
 })
+function agregarEventosBusqueda() {
+    const busquedaInput = document.getElementById('busquedaInput');
+    const searchInput = document.getElementById('searchInput');
+
+    if (busquedaInput) {
+        busquedaInput.addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const productos = document.querySelectorAll('#productos-container .producto');
+
+            productos.forEach(producto => {
+                const nombreProducto = producto.querySelector('.nombre-producto').textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                producto.style.display = nombreProducto.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const productos = document.querySelectorAll('#productList .productoAdm');
+
+            productos.forEach(producto => {
+                const nombreProducto = producto.querySelector('.nombre').textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                producto.style.display = nombreProducto.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    }
+}
+
+function eliminarInputProducto(){
+    const busquedaInput = document.getElementById('busquedaInput');
+    const clearButton = document.getElementById('clearButton');
+        busquedaInput.value = '';
+        clearButton.style.display = 'none';
+        busquedaInput.focus(); // Opcional: vuelve a enfocar el input
+        
+}
 function secciones(){
     const cuadroMenu = document.querySelector('.menu');
     let secciones = document.querySelectorAll('.seccion');
@@ -225,11 +265,20 @@ async function agregarProducto(nombre, precio, gramaje, imagen) {
 async function mostrarProductos() {
     const response = await fetch('/api/productos');
     const productos = await response.json();
+
+    // Ordenar los productos por nombre de manera ascendente
+    productos.sort((a, b) => {
+        const nameA = a.nombre.toLowerCase();
+        const nameB = b.nombre.toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
+
     const productList = document.getElementById("productList");
     productList.innerHTML = ""; // Limpiar la lista actual
 
     productos.forEach(producto => {
         const div = document.createElement("div");
+        div.classList.add('productoAdm')
         div.innerHTML = `
             <p class="nombre">${producto.nombre}</p>
             <p class="precio">Bs/ ${producto.precio}</p>
@@ -238,10 +287,10 @@ async function mostrarProductos() {
   <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
   <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"/>
 </svg></a>
-            <button class="botonGral" id="scrollButton" onclick="prepararEdicionProducto('${producto.id}', '${producto.nombre}', ${producto.precio}, '${producto.gramaje}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+            <button class="botonGral" id="scrollButton" onclick="prepararEdicionProducto('${producto._id}', '${producto.nombre}', ${producto.precio}, '${producto.gramaje}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
   <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
 </svg></button>
-            <button class="botonGral" onclick="anuncio('eliminarProducto', '${producto.id}', '${producto.nombre}', '1')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+            <button class="botonGral" onclick="anuncio('eliminarProducto', '${producto._id}', '${producto.nombre}', '1')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
   <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
 </svg></button>
         `;
@@ -250,8 +299,12 @@ async function mostrarProductos() {
     });
 }
 
+
 // Función para preparar la edición de un producto
 function prepararEdicionProducto(id, nombre, precio, gramaje) {
+    document.querySelector('.buscadorAdm').scrollIntoView({ behavior: 'smooth' });
+
+
     document.getElementById("editarId").value = id;
     document.getElementById("nombre").value = nombre;
     document.getElementById("precio").value = precio;
@@ -297,20 +350,31 @@ async function eliminarProducto(id) {
     const admVentana = document.querySelector('.db-administrador');
     const anuncio = document.querySelector('.anuncio');
     const botonesAnuncio = document.querySelector('.boton-anuncio');
+    
+    // Muestra la pantalla de carga
     document.getElementById("loadingScreen").style.display = "flex";
     botonesAnuncio.style.display = 'none';
+
     try {
+        console.log(`Eliminando producto con ID: ${id}`); // Log para verificar el ID
         const response = await fetch(`/api/productos/${id}`, {
             method: 'DELETE'
         });
+
+        // Manejo de la respuesta del servidor
         if (response.ok) {
-            mostrarProductos();
+            console.log("Producto eliminado con éxito."); // Log de éxito
+            mostrarProductos(); // Actualiza la lista de productos
         } else {
-            console.error("Error al eliminar producto");
+            const errorText = await response.text(); // Obtén el texto de error
+            console.error("Error al eliminar producto:", response.status, errorText); // Log de error
+            alert(`Error al eliminar producto: ${response.status} - ${errorText}`); // Mensaje al usuario
         }
     } catch (error) {
-        console.error("Error al eliminar producto:", error);
-    }finally{
+        console.error("Error al eliminar producto:", error); // Log del error en la solicitud
+        alert("Error al eliminar producto. Inténtalo de nuevo más tarde."); // Mensaje al usuario
+    } finally {
+        // Oculta la pantalla de carga y restaura el estado de la interfaz
         document.getElementById("loadingScreen").style.display = "none";
         admVentana.style.filter = 'none';
         anuncio.style.display = 'none';
@@ -318,6 +382,7 @@ async function eliminarProducto(id) {
         admVentana.style.pointerEvents = 'auto';
     }
 }
+
 
 // Función para restablecer el formulario
 function resetForm() {
@@ -355,10 +420,10 @@ async function mostrarRecetas() {
             <a href="${receta.linkReceta}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
 </svg></a>
-            <button class="botonGral" onclick="prepararEdicionReceta('${receta.id}', '${receta.nombreReceta}', '${receta.descripcion}', '${receta.linkReceta}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+            <button class="botonGral" onclick="prepararEdicionReceta('${receta._id}', '${receta.nombreReceta}', '${receta.descripcion}', '${receta.linkReceta}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
   <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
 </svg></button>
-            <button class="botonGral" onclick="anuncio('eliminarReceta', '${receta.id}', '${receta.nombreReceta}', '1')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+            <button class="botonGral" onclick="anuncio('eliminarReceta', '${receta._id}', '${receta.nombreReceta}', '1')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
   <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
 </svg></button>
         `;
@@ -369,6 +434,8 @@ async function mostrarRecetas() {
 
 // Función para preparar la edición de una receta
 function prepararEdicionReceta(id, nombreReceta, descripcion, linkReceta) {
+    document.querySelector('.buscadorAdmRecetas').scrollIntoView({ behavior: 'smooth' });
+
     document.getElementById("editarRecetaId").value = id;
     document.getElementById("nombreReceta").value = nombreReceta;
     document.getElementById("descripcion").value = descripcion;
@@ -378,7 +445,13 @@ function prepararEdicionReceta(id, nombreReceta, descripcion, linkReceta) {
     document.getElementById("actualizarRecetaBtn").style.display = "block";
     document.getElementById("cancelarEdicionRecetaBtn").style.display = "block";
     document.querySelector('.titulo-agregar-receta').textContent = "Editar";
-    animacionAgregarProducto();
+    const formProduct = document.querySelector(".formReceta2");
+    if (formProduct.classList.contains("mostrar2")){
+
+    }
+    else{
+        animacionAgregarReceta();
+    }
 }
 
 // Función para actualizar una receta
@@ -552,7 +625,7 @@ function handleClick(event) {
                 try {
                     const response = await fetch('/api/productos', {
                     method: 'POST',
-                    body: window.productoId
+                    body: window.productoId,
                 });
                 const data = await response.json();
                 if (response.ok) {
@@ -744,6 +817,9 @@ function mostrarProductos2(productos) {
     const botonComprar = document.querySelector('.botonComprar'); // Botón de comprar
     let subtotal = 0;
 
+    // Ordenar productos por nombre (puedes cambiar esto a precio o gramaje según prefieras)
+    productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
     // Limpiar el contenedor antes de agregar nuevos productos
     contenedorProductos.innerHTML = '';
 
@@ -852,6 +928,7 @@ function mostrarProductos2(productos) {
         window.open(urlWhatsApp, '_blank');
     });
 }
+
 
 
 

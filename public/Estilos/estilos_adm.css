@@ -113,7 +113,7 @@
 
 /* Estilos info productos y recetas */
 .db-productos, .db-recetas{
-    width: 360px;
+    width: 42vw;
     height: auto;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
@@ -122,6 +122,46 @@
     position: relative;
     z-index: 2;
     background-color: white;
+}
+.buscadorAdm{
+    display: flex;
+    margin: 5px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+.buscadorAdm input{
+    width: 220px;
+    margin-left: 10px;        
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 7px;
+    border: 1px solid gray;
+}
+.buscadorAdm p{
+    font-size: 17px !important;
+}
+.buscadorAdmRecetas{
+    display: flex;
+    margin: 5px;
+    margin-left: 25px;
+    margin-bottom: 10px;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+.buscadorAdmRecetas input{
+    width: 220px;
+    margin-left: 10px;        
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 7px;
+    border: 1px solid gray;
+}
+.buscadorAdmRecetas p{
+    font-size: 17px !important;
 }
 .db-productos img{
     width: 100%;
@@ -141,27 +181,29 @@
 }
 .db-productos .titulos-consulta{
     display: flex;
-    margin-inline: 15px;
+    margin-inline: 1.6vw;
     margin-block: 0;
+    padding-left: 2vw;
+    margin-top: 10px;
 }
 .db-recetas .titulos-consulta{
     display: flex;
     justify-content: space-around;
 }
 .db-productos h1, .db-recetas h1{
-    margin: 10px;
-    font-size: 25px;
+    margin: 1vw;
+    font-size: 2.5vw;
 }
 .db-productos p, .db-recetas p{
     margin: 0;
-    font-size: 12px;
+    font-size: 1vw;
 }
 #recetaList, #productList{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-block: 10px;
-    margin-inline: 10px;
+    gap: 1vw;
+    padding-block: 1.2vw;
+    margin-inline: 1.2vw;
     justify-content: center;
 }
 #recetaList div, #productList div{
@@ -170,33 +212,35 @@
     align-items: center;
     background-color: rgba(229, 229, 229, 0.573);
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 0.5vw 1.2vw;
+    padding-left: 2vw;
 }
 .db-administrador .nombre, .tituloNombre{
-    width: 110px;
+    width: 15vw;
 }
 .db-administrador .nombre{
-    width: 200px;
+    width: 20vw;
 }
 .db-administrador .nombre, .tituloNombreReceta{
-    width: 100px;
+    width: 15vw;
 
 }
 .db-administrador .nombreReceta{
-    width: 150px;
+    width: 17vw;
 }
 .db-administrador .precio, .db-administrador .gramaje, .tituloPrecio, .tituloGramaje{
-    width: 60px;
-    text-align: center;
+    margin-top: 10px;
+    width: 8vw;
+    text-align: left;
     margin: 0;
 }
 .db-administrador .tituloDescripcion{
-    width: 150px;
+    width: 17vw;
     text-align: left;
     margin: 0;
 }
 .tituloAcciones{
-    width: 80px;
+    width: 9vw;
     text-align: center;
     margin: 0;
 }
@@ -204,8 +248,8 @@
     background: none;
     color: gray;
     border: none;
-    width: 20px;
-    height: 20px;
+    width: 1.2vw;
+    height: 1.2vw;
 }
 #recetaList button, #productList button{
     background: none;
@@ -272,22 +316,28 @@
 #productForm{
     display: none;
     flex-direction: column;
-    padding-inline: 30px;
-    padding-bottom: 20px;
-    margin-bottom: 10px;
+    flex-wrap: nowrap;
+    padding-inline: 3vw;
+    padding-bottom: 2vw;
+    margin-bottom: 1vw;
     border-bottom: 1px solid rgb(204, 203, 203);
     border-top: 1px solid rgb(204, 203, 203);
     position: relative;
+    gap: 5vw !important;
 }
 #productForm h1{
-    margin: 2px;
+    margin-top: 5px;
+    margin: 0.5vw;
+    font-size: 2vw;
 }
 #productForm input{
-    margin-block: 5px;
-    border-radius: 10px;
+    border-radius: 1vw;
     border: 1px solid gray;
-    padding: 5px;
-    width: 100%;
+    padding: 0.6vw;
+    width: 10vw;
+}
+#productForm #imagen{
+    width: 28.5vw;
 }
 #productForm input:focus {
     border-color: #007bff;
@@ -297,41 +347,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding: 10px;
+    width: 35vw;
+    padding: 0.6vw;
     background-color: #007bff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     color: #fff;
-    font-size: 16px;
+    font-size: 1.2vw;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 0.5vw;
 }
 #productForm button:hover {
     background-color: #0056b3;
-}
-.buscar-producto-adm{
-    width: 70%;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 5px;
-    border: 1px solid gray;
-}
-.buscar-producto-adm:focus{
-    border-color: #007bff;
-    outline: none;
-}
-.buscar-adm{
-    width: 70px;
-    padding: 5px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 5px;
 }
 .btn-agregar-producto{
     position: relative;
@@ -347,7 +374,7 @@
     align-items: center;
 }
 .btn-agregar-producto:hover{
-    background-color: #0056b3;
+    background-color: #034994;
 }
 
 
@@ -393,6 +420,19 @@
     max-height: 500px; 
     opacity: 1;
 }
+.formReceta2 {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.formReceta2.mostrar2 {
+    display: block;
+    max-height: 500px; 
+    opacity: 1;
+}
 
 
 
@@ -401,23 +441,27 @@
 #recetaForm{
     display: none;
     flex-direction: column;
-    padding-inline: 30px;
-    padding-bottom: 20px;
-    margin-bottom: 10px;
+    padding-inline: 3vw;
+    padding-bottom: 2vw;
+    margin-bottom: 1vw;
     border-bottom: 1px solid rgb(204, 203, 203);
     border-top: 1px solid rgb(204, 203, 203);
     position: relative;
 
 }
 #recetaForm h1{
-    margin: 2px;
+    margin: 1vw;
+    font-size: 2vw;
+    margin-top: 5px;
 }
 #recetaForm input{
-    margin-block: 5px;
-    border-radius: 10px;
+    border-radius: 1vw;
     border: 1px solid gray;
-    padding: 5px;
-    width: 100%;
+    padding: 0.6vw;
+    width: 10vw;
+}
+#recetaForm #imagenReceta{
+    width: 28.5vw;
 }
 #recetaForm input:focus {
     border-color: #007bff;
@@ -427,41 +471,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding: 10px;
+    width: 35vw;
+    padding: 0.6vw;
     background-color: #007bff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     color: #fff;
-    font-size: 16px;
+    font-size: 1.2vw;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 0.5vw;
 }
 #recetaForm button:hover {
     background-color: #0056b3;
-}
-.buscar-producto-adm{
-    width: 70%;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 5px;
-    border: 1px solid gray;
-}
-.buscar-producto-adm:focus{
-    border-color: #007bff;
-    outline: none;
-}
-.buscar-adm{
-    width: 70px;
-    padding: 5px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 5px;
 }
 .btn-agregar-producto{
     position: relative;
@@ -592,5 +613,346 @@
     margin-bottom: 5px;
     margin-top: 10px;
 }
-
-
+@media (max-width: 1200px){
+    /* Estilos info productos y recetas */
+    .db-productos, .db-recetas{
+        width: 360px;
+        height: auto;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        display: none;
+        flex-direction: column;
+        position: relative;
+        z-index: 2;
+        background-color: white;
+    }
+    .db-productos img{
+        width: 100%;
+        height: 150px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        object-fit: cover;
+        object-position: bottom;
+    }
+    .db-recetas img{
+        width: 100%;
+        height: 150px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        object-fit: cover;
+        object-position: top;
+    }
+    .db-productos .titulos-consulta{
+        display: flex;
+        margin-inline: 15px;
+        margin-block: 0;
+    }
+    .db-recetas .titulos-consulta{
+        display: flex;
+        justify-content: space-around;
+    }
+    .db-productos h1, .db-recetas h1{
+        margin: 10px;
+        font-size: 25px;
+    }
+    .db-productos p, .db-recetas p{
+        margin: 0;
+        font-size: 12px;
+    }
+    #recetaList, #productList{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-block: 10px;
+        margin-inline: 10px;
+        justify-content: center;
+    }
+    #recetaList div, #productList div{
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        background-color: rgba(229, 229, 229, 0.573);
+        border-radius: 10px;
+        padding: 5px 10px;
+    }
+    .db-administrador .nombre, .tituloNombre{
+        width: 110px;
+    }
+    .db-administrador .nombre{
+        width: 200px;
+    }
+    .db-administrador .nombre, .tituloNombreReceta{
+        width: 100px;
+    
+    }
+    .db-administrador .nombreReceta{
+        width: 150px;
+    }
+    .db-administrador .precio, .db-administrador .gramaje, .tituloPrecio, .tituloGramaje{
+        width: 60px;
+        text-align: center;
+        margin: 0;
+    }
+    .db-administrador .tituloDescripcion{
+        width: 150px;
+        text-align: left;
+        margin: 0;
+    }
+    .tituloAcciones{
+        width: 80px;
+        text-align: center;
+        margin: 0;
+    }
+    #recetaList svg, #productList svg{
+        background: none;
+        color: gray;
+        border: none;
+        width: 20px;
+        height: 20px;
+    }
+    #recetaList button, #productList button{
+        background: none;
+        color: gray;
+        border: none;
+    }
+    /* Estilos de productForm */
+    #productForm{
+        display: none;
+        flex-direction: column;
+        padding-inline: 30px;
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgb(204, 203, 203);
+        border-top: 1px solid rgb(204, 203, 203);
+        position: relative;
+    }
+    #productForm h1{
+        margin: 2px;
+        font-size: 20px;
+    }
+    #productForm input{
+        margin-block: 5px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        padding: 5px;
+        width: 100%;
+    }
+    #productForm #imagen{
+        width: 100%;
+    }
+    #productForm input:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    #productForm button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+    #productForm button:hover {
+        background-color: #0056b3;
+    }
+    .btn-agregar-producto{
+        position: relative;
+        border-radius: 30px;
+        border: 5px solid white;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 30px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn-agregar-producto:hover{
+        background-color: #0056b3;
+    }
+    
+    
+    .btn-contenedor {
+        position: absolute;
+        top: -0px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+    }
+    
+    .vista-previa {
+        display: none;
+        position: absolute;
+        top: 150%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #333;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+    }
+    
+    .btn-contenedor:hover .vista-previa {
+        display: block;
+    }
+    .formProduct2 {
+        display: none;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+    
+    .formProduct2.mostrar2 {
+        display: block;
+        max-height: 500px; 
+        opacity: 1;
+    }
+    
+    
+    
+    
+    /* Estilos de recetaForm */
+    #recetaForm{
+        display: none;
+        flex-direction: column;
+        padding-inline: 30px;
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgb(204, 203, 203);
+        border-top: 1px solid rgb(204, 203, 203);
+        position: relative;
+    
+    }
+    #recetaForm h1{
+        margin: 2px;
+        font-size: 20px;
+    }
+    #recetaForm input{
+        margin-block: 5px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        padding: 5px;
+        width: 100%;
+    }
+    #recetaForm #imagenReceta{
+        width: 100%;
+    }
+    #recetaForm input:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    #recetaForm button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+    #recetaForm button:hover {
+        background-color: #0056b3;
+    }
+    .buscar-producto-adm{
+        width: 70%;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        padding: 5px;
+        border: 1px solid gray;
+    }
+    .buscar-producto-adm:focus{
+        border-color: #007bff;
+        outline: none;
+    }
+    .buscar-adm{
+        width: 70px;
+        padding: 5px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+    .btn-agregar-producto{
+        position: relative;
+        border-radius: 30px;
+        border: 5px solid white;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 30px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn-agregar-producto:hover{
+        background-color: #0056b3;
+    }
+    
+    
+    .btn-contenedor {
+        position: absolute;
+        top: -0px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+    }
+    
+    .vista-previa {
+        display: none;
+        position: absolute;
+        top: 150%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #333;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+    }
+    
+    .btn-contenedor:hover .vista-previa {
+        display: block;
+    }
+    .formReceta {
+        display: none;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+    
+    .formReceta.mostrar2 {
+        display: block;
+        max-height: 500px; 
+        opacity: 1;
+    }
+}

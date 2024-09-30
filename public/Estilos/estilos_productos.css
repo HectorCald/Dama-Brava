@@ -33,6 +33,7 @@
 .buscador{
     width: 100%;
     padding-inline: 20px;
+    font-family: sans-serif;
 }
 .cuadroBuscar{
     display: flex;
@@ -41,19 +42,8 @@
     align-items: center;
     gap: 10px;
 }
-.fixed {
-    position: fixed;
-    top: 48px; /* Fija el cuadro a 50px del borde superior */
-    left: 0;
-    right: 0;
-    z-index: 1; /* Asegura que esté por encima de otros elementos */
-    background-color: white;
-    padding-block: 5px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-}
-.fixedNav{
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid rgb(195, 194, 194);
+.cuadroBuscar p{
+    font-size: 20px;
 }
 .cuadroBuscar button{
     height: 45px;
@@ -68,7 +58,7 @@
 }
 #busquedaInput{
     margin-block: 15px;
-    width: 160px;
+    width: 200px;
     height: 30px;
     font-size: 16px;
     transition: font-size 0.3s ease;
@@ -76,53 +66,15 @@
     border-radius: 30px;
     border: 1px solid rgb(175, 175, 175);
 }
-.clearBoton{
-    display: none;
+#clearInput{
     position: absolute;
-    left: 160px ;
-    top: 20px;
-    font-size: 20px;
-    color: rgb(193, 193, 193);
-    font-family: sans-serif;
+    left: 275px;
+    top: 25px;
     cursor: pointer;
-}
-.filtrosLista{
-    font-size: 14px;
-    font-family: sans-serif;
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    background-color: white;
-    padding: 20px;
-    gap: 5px;
-    width: 200px;
-    height: 400px;
-    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.3);
-    overflow-y: auto;
-    overflow-x: hidden;
-    z-index: 2;
-}
-.filtrosLista::-webkit-scrollbar{
-    width: 5px;
-}
-.filtrosLista::-webkit-scrollbar-track{
-    background: #f1f1f1;
-}
-.filtrosLista::-webkit-scrollbar-thumb{
-    background: #888;
-    border-radius: 10px;
-}
-.filtrosLista p{
-    margin: 0;
-    border-bottom: 1px solid rgb(187, 186, 186);
-    padding: 5px;
-    width: 100%;
-    cursor: pointer;
-}
-.filtrosLista p:hover{
-    background-color: rgb(81, 81, 81);
-    color: white;
+    font-size: 18px;
+    color: #979797; /* Color de la X */
+    z-index: 9;
+    display: flex;
 }
 .hidden{
     display: none;
