@@ -1,43 +1,118 @@
 <%- include("./Partials/header.ejs") %>
-    <div class="carritoBoton" id="accionBoton"></div>
-        <button class="fondoBotonCarrito" id="accionBoton2"  onclick="botonCarrito()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-              </svg>
-        </button>  
-    </div>
-    <div class="seccionProductos seccion">  
-        <h1 class="tituloProductos">PRODUCTOS</h1>
+    <div class="seccion-productos seccion">  
+        <h1 class="titulo-seccion">TIENDA DAMABRAVA</h1>
         <div class="buscador">
-            <div class="cuadroBuscar">
-                <p>Buscador</p>
-                <input type="text" class="cuadroBusqueda" placeholder="Productos..." id="busquedaInput">
-                <span id="clearInput" onclick="eliminarInputProducto()">x</span>
+                <input type="text" class="cuadroBusqueda" placeholder="Buscar" id="busquedaInput"> 
+                <button class="btn-buscar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                  </svg></button>
+                <button class="btn-carrito"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                  </svg><p class="contador-carrito">0</p></button>
+        </div>
+        <div id="productos">
+            <div class="producto loading">
+                <div class="loading-placeholder"></div>
+                <p>Cargando...</p>
+            </div>
+            <div class="producto loading">
+                <div class="loading-placeholder"></div>
+                <p>Cargando...</p>
+            </div>
+            <div class="producto loading">
+                <div class="loading-placeholder"></div>
+                <p>Cargando...</p>
+            </div>
+            <div class="producto loading">
+                <div class="loading-placeholder"></div>
+                <p>Cargando...</p>
             </div>
         </div>
-        <div id="productos-container"></div>
     </div>
-    <div class="carrito div-animado">
-        <div class="tituloCompra">
+    <div class="carrito">
+        <div class="titulo">
             <h1>Mi carrito</h1>
-            <button class="cerrarCompra" onclick="botonCarrito()">-</button>
+            <button class="cerrar" onclick="botonCarrito()">x</button>
         </div>
         <hr style="width: 100%">
         <div class="compra">
-            <!-- se ponen los productos al carrito -->
+            <div class="pedido">
+                <div class="pedido-detalle">
+                    <img src="" alt="">
+                    <div>
+                        <p>nombre-gramaje</p>
+                        <p>cantidad-precio</p>
+                    </div>
+                </div>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                      </svg>
+                </button>
+            </div>
+            <div class="pedido">
+                <div class="pedido-detalle">
+                    <img src="" alt="">
+                    <div>
+                        <p>nombre-gramaje</p>
+                        <p>cantidad-precio</p>
+                    </div>
+                </div>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                      </svg>
+                </button>
+            </div>
+            <div class="pedido">
+                <div class="pedido-detalle">
+                    <img src="" alt="">
+                    <div>
+                        <p>nombre-gramaje</p>
+                        <p>cantidad-precio</p>
+                    </div>
+                </div>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                      </svg>
+                </button>
+            </div>
+            <div class="pedido">
+                <div class="pedido-detalle">
+                    <img src="" alt="">
+                    <div>
+                        <p>nombre-gramaje</p>
+                        <p>cantidad-precio</p>
+                    </div>
+                </div>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                      </svg>
+                </button>
+            </div>
         </div>
         <hr style="width: 100%">
         <div class="subtotal">
             <p>Subtotal:</p>
-            <p class="subtotalPrecio">Bs/0</p>
+            <p class="subtotal">Bs/0</p>
         </div>
         <hr class="lineaSub">
-        <div class="botonesCompra">
-            <button class="botonComprar">Adquirir ahora!</button>
+        <div class="botones">
+            <button class="btn-pedido">¡Hacer pedido!</button>
         </div>
     </div>
-    <div class="contador" id="accionBoton3">
-        <span id="contador">0</span>
-    </div>
+    <script>
+        const nav = document.getElementById('nav');
+        const texto = document.querySelectorAll('.link');
+        const nombreLogo = document.querySelector('.nombre-logo h1');
+        
+            nav.classList.remove('scrolled');
+            nombreLogo.classList.remove('scrolled');
+            texto.forEach(element => {
+            element.classList.remove('scrolled');
+            });
+    </script>
 <%- include("./Partials/footer.ejs") %>
     

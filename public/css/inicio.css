@@ -1,0 +1,336 @@
+/*********************ESTILOS SECCION INICIO*/
+.seccion-inicio{
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+.seccion-inicio img{
+    width: auto;
+    height: 30vw;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.4);
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+/*********************ESTILOS HEROS DE INICIO*/
+.inicio-principal{
+    width: 100%;
+    min-width: auto;
+    min-height: fit-content;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    padding: 4vw;
+    gap: 3vw;
+    justify-content: left;
+    align-items: center;
+    box-shadow: 0 8px 7px rgba(0, 0, 0, 0.1);
+    background-image: url('../img/img-otros/IMG_0276.PNG');
+    background-size: cover;
+    background-position: bottom;
+}
+.inicio-principal .botones{
+    display: flex;
+    gap: 1vw;
+}
+.inicio-productos{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-block: 2vw;
+    width: 100%;
+    min-height: fit-content;
+    height: 95vh;
+    box-sizing: border-box;
+    gap: 2vw;
+    
+}
+.inicio-nosotros{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding:4vw;
+    width: 100%;
+    min-height: fit-content;
+    height: 90vh;
+    box-sizing: border-box;
+    gap: 3vw;
+}
+.inicio-recetas{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding:2vw;
+    width: 100%;
+    min-height: fit-content;
+    height: 90vh;
+    box-sizing: border-box;
+    gap: 2vw;
+    background-color: rgb(39, 39, 39);
+}
+.inicio-recetas .texto{
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2vw;
+    color: white;
+}
+.inicio-recetas .texto p{
+    color: white;
+}
+.inicio-productos .texto{
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2vw;
+}
+.inicio-nosotros .texto{
+    width: 45%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    justify-content: left;
+    align-items: left;
+    gap: 2vw;
+}
+.inicio-principal .texto{
+    width: 40%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    justify-content: left;
+    align-items: left;
+    color: white !important;
+    padding: 2.5vw;
+    border-radius: 30px;
+}
+.inicio-principal .texto p{
+    color: white;
+}
+/*********************ESTILOS CARRUSEL DE PRODUCTOS*/
+.carrusel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 24vw;
+    justify-content: center;
+    align-items: center;
+    background:none; /* Fondo del carrusel estático */
+  }
+  #carrusel .item {
+    min-width: 15vw;
+    height: 23vw;
+    margin: 1VW;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 1px solid rgb(206, 206, 206);
+    gap: 1vw;
+    padding: 1vw;
+    position: relative;
+    background-color: rgb(255, 255, 255); /* Fondo de los items */
+    overflow: hidden;
+    transition: height 0.5s ease;
+    animation: moveItems 10s infinite;
+  }
+  #carrusel .item a {
+    width: 80%;
+    padding: 0.7vw;
+    background: none;
+    border-radius: 20px;
+    color: rgb(255, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 1px solid rgb(255, 0, 0);
+    transition: background-color 0.5s ease;
+  }
+  #carrusel .item a:hover {
+    background-color: rgb(255, 0, 0);
+    color: white;
+  }
+  #carrusel .item p {
+    font-size: 1vw;
+    color: rgb(0, 0, 0);
+    width: 10vw;
+  }
+  #carrusel .item:hover {
+    border: 1px solid red;
+    height: 24vw;
+  }
+/*********************ESTILOS CARRUSEL DE RECETAS*/
+.carrusel-recetas {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 24vw;
+    justify-content: center;
+    align-items: center;
+    background:none;
+  }
+  #carrusel-recetas .item {
+    min-width: 15vw;
+    height: 23vw;
+    margin: 1vw;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 1px solid rgba(206, 206, 206, 0.168);
+    gap: 1vw;
+    padding: 1vw;
+    position: relative;
+    background-color: rgb(39, 39, 39);
+    overflow: hidden;
+    transition: height 0.5s ease;
+    animation: moveItems 10s infinite;
+  }
+  #carrusel-recetas .item a {
+    width: 80%;
+    padding: 0.7vw;
+    background: none;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 1px solid rgb(255, 255, 255);
+    transition: background-color 0.5s ease;
+  }
+  
+  #carrusel-recetas .item a:hover {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border: 1px solid red;
+  }
+  #carrusel-recetas .item p {
+    font-size: 1vw;
+    color: white;
+    width: 10vw;
+  }
+  #carrusel-recetas .item:hover {
+    border: 1px solid rgb(255, 255, 255);
+    height: 24vw;
+  }
+
+  
+  .item img {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+  
+  .loading .loading-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 0, 150, 0.5), rgba(0, 204, 255, 0.5));
+    animation: fadeInOut 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    color: white;
+    }
+
+.item p, .item img, .item a {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.5; } /* Comienza y termina con opacidad 0.5 */
+    40% { opacity: 1; } /* En el 40%, la opacidad es 1 */
+    70% { opacity: 1; } /* Permanece en opacidad 1 hasta el 70% */
+    75% { opacity: 0.8; } /* Se reduce ligeramente a 0.8 en el 75% */
+    85% { opacity: 0.6; } /* Se reduce a 0.6 en el 85% */
+    100% { opacity: 0.5; } /* Finalmente, vuelve a 0.5 */
+}
+  @keyframes moveItems {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-110%); }
+    40% { transform: translateX(-110%); }
+    60% { transform: translateX(-220%); }
+    80% { transform: translateX(-220%); }
+    100% { transform: translateX(0); }
+  }
+  
+  
+/*********************ESTILOS SIGUENOS EN REDES*/
+.inicio-siguenos{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2vw;
+    gap: 2vw;
+    background-color: rgba(155, 155, 155, 0.177);
+}
+.inicio-siguenos h1{
+    color: black;
+}
+.logos-siguenos{
+    display: flex;
+    gap: 2vw;
+}
+.logos-siguenos a{
+    border-radius: 50px;
+    background-color: rgb(55, 55, 55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5vw;
+    height: 3.5vw;
+    transition: background-color 0.5s ease;
+    transition: border-color 0.5s ease;
+}
+.inicio-siguenos svg{
+    width: 2vw;
+    height: 2vw;
+    color: white;
+    transition: fill 0.5s ease;
+}
+.logos-siguenos a:hover{
+    background: none;
+    border: 1px solid rgb(117, 117, 117);
+}
+.logos-siguenos a:hover svg{
+    fill: rgb(54, 54, 54);
+}
+
+
+
+
+
+
+

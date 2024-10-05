@@ -10,8 +10,6 @@ const port = 3000;
 
 // Conectar a MongoDB
 mongoose.connect('mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
 }).then(() => {
     console.log('Conectado a MongoDB');
 }).catch((error) => {

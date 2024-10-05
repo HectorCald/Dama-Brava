@@ -5,18 +5,18 @@
 </div>
 <div class="db-administrador" id="administrador">
     <!-- Sección db productos -->
-    <div class="db-productos div-animado" style="display: none;">
+    <div class="db-productos">
         <img src="./Imagenes2/imgAdm/formProductos.jpg" alt="">
         <h1>Productos</h1>
         <div class="buscadorAdm">
             <p>Buscador</p>
             <input type="text" class="buscar-producto-adm" id="searchInput" placeholder="Buscar producto...">
             <div class="btn-contenedor">
-                <button class="btn-agregar-producto" id="mostrarForm" onclick="animacionAgregarProducto()">+</button>
+                <button class="btn-agregar-producto" id="mostrarForm">+</button>
                 <p class="vista-previa">Agregar producto</p>
             </div>
         </div>
-        <form id="productForm" class="formProduct2 targetSection" style="display: none;" onsubmit="event.preventDefault(); agregarProducto(nombre.value, precio.value, gramaje.value, imagen.files[0]);">
+        <form id="productForm" class="formProduct" onsubmit="event.preventDefault(); agregarProducto(nombre.value, precio.value, gramaje.value, imagen.files[0]);">
             <h1 class="titulo-agregar-producto">Agregar</h1>
             <input type="text" id="nombre" placeholder="Nombre" required oninput="this.value = this.value.toUpperCase();">
             <input type="number" id="precio" placeholder="Precio" step="0.01" required>
@@ -34,7 +34,7 @@
                 <p class="tituloGramaje">Gramaje</p>
                 <p class="tituloAcciones">Acciones</p>
             </div>
-            <div id="productList"></div>
+            <div id="productList"><p>hola</p></div>
         </div>
     </div>
 
@@ -43,18 +43,18 @@
 
 
     <!-- Sección db recetas -->
-    <div class="db-recetas div-animado">
+    <div class="db-recetas">
         <img src="./Imagenes2/imgAdm/formRecetas2.jpeg" alt="">
         <h1>Recetas</h1>
         <div class="buscadorAdmRecetas">
             <p>Buscador</p>
             <input type="text" class="buscar-producto-adm" id="searchInput" placeholder="Buscar producto...">
             <div class="btn-contenedor">
-                <button class="btn-agregar-producto" id="mostrarForm" onclick="animacionAgregarReceta()">+</button>
+                <button class="btn-agregar-producto" id="mostrarForm">+</button>
                 <p class="vista-previa">Agregar producto</p>
             </div>
         </div>
-        <form style="display: none;" id="recetaForm" class="formReceta formReceta2 targetSection" onsubmit="event.preventDefault(); agregarReceta(nombreReceta.value, descripcion.value, linkReceta.value, imagenReceta.files[0]);">
+        <form id="recetaForm" class="formRecet" onsubmit="event.preventDefault(); agregarReceta(nombreReceta.value, descripcion.value, linkReceta.value, imagenReceta.files[0]);">
             <h1 class="titulo-agregar-receta">Agregar</h1>
             <input type="text" id="nombreReceta" placeholder="Nombre de la Receta" required oninput="this.value = this.value.toUpperCase();">
             <input type="text" id="descripcion" placeholder="Descripción" required>
@@ -75,7 +75,7 @@
         </div>
     </div>
     <!-- Sección cambiar contrseña -->
-    <div class="db-contraseña div-animado">
+    <div class="db-contraseña">
         <form id="edit-password-form" class="formContraseña"></form>
             <h1>Cambiar contraseña</h1>
             <label for="username">Usuario:</label>
@@ -91,7 +91,7 @@
     </div>
 </div>
 <!-- Sección anuncio emergenete -->
-<div class="anuncio div-animado">
+<div class="anuncio">
     <h1 class="titulo-anuncio">TITULO</h1>
     <p class="mensaje-anuncio"></p>
     <div class="boton-anuncio">
@@ -131,5 +131,5 @@
         </button>
     </div>
 
-<script src="./Scripts/index.js" defer></script>
+<script src="./js/index.js" defer></script>
 
