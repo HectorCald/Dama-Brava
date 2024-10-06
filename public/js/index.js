@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-  mostrarProductos();
-  mostrarRecetas();
-  obtenerProductos();
-  obtenerRecetas();
+  window.addEventListener('scroll', () => {
+    onScroll();
+    cuadroBuscar();
+    verificarColision();
+    focusInputProductos();
+  });
   loadProducts();
   loadRecetas();
-  initializeCarousel();
-  window.addEventListener('scroll', onScroll);
   onScroll();
+    const currentPath = window.location.pathname; // Obtiene la ruta actual, ej: "/productos"
+    const navLinks = document.querySelectorAll('.link');
+
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active-link');
+        }
+    });
 });
 function loadProducts() {
   let producto = document.querySelectorAll('#carrusel .item');
@@ -34,8 +42,9 @@ function loadProducts() {
             <img src="${product.imagenUrl}" alt="">
             <p>${product.nombre} ${product.gramaje} gr.</p>
             <p>Bs/${product.precio}</p>
-            <a href="/productos">Ver mas</a>
+            <a href="/productos">Ver más</a>
         `;
+
         carouselInner.appendChild(productDiv);
         initializeCarousel()
         producto.forEach(element => {
@@ -135,4 +144,10 @@ function onScroll() {
       });
     }
   }
+}
+function contacto(behaviorType = 'smooth') {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: behaviorType // 'smooth' o 'auto' para scroll instantáneo
+  });
 }

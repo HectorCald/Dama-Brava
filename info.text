@@ -1,0 +1,11 @@
+-----colores
+primer: rgb(221, 0, 0)
+segundo: rgb(180, 0, 0)
+tercero: rgb(39, 39, 39)
+
+-----tamaño de letra
+titulos: 2vw -
+subtitulos: 1.5vw
+parrafos: 1vw - 15px
+
+

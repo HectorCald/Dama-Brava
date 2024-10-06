@@ -9,16 +9,6 @@
     margin-top: 60px;
     margin-bottom: 20px;
 }
-.titulo-seccion{
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
-    font-size: 35px !important;
-    text-align: center;
-    background-color: rgb(43, 43, 43);
-    color: white;
-    padding: 10px;
-}
 .seccion-nosotros h1{
     font-size: 3.3vw;
     margin: 0;

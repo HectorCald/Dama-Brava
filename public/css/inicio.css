@@ -45,7 +45,7 @@
     padding-block: 2vw;
     width: 100%;
     min-height: fit-content;
-    height: 95vh;
+    height: 98vh;
     box-sizing: border-box;
     gap: 2vw;
     
@@ -59,7 +59,7 @@
     padding:4vw;
     width: 100%;
     min-height: fit-content;
-    height: 90vh;
+    height: 98vh;
     box-sizing: border-box;
     gap: 3vw;
 }
@@ -72,10 +72,10 @@
     padding:2vw;
     width: 100%;
     min-height: fit-content;
-    height: 90vh;
+    height: 98vh;
     box-sizing: border-box;
     gap: 2vw;
-    background-color: rgb(39, 39, 39);
+    background-color: rgb(30, 30, 30);
 }
 .inicio-recetas .texto{
     width: 80%;
@@ -169,6 +169,7 @@
     text-decoration: none;
     border: 1px solid rgb(255, 0, 0);
     transition: background-color 0.5s ease;
+    cursor: pointer;
   }
   #carrusel .item a:hover {
     background-color: rgb(255, 0, 0);
@@ -203,11 +204,11 @@
     align-items: center;
     flex-direction: column;
     border-radius: 20px;
-    border: 1px solid rgba(206, 206, 206, 0.168);
+    border: 1px solid rgba(198, 198, 198, 0.303);
     gap: 1vw;
     padding: 1vw;
     position: relative;
-    background-color: rgb(39, 39, 39);
+    background:none;
     overflow: hidden;
     transition: height 0.5s ease;
     animation: moveItems 10s infinite;
