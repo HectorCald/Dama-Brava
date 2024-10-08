@@ -1,3 +1,11 @@
+document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('scroll', () => {
+      onScroll();
+    });
+    onScroll();
+    mostrarProductos();
+    mostrarRecetas();
+  });
 function editarContraseña(){
     cambiar();
     async function cambiar(){

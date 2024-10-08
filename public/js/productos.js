@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
       focusInputProductos();
     });
     obtenerProductos();
-    obtenerRecetas();
     recomendacion();
     focusInputProductos();
     filtrarNombres();
-  });
+    carruselProductos(productosJSON);
+});
 async function obtenerProductos() {
     let producto = document.querySelectorAll('.producto');
     producto.forEach(element => {
@@ -48,27 +48,8 @@ const productosJSON = [
     { nombre: "Producto 10", precio: "$55", descripcion: "Descripción del Producto 10" },
     { nombre: "Producto 11", precio: "$60", descripcion: "Descripción del Producto 11" },
     { nombre: "Producto 12", precio: "$65", descripcion: "Descripción del Producto 12" },
-    { nombre: "Producto 13", precio: "$70", descripcion: "Descripción del Producto 13" },
-    { nombre: "Producto 14", precio: "$75", descripcion: "Descripción del Producto 14" },
-    { nombre: "Producto 15", precio: "$80", descripcion: "Descripción del Producto 15" },
-    { nombre: "Producto 16", precio: "$85", descripcion: "Descripción del Producto 16" },
-    { nombre: "Producto 17", precio: "$90", descripcion: "Descripción del Producto 17" },
-    { nombre: "Producto 18", precio: "$95", descripcion: "Descripción del Producto 18" },
-    { nombre: "Producto 19", precio: "$100", descripcion: "Descripción del Producto 19" },
-    { nombre: "Producto 20", precio: "$105", descripcion: "Descripción del Producto 20" },
-    { nombre: "Producto 21", precio: "$110", descripcion: "Descripción del Producto 21" },
-    { nombre: "Producto 22", precio: "$115", descripcion: "Descripción del Producto 22" },
-    { nombre: "Producto 23", precio: "$120", descripcion: "Descripción del Producto 23" },
-    { nombre: "Producto 14", precio: "$75", descripcion: "Descripción del Producto 14" },
-    { nombre: "Producto 15", precio: "$80", descripcion: "Descripción del Producto 15" },
-    { nombre: "Producto 16", precio: "$85", descripcion: "Descripción del Producto 16" },
-    { nombre: "Producto 17", precio: "$90", descripcion: "Descripción del Producto 17" },
-    { nombre: "Producto 18", precio: "$95", descripcion: "Descripción del Producto 18" },
-    { nombre: "Producto 19", precio: "$100", descripcion: "Descripción del Producto 19" },
-    { nombre: "Producto 20", precio: "$105", descripcion: "Descripción del Producto 20" },
-    { nombre: "Producto 21", precio: "$110", descripcion: "Descripción del Producto 21" },
-    { nombre: "Producto 22", precio: "$115", descripcion: "Descripción del Producto 22" },
-    { nombre: "Producto 23", precio: "$120", descripcion: "Descripción del Producto 23" },
+    { nombre: "Producto 11", precio: "$60", descripcion: "Descripción del Producto 11" },
+    { nombre: "Producto 12", precio: "$65", descripcion: "Descripción del Producto 12" },   
 ];
 function carruselProductos(productos) {
     const productosContainer = document.querySelector('#productos');
@@ -151,7 +132,6 @@ function carruselProductos(productos) {
                             </svg>
                         </button>
                     `;
-
                     compraDiv.appendChild(pedidoDiv);
                     subtotal += parseFloat(totalPrecio);
                     subtotalElement.textContent = `Bs/${subtotal.toFixed(2)}`;
@@ -195,8 +175,48 @@ function carruselProductos(productos) {
     }
 
     function actualizarBotones() {
-        document.getElementById('prevBtn').style.display = currentPage > 0 ? 'inline-block' : 'none';
-        document.getElementById('nextBtn').style.display = currentPage < totalPages - 1 ? 'inline-block' : 'none';
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageBtnContainer = document.getElementById('paginacion'); // Contenedor para botones de páginas
+
+        // Limpiar botones de página
+        pageBtnContainer.innerHTML = '';
+
+        // Crear botones de página
+        for (let i = 0; i < totalPages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.innerText = i + 1;
+            pageBtn.classList.add('page-btn');
+            if (i === currentPage) {
+                pageBtn.classList.add('active'); // Marcar página actual
+            }
+
+            // Añadir evento click para navegar a la página específica
+            pageBtn.addEventListener('click', () => {
+                currentPage = i;
+                mostrarPagina();
+            });
+
+            pageBtnContainer.appendChild(pageBtn); // Añadir botón de página al contenedor
+        }
+
+        // Habilitar o deshabilitar el botón "Anterior"
+        if (currentPage > 0) {
+            prevBtn.classList.remove('disabled');
+            prevBtn.disabled = false;
+        } else {
+            prevBtn.classList.add('disabled');
+            prevBtn.disabled = true;
+        }
+
+        // Habilitar o deshabilitar el botón "Siguiente"
+        if (currentPage < totalPages - 1) {
+            nextBtn.classList.remove('disabled');
+            nextBtn.disabled = false;
+        } else {
+            nextBtn.classList.add('disabled');
+            nextBtn.disabled = true;
+        }
     }
 
     document.getElementById('prevBtn').addEventListener('click', () => {
@@ -213,40 +233,7 @@ function carruselProductos(productos) {
         }
     });
 
-    mostrarPagina();
-}
-async function obtenerRecetas() {
-    try {
-        const response = await fetch('/api/recetas');
-        if (!response.ok) {
-            throw new Error('Error al obtener recetas');
-        }
-        const recetas = await response.json();
-        mostrarRecetas2(recetas);
-    } catch (error) {
-        console.error(error);
-    }
-}
-function mostrarRecetas2(recetas) {
-    const contenedorRecetas = document.getElementById('recetasPrincipal');
-
-    // Limpiar el contenedor antes de agregar nuevas recetas
-    contenedorRecetas.innerHTML = '';
-
-    recetas.forEach(receta => {
-        const divReceta = document.createElement('div');
-        divReceta.classList.add('cuadroReceta'); // Clase para estilo, ajusta según tu CSS
-
-        divReceta.innerHTML = `
-            <img src="${receta.imagenUrl}" alt="${receta.nombreReceta}"> <!-- Asegúrate de que la propiedad sea correcta -->
-            <div class="textoReceta">
-                <h1>${receta.nombreReceta}</h1>
-                <p>${receta.descripcion}</p>
-                <a class="botonPage" href="${receta.linkReceta}" target="_blank">VER VIDEO</a> <!-- Asegúrate de que la propiedad sea correcta -->
-            </div>
-        `;
-        contenedorRecetas.appendChild(divReceta);
-    });
+    mostrarPagina(); // Muestra la primera página de productos
 }
 function showDiv() {
     const slidingDiv = document.getElementById('carrito');
@@ -455,6 +442,7 @@ function filtrarNombres() {
     const input = document.getElementById('busquedaInput');
     const contenedor = document.getElementById('sugerencias');
     const parrafos = contenedor.getElementsByTagName('p');
+    
 
     // Escuchar el evento 'input' en el campo de texto
     input.addEventListener('input', () => {

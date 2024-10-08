@@ -3,14 +3,13 @@
     <p>ADMINISTRADOR</p>
     <img src="./Imagenes2/imgInicio/Logo Dama Brava2.webp" alt="">
 </div>
-<div class="db-administrador" id="administrador">
+<div class="db-administrador seccion" id="administrador">
     <!-- Sección db productos -->
     <div class="db-productos">
-        <img src="./Imagenes2/imgAdm/formProductos.jpg" alt="">
+        <img src="./img/img-adm/formProductos.jpg" alt="">
         <h1>Productos</h1>
         <div class="buscadorAdm">
-            <p>Buscador</p>
-            <input type="text" class="buscar-producto-adm" id="searchInput" placeholder="Buscar producto...">
+            <input type="text" class="buscar-producto-adm" id="searchInput" placeholder="Buscar">
             <div class="btn-contenedor">
                 <button class="btn-agregar-producto" id="mostrarForm">+</button>
                 <p class="vista-previa">Agregar producto</p>
@@ -43,11 +42,10 @@
 
 
     <!-- Sección db recetas -->
-    <div class="db-recetas">
-        <img src="./Imagenes2/imgAdm/formRecetas2.jpeg" alt="">
+    <div class="db-recetas" style="display: none;">
+        <img src="./img/img-adm/formRecetas2.jpeg" alt="">
         <h1>Recetas</h1>
         <div class="buscadorAdmRecetas">
-            <p>Buscador</p>
             <input type="text" class="buscar-producto-adm" id="searchInput" placeholder="Buscar producto...">
             <div class="btn-contenedor">
                 <button class="btn-agregar-producto" id="mostrarForm">+</button>
@@ -75,7 +73,7 @@
         </div>
     </div>
     <!-- Sección cambiar contrseña -->
-    <div class="db-contraseña">
+    <div class="db-contraseña" style="display: none;">
         <form id="edit-password-form" class="formContraseña"></form>
             <h1>Cambiar contraseña</h1>
             <label for="username">Usuario:</label>
@@ -132,4 +130,5 @@
     </div>
 
 <script src="./js/index.js" defer></script>
+<script src="./js/adm.js"></script>
 

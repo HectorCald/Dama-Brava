@@ -1,7 +1,7 @@
 <%- include("./Partials/header.ejs") %>
     <div class="seccion-productos seccion"> 
 <!-- *********************SECCION TITULOS Y BUSCADOR --> 
-        <h1 class="titulo-seccion">Productos damabrava</h1>
+        <h1 class="titulo-seccion">Productos <span>damabrava</span></h1>
         <div class="buscador" id="seccion-buscar-productos">
             <input type="text" class="cuadroBusqueda" placeholder="Buscar" id="busquedaInput"> 
             <button onclick="filtrarPorTexto()" class="btn-buscar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -39,11 +39,52 @@
                         <div class="loading-placeholder"></div>
                         <p>Cargando...</p>
                     </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
+                    <div class="producto loading">
+                        <div class="loading-placeholder"></div>
+                        <p>Cargando...</p>
+                    </div>
                 </div>
             </div>
             <div class="botones">
-                <button id="prevBtn" class="btn-page-corto">Anterior</button>
-                <button id="nextBtn" class="btn-page-corto">Siguiente</button>
+                <button id="prevBtn" class="btn-page-corto-red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                  </svg></button>
+                  <div id="paginacion" class="paginacion-botones"></div>
+                <button id="nextBtn" class="btn-page-corto-red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                  </svg></button>
             </div>
         </div>
         <h1 class="mensaje-no" style="display: none;">"No encontramos productos que se ajusten a tu búsqueda. ¿Qué tal si intentas otra búsqueda?"</h1>
