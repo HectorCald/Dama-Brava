@@ -13,7 +13,7 @@
     width: 25px;
     height: 25px;
 }
-/*----------------------------ESTILOS DE LA SECCION BUSCADOR*/
+/*********************************ESTILOS DE LA SECCION BUSCADOR*/
 .seccion-productos .buscador {
     display: flex;
     flex-direction: row;
@@ -174,7 +174,7 @@
     flex-wrap: wrap;
     overflow: hidden;
 }
-/*----------------------------ESTILOS DE LA SECCION PRODUCTOS MOSTRAR*/
+/****************************ESTILOS DE LA SECCION PRODUCTOS MOSTRAR*/
 .productos2 {
     width: 100%;
     position: relative;
@@ -310,7 +310,7 @@
     font-size: 2vw;
     color: rgb(39, 39, 39);
 }
-/*----------------------------ESTILOS DE LA SECCION CARRITO*/
+/****************************************ESTILOS DE LA SECCION CARRITO*/
 .carrito{
     position: fixed;
     top: 65px;

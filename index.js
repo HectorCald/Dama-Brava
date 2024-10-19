@@ -94,23 +94,31 @@ app.get('/adm', verificarAutenticacion, (req, res) => {
 
 // Manejo de inicio de sesión
 app.post('/login', async (req, res) => {
+    console.log('Request body:', req.body); // Imprimir el cuerpo recibido
+
     const { username, password } = req.body;
 
+    if (!username || !password) {
+        return res.status(400).json({ message: 'Por favor, ingrese usuario y contraseña' });
+    }
+
     try {
-        const user = await User.findOne({ username, password });
-        
+        const user = await User.findOne({ username });
         if (!user) {
-            return res.redirect('/login');
+            return res.status(401).json({ message: 'Usuario no encontrado' });
+        }
+
+        if (user.password !== password) {
+            return res.status(401).json({ message: 'Contraseña incorrecta' });
         }
 
         req.session.usuarioAutenticado = true;
-        res.redirect('/adm');
+        res.status(200).json({ message: 'Login exitoso' });
     } catch (error) {
         console.error('Error al autenticar usuario:', error);
-        res.status(500).send('Error del servidor');
+        res.status(500).json({ message: 'Error del servidor' });
     }
 });
-
 // Ruta para cerrar sesión
 app.post('/logout', (req, res) => {
     req.session.destroy((err) => {
@@ -120,6 +128,32 @@ app.post('/logout', (req, res) => {
         }
         res.redirect('/login');
     });
+});
+// API para cambiar la contraseña
+app.put('/api/usuarios/cambiar-password', async (req, res) => {
+    const { username, currentPassword, newPassword } = req.body;
+
+    try {
+        // Verificar si el usuario existe
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+
+        // Verificar si la contraseña actual es correcta
+        if (user.password !== currentPassword) {
+            return res.status(403).json({ error: "Contraseña actual incorrecta" });
+        }
+
+        // Actualizar la contraseña
+        user.password = newPassword; // Aquí puedes agregar lógica para encriptar la contraseña
+        await user.save();
+
+        res.status(200).json({ message: "Contraseña actualizada correctamente" });
+    } catch (error) {
+        console.error("Error al cambiar la contraseña:", error);
+        res.status(500).json({ error: "Error al cambiar la contraseña" });
+    }
 });
 
 // API para obtener productos
