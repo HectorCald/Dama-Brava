@@ -88,3 +88,8 @@
 .verde{
     background-color: green;
 }
+@media (max-width: 1200px) {
+    body{
+        display: none;
+    }
+}
