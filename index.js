@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Conectar a MongoDB
 mongoose.connect('mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
@@ -305,6 +305,6 @@ app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), asy
 });
 
 // Iniciar el servidor
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${port}`);
 });
