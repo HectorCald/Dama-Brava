@@ -306,5 +306,5 @@ app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), asy
 
 // Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${port}`);
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
