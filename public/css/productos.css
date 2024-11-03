@@ -749,7 +749,7 @@
         background-color: white;
         border: none;
         color: gray;
-        height: 40%;
+        height: 12vw !important;
     }
     #productos .producto .cantidad button:hover{
         color: black;
