@@ -332,14 +332,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3.5vw;
-    height: 3.5vw;
+    width: 50px;
+    height: 50px;
     transition: background-color 0.5s ease;
     transition: border-color 0.5s ease;
 }
 .inicio-siguenos svg{
-    width: 2vw;
-    height: 2vw;
+    width: 30px;
+    height: 30px;
     color: white;
     transition: fill 0.5s ease;
 }
@@ -676,7 +676,7 @@
   .inicio-siguenos h1{
     color: black;
     text-align: center;
-    font-size: 5vw;
+    font-size: 25px;
   }
   .logos-siguenos{
     display: flex;
@@ -688,14 +688,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 12vw;
-    height: 12vw;
+    width: 50px;
+    height: 50px;
     transition: background-color 0.5s ease;
     transition: border-color 0.5s ease;
   }
   .inicio-siguenos svg{
-    width: 8vw;
-    height: 8vw;
+    width: 30px;
+    height: 30px;
     color: white;
     transition: fill 0.5s ease;
   }
