@@ -200,6 +200,7 @@ a{
 }
 .nav-bar .nombre-logo{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 14px;
@@ -209,6 +210,7 @@ a{
 .nav-bar .nombre-logo h1{
     font-size: 30px;
     color: white;
+    margin: 0;
 }
 .nav-bar .link{
     border-radius: 0;
@@ -232,6 +234,7 @@ a{
 }
 .nav-bar .btn-menu{
     display: none;
+    color: white;
 }
 .btn-whatsapp{
     position: fixed;
@@ -273,10 +276,10 @@ a{
 /*********************ESTILOS NAVBAR PARA DISPOSITIVOS MOVILES*/
 @media (max-width: 950px){
     .nav-bar .menu{
-        display: none;
+        display: flex;
         position: fixed;
-        top: 60px;
-        right: 0;
+        top: 65px;
+        right: -220px;
         width: 220px;
         height: 350px;
         flex-direction: column;
@@ -288,13 +291,17 @@ a{
         box-shadow: -2px 5px 15px rgba(0, 0, 0, 0.7);
         gap: 0;
         z-index: 2;
+        transition: right 0.5s ease;
+    }
+    .deslizar {
+        right: 0 !important;
     }
     .nav-bar .botones{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 3px;
+        gap: 2px;
         width: 100%;
     }
     .nav-bar .botones button, .nav-bar .botones a{
@@ -331,5 +338,149 @@ a{
     .nav-bar .btn-menu svg{
         width: 50px;
         height: 50px;
+    }
+    .nav-bar .botones a{
+        border-radius: 0px;
+        background-color: rgb(27, 27, 27);
+        color: white;
+        gap: 0;
+        display: flex;
+        border: none;
+    }
+
+
+
+
+
+
+
+    
+    .btn-page-corto-red{
+        width: 130px;
+        height: 55px;
+        font-size: 17px;
+        text-decoration: none;
+        background-color: rgb(221, 0, 0);
+        border: none;
+        padding: 5px;
+        color: white;
+        display: flex;
+        gap: 5px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        transition: background-color 0.5s ease;
+    }
+    .btn-page-corto-red:hover{
+        background: rgb(93, 93, 93);
+        color: rgb(255, 255, 255);
+        border: none;
+        box-shadow: 0 0 5px rgba(200, 200, 200, 0.3),
+                    0 0 10px rgba(180, 180, 180, 0.4),
+                    0 0 15px rgba(160, 160, 160, 0.5);
+    }
+    .btn-page-largo-red{
+        width: 190px;
+        height: 55px;
+        font-size: 17px;
+        text-decoration: none;
+        background-color: red;
+        border: none;
+        padding: 5px;
+        color: white;
+        display: flex;
+        gap: 5px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        transition: background-color 0.5s ease;
+    }
+    .btn-page-largo-red:hover{
+        background: rgb(93, 93, 93);
+        color: rgb(255, 255, 255);
+        border: none;
+        box-shadow: 0 0 5px rgba(200, 200, 200, 0.3),
+                    0 0 10px rgba(180, 180, 180, 0.4),
+                    0 0 15px rgba(160, 160, 160, 0.5);
+    }
+    .btn-page-corto-white{
+        width: 130px;
+        height: 55px;
+        font-size: 17px;
+        text-decoration: none;
+        background-color: rgba(221, 0, 0, 0);
+        border: 2px solid white;
+        padding: 5px;
+        color: white;
+        display: flex;
+        gap: 5px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        transition: background-color 0.5s ease;
+    }
+    .btn-page-corto-white:hover{
+        background: rgb(93, 93, 93);
+        color: white;
+        border: none;
+        box-shadow: 0 0 5px rgba(200, 200, 200, 0.3),
+                    0 0 10px rgba(180, 180, 180, 0.4),
+                    0 0 15px rgba(160, 160, 160, 0.5);
+    
+    }
+    .btn-page-largo-white{
+        width: 190px;
+        height: 55px;
+        font-size: 17px;
+        text-decoration: none;
+        background-color: rgba(255, 0, 0, 0);
+        border: 2px solid white;
+        padding: 5px;
+        color: white;
+        display: flex;
+        gap: 5px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        transition: background-color 0.5s ease;
+    }
+    .btn-page-largo-white:hover{
+        background: rgb(93, 93, 93);
+        color: white;
+        border: none;
+        box-shadow: 0 0 5px rgba(200, 200, 200, 0.3),
+                    0 0 10px rgba(180, 180, 180, 0.4),
+                    0 0 15px rgba(160, 160, 160, 0.5);
+    }
+
+
+
+
+    h1{
+        margin-bottom: 0vw;
+        font-family: 'Nunito', sans-serif;
+        line-height: 1;
+        font-size: 6vw;
+    }
+    p{
+        margin: 0;
+        font-size: 3vw;
+    }
+}
+@media (max-width: 750px){
+    h1{
+        margin-bottom: 0vw;
+        font-family: 'Nunito', sans-serif;
+        line-height: 1;
+        font-size: 11vw;
+        margin: 0;
+    }
+    p{
+        margin: 0;
+        font-size: 5vw;
     }
 }

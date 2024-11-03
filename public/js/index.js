@@ -56,14 +56,12 @@ function loadProducts() {
       carouselInner.style.scrollBehavior = 'smooth';
 
       // Opcional: Añade un padding para que los productos no estén pegados a los bordes
-      carouselInner.style.padding = '10px';
+      carouselInner.style.padding = '0px';
 
       // Establecemos que los items tengan un tamaño uniforme
       const items = document.querySelectorAll('.item');
       items.forEach(item => {
-          item.style.flex = '0 0 auto';  // Evita que los elementos se reduzcan o expandan
-          item.style.width = '200px';    // Ajusta el ancho de los productos según desees
-          item.style.margin = '0 10px';  // Añade espacio entre los productos
+          item.style.margin = '0';  // Añade espacio entre los productos
       });
   }
 
@@ -134,14 +132,12 @@ function loadRecetas() {
       carouselInner.style.scrollBehavior = 'smooth';
 
       // Opcional: Añade un padding para que las recetas no estén pegadas a los bordes
-      carouselInner.style.padding = '10px';
+      carouselInner.style.padding = '0px';
 
       // Establecemos que los items tengan un tamaño uniforme
       const items = document.querySelectorAll('.item');
       items.forEach(item => {
-          item.style.flex = '0 0 auto';  // Evita que los elementos se reduzcan o expandan
-          item.style.width = '200px';    // Ajusta el ancho de las recetas según desees
-          item.style.margin = '0 10px';  // Añade espacio entre las recetas
+          item.style.margin = '0';  // Añade espacio entre las recetas
       });
   }
 
@@ -212,6 +208,7 @@ function contacto(behaviorType = 'smooth') {
     top: document.body.scrollHeight,
     behavior: behaviorType // 'smooth' o 'auto' para scroll instantáneo
   });
+  menu();
 }
 function nav(){
   const currentPath = window.location.pathname; // Obtiene la ruta actual, ej: "/productos"
