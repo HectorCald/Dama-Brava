@@ -484,8 +484,3 @@ a{
         font-size: 5vw;
     }
 }
-@media screen and (orientation: landscape) {
-    body {
-        display: none;
-    }
-}

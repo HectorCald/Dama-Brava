@@ -373,7 +373,7 @@
   .inicio-principal{
     width: 100%;
     min-width: auto;
-    min-height: fit-content;
+    min-height: 100vw;
     max-height: 100vh;
     box-sizing: border-box;
     display: flex;

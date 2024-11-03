@@ -291,6 +291,8 @@
     background-color: white;
     border: none;
     color: gray;
+    width: 100%;
+    height: 100%;
 }
 #productos .producto .cantidad button:hover{
     color: black;
@@ -322,6 +324,9 @@
     padding: 4vw;
     font-size: 2vw;
     color: rgb(39, 39, 39);
+}
+.btn-decrementar{
+    background-color: gray;
 }
 /****************************************ESTILOS DE LA SECCION CARRITO*/
 .carrito{
@@ -740,7 +745,7 @@
         border-radius: 50px;
     }
     #productos .producto .cantidad button{
-        font-size: 2vw;
+        font-size: 10vw !important;
         background-color: white;
         border: none;
         color: gray;
