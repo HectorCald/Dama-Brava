@@ -631,6 +631,7 @@
         transition: border-color 0.3s;
         outline: none;
         z-index: 0;
+        font-size: 16px;
     }
     #busquedaInput:focus{
         border: 2px solid red;
