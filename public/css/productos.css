@@ -793,7 +793,7 @@
         height: 100%;
         background-color: rgb(47, 47, 47);
         color: white;
-        padding: 40px;
+        padding: 50px;
         display: flex;
         flex-direction: column;
         z-index: 4;
@@ -822,9 +822,12 @@
         padding-bottom: 1vw;
         align-items: center;
     }
+    .carrito .titulo h1{
+        margin: 0;
+    }
     .carrito .titulo button, .carrito .pedido button{
-        width: 40px;
-        height: 40px;
+        width: 55px;
+        height: 55px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -836,8 +839,8 @@
         color: red;
     }
     .carrito .titulo button svg{
-        width: 50px !important;
-        height: 50px !important;
+        width: 100px !important;
+        height: 100px !important;
     }
     .carrito .subtotal{
         display: flex;
@@ -861,6 +864,7 @@
     }
     .carrito .btn-pedido{
         width: 100%;
+        height: 50px;
         margin-top: 1vw;
         padding: 1vw;
     }

@@ -31,8 +31,9 @@ a{
     text-align: left;
     background-color: white;
     color: rgb(39, 39, 39);
+    padding: 10px;
     padding-left: 10vw;
-    padding-top: 1vw;
+    padding-top: 10px;
 }
 .titulo-seccion span{
     color: rgb(205, 0, 0);
