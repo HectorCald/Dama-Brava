@@ -307,6 +307,8 @@ a{
     }
     .nav-bar .botones button, .nav-bar .botones a{
         width: 100%;
+        display: flex;
+        gap: 10px;
     }
     .nav-bar .link{
         width: 100%;

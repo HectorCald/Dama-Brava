@@ -36,7 +36,7 @@
     align-items: center;
     padding:4vw;
     width: 100%;
-    min-height: auto;
+    min-height: 100vw;
     height: 80vh;
     box-sizing: border-box;
     gap: 3vw;
@@ -54,7 +54,7 @@
     align-items: center;
     padding:4vw;
     width: 100%;
-    min-height: auto;
+    min-height: 100vw;
     height: 95vh;
     box-sizing: border-box;
     gap: 3vw;
@@ -84,7 +84,7 @@
     align-items: center;
     padding:4vw;
     width: 100%;
-    min-height: auto;
+    min-height: 100vw;
     height: 90vh;
     box-sizing: border-box;
     gap: 3vw;
