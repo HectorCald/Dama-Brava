@@ -25,3 +25,12 @@ function menu() {
         btn.innerHTML = svgMenu;         // Cambia al ícono de "Menú"
     }
 }
+let lastTouch = 0;
+
+document.addEventListener('touchstart', function(event) {
+    const currentTime = new Date().getTime();
+    if (currentTime - lastTouch <= 300) {
+        event.preventDefault(); // Evita que el doble toque provoque el zoom
+    }
+    lastTouch = currentTime;
+}, { passive: false });
