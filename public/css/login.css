@@ -28,6 +28,7 @@
     overflow: hidden;
     margin: 30px;
     width: 30%;
+    min-width: 300px;
 }
 .login-form{
     width: 100%;
@@ -65,6 +66,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 .input-group input:focus {

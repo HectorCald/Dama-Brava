@@ -5,14 +5,15 @@
     box-sizing: border-box;
     overflow: hidden;
     width: 100%;
-    height: 80vh;
+    height: auto;
     margin-top: 65px;
     margin-bottom: 20px;
     align-items: center;
     position: relative;
+    margin-bottom: 60px;
 }
 .db-administrador input{
-    width: 250px;
+    width: 300px;
     height: 40px;
     border-radius: 20px;
     border: 1px solid gray;
@@ -56,21 +57,27 @@
     flex-direction: column;
     justify-content: top;
     align-items: center;
-    opacity: 0; /* Inicialmente invisible */
-  transform: translateY(-100%); /* Comienza fuera de la vista, arriba */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Transiciones */
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .db-productos .info-productos, .db-recetas .info-recetas{
-    width: 70vw;
+    width: 90vw;
+    min-width: 390px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 10px;
     padding-block: 20px;
     position: relative;
 }
 .info-productos .buscador, .info-recetas .buscador{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    height: auto;
 }
 .info-productos .titulos-consulta, .info-recetas .titulos-consulta{
     display: flex;
@@ -86,17 +93,23 @@
     gap: 10px;
     display: flex;
     flex-direction: column;
-    max-height: 350px;
-    overflow-y: auto;
+    height: auto;
 }
 .info-productos #productList .producto-adm, .info-recetas #recetaList .receta-adm{
     display: flex;
     width: 100% !important;
+    height: 40px;
     justify-content: space-around;
+    align-items: center;
     background-color: rgba(128, 128, 128, 0.205);
     padding: 5px;
     border-radius: 20px;
-    align-items: center;
+    overflow: hidden;
+}
+.info-recetas #recetaList .receta-adm .descripcion{
+    height: 30px;
+    width: 80px;
+    overflow: hidden;
 }
 .info-productos #productList .producto-adm button, .info-recetas #recetaList .receta-adm button{
     background: none;
@@ -111,6 +124,9 @@
 }
 .info-recetas #recetaList .receta-adm p, .info-recetas #recetaList .receta-adm a, .info-recetas #recetaList .receta-adm .acciones{
     width: 13vw;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 .info-recetas #recetaList .receta-adm a{
     display: flex;
@@ -139,12 +155,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
     padding: 10px 20px;
+    z-index: 1;
 }
 #productForm .titulo, #recetaForm .titulo{
     display: flex;
@@ -194,12 +210,13 @@
 /**************************ESTILOS ANIMACION DE APARICION DE FORMULARIOS PARA AGREGAR*/
 .fade-element {
     opacity: 0;
+    display: none;
     transform: scale(0.95);
     transition: opacity 0.2s ease, transform 0.2s ease;
-    display: none;
+    z-index: 0;
   }
   
-  .fade-element.visible {
+.fade-element.visible {
     display: flex;
     position: absolute;
     top: 50%;
@@ -212,19 +229,17 @@
 .db-contraseña{
     width: 350px;
     height: auto;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column; 
     padding: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    position: absolute;
-    top: 20%;
     border-radius: 20px;
     opacity: 0; /* Inicialmente invisible */
-    transform: translateY(-100%); /* Comienza fuera de la vista, arriba */
     transition: opacity 0.5s ease, transform 0.5s ease; /* Transiciones */
     gap: 10px;
+    margin-top: 50px;
 }
 .db-contraseña form{
     display: flex;
@@ -285,4 +300,38 @@
 }
 .alertas p{
     font-size: 12px !important;
+}
+
+
+
+
+
+.texto-pequeño {
+    display: none;
+    font-size: 20px;
+}
+.texto-grande {
+    display: inline;
+    font-size: 20px;
+}
+
+@media (max-width: 950px){
+    .info-productos #productList .producto-adm p,.info-productos #productList .producto-adm , .info-productos #productList .producto-adm a, .info-productos #productList .producto-adm .acciones{
+        width: 9vw;
+        font-size: 10px;
+    }
+    .info-recetas #recetaList .receta-adm p, .info-recetas #recetaList .receta-adm a, .info-recetas #recetaList .receta-adm .acciones{
+        width: 13vw;
+        font-size: 10px;
+    }
+    .info-productos .buscador button, .info-recetas .buscador button{
+        width: 40px;
+        height: 40px;
+    }
+    .texto-pequeño {
+        display: inline;
+    }
+    .texto-grande {
+        display: none;
+    }
 }

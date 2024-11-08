@@ -532,36 +532,34 @@ function switchScreens(div) {
         contraseña.style.display = 'none'; 
         productos.style.display = 'flex'; // Asegúrate de que se muestre
         productos.style.opacity = '0'; // Hacer invisible antes de la animación
-        productos.style.transform = 'translateY(-100%)'; // Comienza fuera de la vista, arriba
+
 
         // Iniciar la animación de entrada
         setTimeout(() => {
             productos.style.opacity = '1'; // Aplica la opacidad para mostrar la pantalla
-            productos.style.transform = 'translateY(0)'; // Mueve la pantalla a su posición normal
+
         }, 10); // Espera un momento para aplicar el display
     } else if (div === 'recetas') {
         productos.style.display = 'none'; 
         contraseña.style.display = 'none'; 
         recetas.style.display = 'flex'; // Asegúrate de que se muestre
         recetas.style.opacity = '0'; // Hacer invisible antes de la animación
-        recetas.style.transform = 'translateY(-100%)'; // Comienza fuera de la vista, arriba
+
 
         // Iniciar la animación de entrada
         setTimeout(() => {
             recetas.style.opacity = '1'; // Aplica la opacidad para mostrar la pantalla
-            recetas.style.transform = 'translateY(0)'; // Mueve la pantalla a su posición normal
+
         }, 10); // Espera un momento para aplicar el display
     }else if (div === 'contraseña') {
         productos.style.display = 'none';
         recetas.style.display = 'none'; 
         contraseña.style.display = 'flex'; // Asegúrate de que se muestre
         contraseña.style.opacity = '0'; // Hacer invisible antes de la animación
-        contraseña.style.transform = 'translateY(-100%)'; // Comienza fuera de la vista, arriba
 
         // Iniciar la animación de entrada
         setTimeout(() => {
             contraseña.style.opacity = '1'; // Aplica la opacidad para mostrar la pantalla
-            contraseña.style.transform = 'translateY(0)'; // Mueve la pantalla a su posición normal
         }, 10); // Espera un momento para aplicar el display
     }
 }

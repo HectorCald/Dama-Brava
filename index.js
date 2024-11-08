@@ -94,7 +94,6 @@ app.get('/adm', verificarAutenticacion, (req, res) => {
 
 // Manejo de inicio de sesión
 app.post('/login', async (req, res) => {
-    console.log('Request body:', req.body); // Imprimir el cuerpo recibido
 
     const { username, password } = req.body;
 
