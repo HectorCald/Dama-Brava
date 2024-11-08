@@ -46,7 +46,6 @@
     color: rgb(36, 36, 36);
 }
 .mision-vision{
-    border: 1px solid black;
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap;
@@ -54,7 +53,7 @@
     align-items: center;
     padding:4vw;
     width: 100%;
-    min-height: 100vw;
+    min-height: 150vw;
     height: 95vh;
     box-sizing: border-box;
     gap: 3vw;
