@@ -42,7 +42,7 @@ a{
 .btn-page-corto-red{
     width: 120px;
     height: 45px;
-    font-size: 17px;
+    font-size: 16px;
     text-decoration: none;
     background-color: rgb(221, 0, 0);
     border: none;
@@ -67,7 +67,7 @@ a{
 .btn-page-largo-red{
     width: 180px;
     height: 45px;
-    font-size: 17px;
+    font-size: 16px;
     text-decoration: none;
     background-color: red;
     border: none;
@@ -92,7 +92,7 @@ a{
 .btn-page-corto-white{
     width: 120px;
     height: 45px;
-    font-size: 17px;
+    font-size: 16px;
     text-decoration: none;
     background-color: rgba(221, 0, 0, 0);
     border: 2px solid white;
@@ -118,7 +118,7 @@ a{
 .btn-page-largo-white{
     width: 180px;
     height: 45px;
-    font-size: 17px;
+    font-size: 16px;
     text-decoration: none;
     background-color: rgba(255, 0, 0, 0);
     border: 2px solid white;
