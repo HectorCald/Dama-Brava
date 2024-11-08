@@ -118,4 +118,8 @@
         font-size: 30px;
         color: rgb(41, 41, 41);
     }
+    .historia, .valores, .historia {
+        height: auto; /* En móviles, usa `auto` para que el contenedor crezca con el contenido */
+        min-height: fit-content; /* Asegura que se ajuste al contenido en dispositivos pequeños */
+    }
 }
