@@ -21,17 +21,21 @@ function menu() {
     // Cambia el ícono y el texto del botón según el estado del menú
     if (div.classList.contains("deslizar")) {
         btn.innerHTML = svgCerrar;       // Cambia al ícono de "Cerrar"
-        activarBorroso();
     } else {
         btn.innerHTML = svgMenu;         // Cambia al ícono de "Menú"
     }
-}
-let lastTouch = 0;
+    hideDiv();
+    const pantalla = document.querySelector('.productos2');
+    const buscador = document.querySelector('.buscador');
+    const titulo = document.querySelector('.titulo-seccion');
 
-document.addEventListener('touchstart', function(event) {
-    const currentTime = new Date().getTime();
-    if (currentTime - lastTouch <= 300) {
-        event.preventDefault(); // Evita que el doble toque provoque el zoom
-    }
-    lastTouch = currentTime;
-}, { passive: false });
+    pantalla.style.filter = 'none';
+        pantalla.style.pointerEvents = 'auto';
+        pantalla.style.overflow = 'auto';
+        buscador.style.filter = 'none';
+        buscador.style.pointerEvents = 'auto';
+        buscador.style.overflow = 'auto';
+        titulo.style.filter = 'none';
+        titulo.style.pointerEvents = 'auto';
+        titulo.style.overflow = 'auto';
+}
