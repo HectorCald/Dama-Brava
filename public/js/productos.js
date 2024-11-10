@@ -162,7 +162,7 @@ function carruselProductos(productos) {
         mensaje += `\nTotal: ${subtotalElement.textContent}`;
 
         // Reemplaza el número de WhatsApp con el tuyo
-        const numeroWhatsApp = '59169713972'; 
+        const numeroWhatsApp = '59170325449'; 
         const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
         
         window.open(urlWhatsApp, '_blank'); // Abre WhatsApp con el mensaje
