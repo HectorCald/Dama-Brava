@@ -65,7 +65,7 @@ function carruselRecetas(recetas) {
             recetaDiv.innerHTML = `
                 <img src="${receta.imagenUrl}" alt="${receta.nombreReceta}">
                 <div class="texto-receta">
-                    <h2 class="nombre-receta">${receta.nombreReceta}</h2>
+                    <h3 class="nombre-receta">${receta.nombreReceta}</h3>
                     <p>${receta.descripcion}</p>
                     <a class="btn-page-corto-red" href="${receta.linkReceta}" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">

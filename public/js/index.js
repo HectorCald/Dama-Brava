@@ -106,7 +106,6 @@ function loadRecetas() {
               recetaDiv.innerHTML = `
                   <img src="${receta.imagenUrl}" alt="">
                   <p>${receta.nombreReceta}</p>
-                  <p>${receta.descripcion}</p>
                   <a href="/recetas">Ver más</a>
               `;
 
@@ -217,4 +216,10 @@ function nav(){
             link.classList.add('active-link');
         }
     });
+}
+function irAlInicio() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // Desplazamiento suave
+  });
 }

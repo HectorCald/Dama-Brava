@@ -231,8 +231,8 @@ async function agregarReceta(nombreReceta, descripcion, linkReceta, imagen) {
         });
         const data = await response.json();
         if (response.ok) {
-            resetFormReceta();
             mostrarRecetas();
+            resetFormReceta();
         } else {
             console.error("Error al agregar receta:", data);
         }
@@ -241,6 +241,7 @@ async function agregarReceta(nombreReceta, descripcion, linkReceta, imagen) {
     }finally    {
         toggleVisibility('hide');
     }
+    mostrarRecetas();
 }
 async function mostrarRecetas() {
     const response = await fetch('/api/recetas');
@@ -507,6 +508,7 @@ function toggleVisibility(action) {
       element.classList.remove('visible');
       resetFormReceta();
     }
+    irAlInicio();
 }
 function toggleVisibility2(action) {
     const element = document.getElementById('productForm');
@@ -518,6 +520,7 @@ function toggleVisibility2(action) {
         element.classList.remove('visible');
         resetForm();
     }
+    irAlInicio();
 }
 function switchScreens(div) {
     const recetas = document.querySelector('.db-recetas');
