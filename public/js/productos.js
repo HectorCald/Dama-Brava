@@ -123,7 +123,7 @@ function carruselProductos(productos) {
                             <img src="${producto.imagenUrl}" alt="">
                             <div class="texto-pedido">
                                 <p>${producto.nombre} ${producto.gramaje} gr</p>
-                                <p>${cantidad} x Bs/${producto.precio} = Bs/${totalPrecio}</p>
+                                <p>${cantidad} x Bs/${totalPrecio}</p>
                             </div>
                         </div>
                         <button class="btn-eliminar" onclick="iniciarActualizacion()">
@@ -156,7 +156,7 @@ function carruselProductos(productos) {
         pedidos.forEach(pedido => {
             const nombreProducto = pedido.querySelector('.texto-pedido p:first-child').innerText; // Nombre y gramaje del producto
             const cantidadYPrecio = pedido.querySelector('.texto-pedido p:nth-child(2)').innerText; // Cantidad y precio total
-            mensaje += `- ${nombreProducto} ${cantidadYPrecio}\n`;
+            mensaje += `- ${nombreProducto}\n${cantidadYPrecio}\n`;
         });
 
         mensaje += `Subtotal: ${subtotalElement.textContent}`;
