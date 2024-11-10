@@ -21,7 +21,6 @@ async function obtenerRecetas() {
         console.error(error);
     }
 }
-
 const recetas = [ 
     { nombreReceta: "Receta 1", descripcion: "Descripción 1", imagenUrl: "imagen1.jpg", linkReceta: "#" },
     { nombreReceta: "Receta 2", descripcion: "Descripción 2", imagenUrl: "imagen2.jpg", linkReceta: "#" },

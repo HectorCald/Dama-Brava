@@ -29,12 +29,9 @@
     justify-content: left;
     align-items: center;
     box-shadow: 0 8px 7px rgba(0, 0, 0, 0.1);
-    background-image: url('../img/img-otros/imagen-principal.webp');
+    background-image: url('../img/img-inicio/principal-inicio.webp');
     background-size: cover;
     background-position: bottom;
-}
-.inicio-principal h1{
-  font-size: 3vw;
 }
 .inicio-principal .botones{
     display: flex;
@@ -353,15 +350,6 @@
 
 @media (max-width: 950px){
     /*********************ESTILOS SECCION INICIO*/
-  .seccion-inicio{
-    display: flex;
-    flex-direction: column;
-    font-family: sans-serif;
-    box-sizing: border-box;
-    overflow: hidden;
-    width: 100%;
-    height: auto;
-  }
   .seccion-inicio img{
     width: 100%;
     height: auto;
@@ -375,70 +363,39 @@
     min-width: auto;
     min-height: 120vw;
     height: 100vh;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    padding: 4vw;
-    gap: 3vw;
-    justify-content: center;
-    align-items: center;
     box-shadow: 0 8px 7px rgba(0, 0, 0, 0.1);
-    background-image: url('../img/img-otros/imagen-principal.webp');
-    background-size: cover;
-    background-position: bottom;
   }
   .inicio-principal h1{
-  font-size: 10vw;
-  text-align: center;
+    text-align: center;
   }
   .inicio-principal .botones{
     display: flex;
-    gap: 1vw;
+    gap: 10px;
   }
   .inicio-productos{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 2vw;
     width: 100%;
     min-height: 120vw;
     height: 98vh;
-    box-sizing: border-box;
+    padding: 10px;
   }
   .inicio-nosotros{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding:4vw;
     width: 100%;
     min-height: 120vw;
     height: 98vh;
-    box-sizing: border-box;
-    gap: 1vw;
+    padding: 10px;
   }
   .inicio-recetas{
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding:3vw;
     width: 100%;
     min-height: 120vw;
     height: 98vh;
-    box-sizing: border-box;
-    gap: 2vw;
-    background-color: rgb(30, 30, 30);
+    padding: 10px;
   }
   .inicio-recetas .texto{
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 3vw;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -452,7 +409,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 3vw;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -462,7 +419,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 2vw;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     text-align: justify;
@@ -472,8 +429,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 3vw;
-    padding: 5vw;
+    gap: 10px;
     justify-content: left;
     align-items: center;
     color: white !important;

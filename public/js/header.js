@@ -21,6 +21,7 @@ function menu() {
     // Cambia el ícono y el texto del botón según el estado del menú
     if (div.classList.contains("deslizar")) {
         btn.innerHTML = svgCerrar;       // Cambia al ícono de "Cerrar"
+        activarBorroso();
     } else {
         btn.innerHTML = svgMenu;         // Cambia al ícono de "Menú"
     }

@@ -333,7 +333,7 @@
     position: fixed;
     top: 65px;
     right: -100%;
-    transition: right 0.6s ease;
+    transition: right 1s ease;
     width: 30%;
     height: 100%;
     background-color: rgb(47, 47, 47);
@@ -839,6 +839,10 @@
     .carrito .titulo button:hover ,.carrito .pedido button:hover{
         color: red;
     }
+    .carrito .titulo button{
+        width: 50px !important;
+        height: 50px !important;
+    }
     .carrito .titulo button svg{
         width: 100px !important;
         height: 100px !important;
@@ -1049,8 +1053,8 @@
         color: red;
     }
     .carrito .titulo button svg{
-        width: 50px !important;
-        height: 50px !important;
+        width: 100px !important;
+        height: 100px !important;
     }
     .carrito .subtotal{
         display: flex;

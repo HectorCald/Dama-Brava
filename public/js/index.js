@@ -9,11 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   nav();
   loadProducts();
   loadRecetas();
-
+  bodyTouch();
 });
 function loadProducts() {
   const carouselInner = document.getElementById("carrusel");
-
   // Función para cargar productos desde la API
   const fetchProducts = async () => {
       try {
@@ -163,7 +162,6 @@ function loadRecetas() {
       });
   });
 }
-
 function onScroll() {
   const nav = document.getElementById('nav');
   const mainSections = document.querySelectorAll('.seccion');
