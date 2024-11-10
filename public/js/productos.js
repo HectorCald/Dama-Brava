@@ -159,7 +159,7 @@ function carruselProductos(productos) {
             mensaje += `- ${nombreProducto}\n${cantidadYPrecio}\n`;
         });
 
-        mensaje += `Total: ${subtotalElement.textContent}`;
+        mensaje += `\nTotal: ${subtotalElement.textContent}`;
 
         // Reemplaza el número de WhatsApp con el tuyo
         const numeroWhatsApp = '59169713972'; 
