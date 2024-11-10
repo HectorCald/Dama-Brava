@@ -123,7 +123,7 @@ function carruselProductos(productos) {
                             <img src="${producto.imagenUrl}" alt="">
                             <div class="texto-pedido">
                                 <p>${producto.nombre} ${producto.gramaje} gr</p>
-                                <p>${cantidad} x Bs/${totalPrecio}</p>
+                                <p>Subtotal: ${cantidad} x Bs/${totalPrecio}</p>
                             </div>
                         </div>
                         <button class="btn-eliminar" onclick="iniciarActualizacion()">
@@ -159,7 +159,7 @@ function carruselProductos(productos) {
             mensaje += `- ${nombreProducto}\n${cantidadYPrecio}\n`;
         });
 
-        mensaje += `Subtotal: ${subtotalElement.textContent}`;
+        mensaje += `Total: ${subtotalElement.textContent}`;
 
         // Reemplaza el número de WhatsApp con el tuyo
         const numeroWhatsApp = '59169713972'; 
