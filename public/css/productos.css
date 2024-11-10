@@ -443,7 +443,6 @@
     gap: 10px;
 }
 .carrito p{
-    font-size: 1vw;
     width: 100%;
     font-weight: normal;
     text-align: left;
@@ -746,7 +745,6 @@
         border-radius: 50px;
     }
     #productos .producto .cantidad button{
-        font-size: 7vw !important;
         background-color: white;
         border: none;
         color: gray;
@@ -781,7 +779,6 @@
     .mensaje-no{
         text-align: center;
         padding: 4vw;
-        font-size: 2vw;
         color: rgb(39, 39, 39);
     }
     /****************************************ESTILOS DE LA SECCION CARRITO*/
@@ -907,11 +904,11 @@
         gap: 10px;
     }
     .carrito p{
-        font-size: 3vw;
         width: 100%;
         font-weight: normal;
         text-align: left;
         color: white;
+
     }
     .carrito .texto-pedido{
         display: flex;
@@ -968,7 +965,7 @@
         border-radius: 50px;
     }
     #productos .producto .cantidad button{
-        font-size: 16px;
+        font-size: 30px !important;
         background-color: white;
         border: none;
         color: gray;
@@ -991,7 +988,7 @@
         background-color: red;
         color: white;
         border: none;
-        font-size: 3vw;
+        font-size: 4vw;
         transition: background-color 0.5s ease;
         border: 2px solid red;
     }
@@ -1115,7 +1112,6 @@
         gap: 10px;
     }
     .carrito p{
-        font-size: 5vw;
         width: 100%;
         font-weight: normal;
         text-align: left;
