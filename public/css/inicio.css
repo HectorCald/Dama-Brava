@@ -367,6 +367,7 @@
   }
   .inicio-principal h1{
     text-align: center;
+    font-size: 45px;
   }
   .inicio-principal .botones{
     display: flex;
