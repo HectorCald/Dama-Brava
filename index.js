@@ -76,6 +76,17 @@ const verificarAutenticacion = (req, res, next) => {
     }
 };
 
+// Redirección de damabrava.com a www.damabrava.com
+app.use((req, res, next) => {
+    // Comprobamos si el dominio no tiene el prefijo www
+    if (req.headers.host === 'damabrava.com') {
+      // Redirigimos a www.damabrava.com manteniendo el resto de la URL
+      return res.redirect(301, `https://www.damabrava.com${req.url}`);
+    }
+    next();
+  });
+cd  
+
 // Rutas para renderizar las vistas
 app.get('/', (req, res) => {
     res.redirect('/inicio');
