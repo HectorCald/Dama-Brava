@@ -76,15 +76,19 @@ const verificarAutenticacion = (req, res, next) => {
     }
 };
 
-// Redirección de damabrava.com a www.damabrava.com
+// Redirigir de http://damabrava.com a https://www.damabrava.com
 app.use((req, res, next) => {
-    // Comprobamos si el dominio no tiene el prefijo www
+    // Si el dominio no tiene el prefijo www, lo agregamos y redirigimos
     if (req.headers.host === 'damabrava.com') {
-      // Redirigimos a www.damabrava.com manteniendo el resto de la URL
-      return res.redirect(301, `https://www.damabrava.com${req.url}`);
+        return res.redirect(301, `https://www.damabrava.com${req.url}`);
+    }
+    // Redirigir cualquier versión http:// a https://
+    if (req.protocol === 'http') {
+        return res.redirect(301, `https://${req.headers.host}${req.url}`);
     }
     next();
-});  
+});
+
 
 // Rutas para renderizar las vistas
 app.get('/', (req, res) => {
