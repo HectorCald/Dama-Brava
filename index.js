@@ -56,15 +56,17 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
 app.use((req, res, next) => {
-    // Comprobamos si la solicitud ya está en https y con www
+    // Comprobamos si ya estamos en https y con www
     if (req.protocol !== 'https' || !req.headers.host.startsWith('www.')) {
-        // Redirigir de http://damabrava.com a https://www.damabrava.com
+        // Si el dominio no tiene www (damabrava.com en lugar de www.damabrava.com)
         if (req.headers.host === 'damabrava.com') {
+            // Redirigir de http://damabrava.com a https://www.damabrava.com
             return res.redirect(301, `https://www.damabrava.com${req.url}`);
         }
 
-        // Redirigir cualquier versión http:// a https://
+        // Si la solicitud es http y tiene www, redirigir a https://
         if (req.protocol === 'http') {
             return res.redirect(301, `https://${req.headers.host}${req.url}`);
         }
