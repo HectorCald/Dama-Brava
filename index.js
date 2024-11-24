@@ -60,7 +60,6 @@ const upload = multer({ storage });
 app.use((req, res, next) => {
     if (req.headers.host === 'damabrava-web-a396e1ccb037.herokuapp.com') {
       res.redirect(301, 'https://www.damabrava.com' + req.url);
-      alert('hola mundo');
     } else {
       next();
     }
