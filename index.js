@@ -56,7 +56,13 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
+app.use((req, res, next) => {
+    if (req.headers.host === 'damabrava-web-a396e1ccb037.herokuapp.com') {
+      res.redirect(301, 'https://www.damabrava.com' + req.url);
+    } else {
+      next();
+    }
+});
 
 app.use(session({
     secret: 'mi-secreto', // Cambia esto por una clave secreta en producción
