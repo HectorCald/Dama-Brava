@@ -84,8 +84,7 @@ app.use((req, res, next) => {
       return res.redirect(301, `https://www.damabrava.com${req.url}`);
     }
     next();
-  });
-cd  
+});  
 
 // Rutas para renderizar las vistas
 app.get('/', (req, res) => {
