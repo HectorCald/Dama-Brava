@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   bodyTouch();
 });
 function loadProducts() {
-  alert('hola mundo');
   const carouselInner = document.getElementById("carrusel");
   // Función para cargar productos desde la API
   const fetchProducts = async () => {
