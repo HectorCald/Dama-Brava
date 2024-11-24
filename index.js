@@ -60,12 +60,12 @@ const upload = multer({ storage });
 app.use((req, res, next) => {
     // Redirigir de http://damabrava.com a https://www.damabrava.com
     if (req.headers.host === 'damabrava.com') {
-        return res.redirect(301, `https://www.damabrava.com${req.url}`);
+        return res.redirect(301, `https://www.damabrava.com`);
     }
 
     // Redirigir cualquier versión http:// a https://
     if (req.protocol === 'http') {
-        return res.redirect(301, `https://${req.headers.host}${req.url}`);
+        return res.redirect(301, `https://www.damabrava.com`);
     }
 
     // Si la solicitud es https:// y tiene www, continuamos con el siguiente middleware
