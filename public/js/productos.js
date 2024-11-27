@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     recomendacion();
     focusInputProductos();
     filtrarNombres();
-    carruselProductos(productosJSON);
 });
+let productosGlobal = []; // Variable global para almacenar los productos
+
 async function obtenerProductos() {
     let producto = document.querySelectorAll('.producto');
     producto.forEach(element => {
@@ -35,23 +36,8 @@ async function obtenerProductos() {
         mensajeNoCoincidencias.textContent='Revisa tu conexion y intentalo mas tarde!'
     }
 }
-const productosJSON = [
-    { nombre: "Producto 1", precio: "$10", descripcion: "Descripción del Producto 1" },
-    { nombre: "Producto 2", precio: "$15", descripcion: "Descripción del Producto 2" },
-    { nombre: "Producto 3", precio: "$20", descripcion: "Descripción del Producto 3" },
-    { nombre: "Producto 4", precio: "$25", descripcion: "Descripción del Producto 4" },
-    { nombre: "Producto 5", precio: "$30", descripcion: "Descripción del Producto 5" },
-    { nombre: "Producto 6", precio: "$35", descripcion: "Descripción del Producto 6" },
-    { nombre: "Producto 7", precio: "$40", descripcion: "Descripción del Producto 7" },
-    { nombre: "Producto 8", precio: "$45", descripcion: "Descripción del Producto 8" },
-    { nombre: "Producto 9", precio: "$50", descripcion: "Descripción del Producto 9" },
-    { nombre: "Producto 10", precio: "$55", descripcion: "Descripción del Producto 10" },
-    { nombre: "Producto 11", precio: "$60", descripcion: "Descripción del Producto 11" },
-    { nombre: "Producto 12", precio: "$65", descripcion: "Descripción del Producto 12" },
-    { nombre: "Producto 11", precio: "$60", descripcion: "Descripción del Producto 11" },
-    { nombre: "Producto 12", precio: "$65", descripcion: "Descripción del Producto 12" },   
-];
 function carruselProductos(productos) {
+    productosGlobal=productos;
     const productosContainer = document.querySelector('#productos');
     const carritoContainer = document.querySelector('#carrito');
     const compraDiv = document.querySelector('.compra');
@@ -243,43 +229,60 @@ function hideDiv() {
     const slidingDiv = document.getElementById('carrito');
     slidingDiv.classList.remove('show');
 }
+
 function filtrarPorTexto() {
     const filterValue = normalizarTexto(document.getElementById('busquedaInput').value.toLowerCase());
-    const input = document.getElementById('busquedaInput');
-    const items = document.querySelectorAll('#productos .producto');
     const borrarInput = document.querySelector('.btn-borrar-input');
     const buscarInput = document.querySelector('.btn-buscar');
-    const contenedor = document.getElementById('sugerencias');
     const mensajeNoCoincidencias = document.querySelector('.mensaje-no');
+    const productosContainer = document.querySelector('#productos');
+    const paginacion = document.getElementById('paginacion');
 
-    if (input.value != '') {
+    if (filterValue !== '') {
         borrarInput.style.display = 'flex';
         buscarInput.style.display = 'none';
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        contenedor.style.display = 'none';
-        
-        let hayCoincidencias = false; // Variable para verificar si hay coincidencias
 
-        items.forEach(function(item) {
-            const text = normalizarTexto(item.querySelector('p').textContent.toLowerCase());
-
-            // Comprobar si el texto de la etiqueta p incluye el valor del input
-            if (text.includes(filterValue)) {
-                item.style.display = ''; // Mostrar el div
-                hayCoincidencias = true; // Hay al menos una coincidencia
-            } else {
-                item.style.display = 'none'; // Ocultar el div
-            }
+        // Filtrar productos
+        const productosFiltrados = productosGlobal.filter(producto => {
+            const text = normalizarTexto(producto.nombre.toLowerCase());
+            return text.includes(filterValue);
         });
 
-        // Mostrar el mensaje si no hay coincidencias
-        if (!hayCoincidencias) {
-            mensajeNoCoincidencias.style.display = 'flex'; // Mostrar el mensaje
+        // Mostrar resultados filtrados
+        productosContainer.innerHTML = ''; // Limpiar contenedor de productos
+        if (productosFiltrados.length > 0) {
+            productosFiltrados.forEach(producto => {
+                const productoDiv = document.createElement('div');
+                productoDiv.classList.add('producto');
+                productoDiv.innerHTML = `
+                    <img src="${producto.imagenUrl}" alt="">
+                    <p class="nombre-producto">${producto.nombre} ${producto.gramaje} gr.</p>
+                    <p><span class="precio">Bs/${producto.precio}</span></p>
+                    <div class="cantidad">
+                        <button class="btn-decrementar">-</button>
+                        <p class="cantidad-numero">0</p>
+                        <button class="btn-incrementar">+</button>
+                    </div>
+                    <button onclick="iniciarActualizacion()" class="btn-anadir-carrito">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>Añadir al carrito
+                    </button>
+                `;
+                productosContainer.appendChild(productoDiv);
+            });
+
+            mensajeNoCoincidencias.style.display = 'none'; // Ocultar mensaje si hay coincidencias
         } else {
-            mensajeNoCoincidencias.style.display = 'none'; // Ocultar el mensaje si hay coincidencias
+            mensajeNoCoincidencias.style.display = 'flex'; // Mostrar mensaje si no hay coincidencias
         }
+
+        paginacion.style.display = 'none'; // Ocultar paginación durante el filtro
     }
 }
+
+
 function normalizarTexto(texto) {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
@@ -289,6 +292,8 @@ function borrarInput(){
     const input = document.getElementById('busquedaInput');
     const contenedor = document.getElementById('sugerencias');
     const mensajeNoCoincidencias = document.querySelector('.mensaje-no').style.display='none';
+    const paginacion = document.getElementById('paginacion');
+    paginacion.style.display = 'flex'; // Mostrar paginación
     borrarInput.style.display = 'none';
     buscarInput.style.display = 'flex';
     input.value='';
