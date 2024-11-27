@@ -232,7 +232,6 @@ function hideDiv() {
     const slidingDiv = document.getElementById('carrito');
     slidingDiv.classList.remove('show');
 }
-
 function filtrarPorTexto() {
     const filterValue = normalizarTexto(document.getElementById('busquedaInput').value.toLowerCase());
     const borrarInput = document.querySelector('.btn-borrar-input');

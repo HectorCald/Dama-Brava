@@ -210,10 +210,17 @@ function contacto(behaviorType = 'smooth') {
 function nav(){
   const currentPath = window.location.pathname; // Obtiene la ruta actual, ej: "/productos"
     const navLinks = document.querySelectorAll('.link');
+    const whatsapp = document.querySelector('.btn-whatsapp');
 
     navLinks.forEach(link => {
         if (link.getAttribute('href') === currentPath) {
             link.classList.add('active-link');
+        }
+        if (currentPath === "/adm") {
+          whatsapp.style.display='none'
+        }
+        else{
+          whatsapp.style.display='flex'
         }
     });
 }
