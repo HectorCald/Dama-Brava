@@ -280,9 +280,8 @@ function filtrarPorTexto() {
 
         paginacion.style.display = 'none'; // Ocultar paginación durante el filtro
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-
 function normalizarTexto(texto) {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
@@ -300,6 +299,7 @@ function borrarInput(){
     input.focus();
     contenedor.style.display='none'
     obtenerProductos();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function focusInputProductos() {
     const borrarInput = document.querySelector('.btn-borrar-input');
