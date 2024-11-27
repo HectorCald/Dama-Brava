@@ -44,6 +44,9 @@ function carruselProductos(productos) {
     const subtotalElement = document.querySelector('.subtotal');
     const btnHacerPedido = document.querySelector('.btn-pedido'); // Botón de hacer pedido
     const itemsPerPage = 12;
+    const paginacion = document.getElementById('paginacion');
+    paginacion.style.display = 'flex'; // Ocultar paginación durante el filtro
+
     let currentPage = 0;
     let subtotal = 0;
 
