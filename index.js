@@ -95,7 +95,7 @@ app.get('/', (req, res) => {
   app.get('/inicio', (req, res) => {
     console.log('Renderizando la vista /inicio');
     try {
-      res.render('index.ejs'); // Aquí renderizas la vista
+      res.render('views/index.ejs'); // Aquí renderizas la vista
     } catch (err) {
       console.error('Error al renderizar /inicio:', err); // Muestra el error completo
       res.status(500).send(`Error al renderizar la página: ${err.message}`);
