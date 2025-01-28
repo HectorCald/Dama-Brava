@@ -9,19 +9,19 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Conectar a MongoDB
-mongoose.connect('mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {})
-  .then(() => {
+mongoose.connect('mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+}).then(() => {
     console.log('Conectado a MongoDB');
-  })
-  .catch((error) => {
+}).catch((error) => {
     console.error('Error al conectar a MongoDB:', error);
-  });
+});
 
 // Definir esquema y modelo de usuario
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
 });
+
 const User = mongoose.model('User', userSchema);
 
 // Definir esquema y modelo de producto
@@ -31,6 +31,7 @@ const productSchema = new mongoose.Schema({
     gramaje: String,
     imagenUrl: String,
 });
+
 const Product = mongoose.model('Product', productSchema);
 
 // Definir esquema y modelo de receta
@@ -40,80 +41,81 @@ const recipeSchema = new mongoose.Schema({
     linkReceta: String,
     imagenUrl: String,
 });
+
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 // Configura multer para manejar archivos
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/uploads');
+        cb(null, 'public/uploads'); // Carpeta donde se guardarán las imágenes
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9); // Generar nombre único
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)); // Preservar la extensión original
     }
 });
+
 const upload = multer({ storage });
 
 app.use((req, res, next) => {
     if (req.headers.host === 'damabrava-web-a396e1ccb037.herokuapp.com') {
-        res.redirect(301, 'https://www.damabrava.com' + req.url);
+      res.redirect(301, 'https://www.damabrava.com' + req.url);
     } else {
-        next();
+      next();
     }
 });
 
 app.use(session({
-    secret: 'mi-secreto',
+    secret: 'mi-secreto', // Cambia esto por una clave secreta en producción
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }
+    cookie: { secure: false } // Usa `true` si estás usando HTTPS
 }));
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configuración de EJS como motor de vistas
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Define la carpeta de las vistas
-
 const verificarAutenticacion = (req, res, next) => {
     if (req.session && req.session.usuarioAutenticado) {
-        next();
+        next(); // El usuario está autenticado, continuar con la solicitud
     } else {
         return res.redirect('/login');
     }
 };
 
+
+
+
 // Rutas para renderizar las vistas
 app.get('/', (req, res) => {
     console.log('Redirigiendo a /inicio');
     res.redirect('/inicio');
-});
-
-app.get('/inicio', (req, res) => {
+  });
+  app.get('/inicio', (req, res) => {
     console.log('Renderizando la vista /inicio');
     try {
-        res.render('index'); // Aquí renderizas la vista
+      res.render('index.ejs'); // Aquí renderizas la vista
     } catch (err) {
-        console.error('Error al renderizar /inicio:', err);
-        res.status(500).send(`Error al renderizar la página: ${err.message}`);
+      console.error('Error al renderizar /inicio:', err); // Muestra el error completo
+      res.status(500).send(`Error al renderizar la página: ${err.message}`);
     }
-});
-
-app.get('/productos', (req, res) => res.render('productos'));
+  });
+  
+app.get('/productos', (req, res) => res.render('productos.ejs'));
 app.get('/login', (req, res) => {
     const usuarioAutenticado = req.session.usuarioAutenticado || false;
-    res.render('login', { usuarioAutenticado });
+    res.render('login.ejs', { usuarioAutenticado });
 });
-app.get('/recetas', (req, res) => res.render('receta'));
-app.get('/nosotros', (req, res) => res.render('nosotros'));
+app.get('/recetas', (req, res) => res.render('receta.ejs'));
+app.get('/nosotros', (req, res) => res.render('nosotros.ejs'));
 app.get('/adm', verificarAutenticacion, (req, res) => {
-    res.render('adm', { usuarioAutenticado: true });
+    res.render('adm.ejs', { usuarioAutenticado: true });
 });
 
 // Manejo de inicio de sesión
 app.post('/login', async (req, res) => {
+
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -137,7 +139,6 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Error del servidor' });
     }
 });
-
 // Ruta para cerrar sesión
 app.post('/logout', (req, res) => {
     req.session.destroy((err) => {
@@ -147,6 +148,32 @@ app.post('/logout', (req, res) => {
         }
         res.redirect('/login');
     });
+});
+// API para cambiar la contraseña
+app.put('/api/usuarios/cambiar-password', async (req, res) => {
+    const { username, currentPassword, newPassword } = req.body;
+
+    try {
+        // Verificar si el usuario existe
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+
+        // Verificar si la contraseña actual es correcta
+        if (user.password !== currentPassword) {
+            return res.status(403).json({ error: "Contraseña actual incorrecta" });
+        }
+
+        // Actualizar la contraseña
+        user.password = newPassword; // Aquí puedes agregar lógica para encriptar la contraseña
+        await user.save();
+
+        res.status(200).json({ message: "Contraseña actualizada correctamente" });
+    } catch (error) {
+        console.error("Error al cambiar la contraseña:", error);
+        res.status(500).json({ error: "Error al cambiar la contraseña" });
+    }
 });
 
 // API para obtener productos
@@ -275,7 +302,7 @@ app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), asy
     let imagenUrl;
 
     if (req.file) {
-        imagenUrl = `/uploads/${req.file.filename}`;
+        imagenUrl = `/uploads/${req.file.filename}`; // Actualizar URL si se sube una nueva imagen
     }
 
     try {
@@ -283,7 +310,7 @@ app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), asy
             nombreReceta,
             descripcion,
             linkReceta,
-            imagenUrl: imagenUrl || undefined
+            imagenUrl: imagenUrl || undefined // Mantener la URL anterior si no se sube una nueva imagen
         }, { new: true });
 
         if (!recetaActualizada) {
