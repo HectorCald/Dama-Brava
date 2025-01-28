@@ -97,10 +97,11 @@ app.get('/', (req, res) => {
     try {
       res.render('index.ejs'); // Aquí renderizas la vista
     } catch (err) {
-      console.error('Error al renderizar /inicio:', err);
-      res.status(500).send('Error al renderizar la página');
+      console.error('Error al renderizar /inicio:', err); // Muestra el error completo
+      res.status(500).send(`Error al renderizar la página: ${err.message}`);
     }
   });
+  
 app.get('/productos', (req, res) => res.render('productos.ejs'));
 app.get('/login', (req, res) => {
     const usuarioAutenticado = req.session.usuarioAutenticado || false;
