@@ -89,9 +89,18 @@ const verificarAutenticacion = (req, res, next) => {
 
 // Rutas para renderizar las vistas
 app.get('/', (req, res) => {
+    console.log('Redirigiendo a /inicio');
     res.redirect('/inicio');
-});
-app.get('/inicio', (req, res) => res.render('index.ejs'));
+  });
+  app.get('/inicio', (req, res) => {
+    console.log('Renderizando la vista /inicio');
+    try {
+      res.render('index.ejs'); // Aquí renderizas la vista
+    } catch (err) {
+      console.error('Error al renderizar /inicio:', err);
+      res.status(500).send('Error al renderizar la página');
+    }
+  });
 app.get('/productos', (req, res) => res.render('productos.ejs'));
 app.get('/login', (req, res) => {
     const usuarioAutenticado = req.session.usuarioAutenticado || false;
