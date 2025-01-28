@@ -67,8 +67,3 @@ build/Release
 
 # dataconnect generated files
 .dataconnect
-
-# Ignorar la carpeta de credenciales
-credentials/
-.vercel
-

@@ -2,29 +2,48 @@ import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import session from 'express-session';
-import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Conectar a MongoDB
-mongoose.connect('mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+// Configuración de vistas y middleware básico
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Configuración de sesión
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'mi-secreto',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 24 * 60 * 60 * 1000 // 24 horas
+    }
+}));
+
+// Conexión a MongoDB
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
 }).then(() => {
     console.log('Conectado a MongoDB');
 }).catch((error) => {
     console.error('Error al conectar a MongoDB:', error);
 });
 
-// Definir esquema y modelo de usuario
+// Esquemas
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
 });
 
-const User = mongoose.model('User', userSchema);
-
-// Definir esquema y modelo de producto
 const productSchema = new mongoose.Schema({
     nombre: String,
     precio: Number,
@@ -32,9 +51,6 @@ const productSchema = new mongoose.Schema({
     imagenUrl: String,
 });
 
-const Product = mongoose.model('Product', productSchema);
-
-// Definir esquema y modelo de receta
 const recipeSchema = new mongoose.Schema({
     nombreReceta: String,
     descripcion: String,
@@ -42,80 +58,95 @@ const recipeSchema = new mongoose.Schema({
     imagenUrl: String,
 });
 
+// Modelos
+const User = mongoose.model('User', userSchema);
+const Product = mongoose.model('Product', productSchema);
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
-// Configura multer para manejar archivos
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/uploads'); // Carpeta donde se guardarán las imágenes
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9); // Generar nombre único
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)); // Preservar la extensión original
-    }
-});
-
+// Configuración de Multer para manejo de archivos
+const storage = multer.memoryStorage(); // Cambiado a memoryStorage para Vercel
 const upload = multer({ storage });
 
-app.use((req, res, next) => {
-    if (req.headers.host === 'damabrava-web-a396e1ccb037.herokuapp.com') {
-      res.redirect(301, 'https://www.damabrava.com' + req.url);
-    } else {
-      next();
-    }
-});
-
-app.use(session({
-    secret: 'mi-secreto', // Cambia esto por una clave secreta en producción
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false } // Usa `true` si estás usando HTTPS
-}));
-
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
+// Middleware de autenticación
 const verificarAutenticacion = (req, res, next) => {
     if (req.session && req.session.usuarioAutenticado) {
-        next(); // El usuario está autenticado, continuar con la solicitud
+        next();
     } else {
-        return res.redirect('/login');
+        res.redirect('/login');
     }
 };
 
-
-
-
-// Rutas para renderizar las vistas
-app.get('/', (req, res) => {
-    console.log('Redirigiendo a /inicio');
-    res.redirect('/inicio');
-  });
-  app.get('/inicio', (req, res) => {
-    console.log('Renderizando la vista /inicio');
-    try {
-      res.render('views/index.ejs'); // Aquí renderizas la vista
-    } catch (err) {
-      console.error('Error al renderizar /inicio:', err); // Muestra el error completo
-      res.status(500).send(`Error al renderizar la página: ${err.message}`);
+// Middleware de redirección HTTPS
+app.use((req, res, next) => {
+    if (req.headers.host === 'damabrava-web-a396e1ccb037.herokuapp.com') {
+        res.redirect(301, 'https://www.damabrava.com' + req.url);
+    } else {
+        next();
     }
-  });
-  
-app.get('/productos', (req, res) => res.render('productos.ejs'));
+});
+
+// Rutas de vistas
+app.get('/', (req, res) => {
+    res.redirect('/inicio');
+});
+
+app.get('/inicio', (req, res) => {
+    try {
+        res.render('index');
+    } catch (err) {
+        console.error('Error al renderizar /inicio:', err);
+        res.status(500).send(`Error al renderizar la página: ${err.message}`);
+    }
+});
+
+app.get('/productos', (req, res) => {
+    try {
+        res.render('productos');
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error al renderizar productos');
+    }
+});
+
 app.get('/login', (req, res) => {
-    const usuarioAutenticado = req.session.usuarioAutenticado || false;
-    res.render('login.ejs', { usuarioAutenticado });
+    try {
+        const usuarioAutenticado = req.session.usuarioAutenticado || false;
+        res.render('login', { usuarioAutenticado });
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error al renderizar login');
+    }
 });
-app.get('/recetas', (req, res) => res.render('receta.ejs'));
-app.get('/nosotros', (req, res) => res.render('nosotros.ejs'));
+
+app.get('/recetas', (req, res) => {
+    try {
+        res.render('receta');
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error al renderizar recetas');
+    }
+});
+
+app.get('/nosotros', (req, res) => {
+    try {
+        res.render('nosotros');
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error al renderizar nosotros');
+    }
+});
+
 app.get('/adm', verificarAutenticacion, (req, res) => {
-    res.render('adm.ejs', { usuarioAutenticado: true });
+    try {
+        res.render('adm', { usuarioAutenticado: true });
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error al renderizar admin');
+    }
 });
 
-// Manejo de inicio de sesión
+// Rutas de autenticación
 app.post('/login', async (req, res) => {
-
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -124,207 +155,192 @@ app.post('/login', async (req, res) => {
 
     try {
         const user = await User.findOne({ username });
-        if (!user) {
-            return res.status(401).json({ message: 'Usuario no encontrado' });
-        }
-
-        if (user.password !== password) {
-            return res.status(401).json({ message: 'Contraseña incorrecta' });
+        if (!user || user.password !== password) {
+            return res.status(401).json({ message: 'Credenciales inválidas' });
         }
 
         req.session.usuarioAutenticado = true;
         res.status(200).json({ message: 'Login exitoso' });
     } catch (error) {
-        console.error('Error al autenticar usuario:', error);
+        console.error('Error al autenticar:', error);
         res.status(500).json({ message: 'Error del servidor' });
     }
 });
-// Ruta para cerrar sesión
+
 app.post('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            console.error('Error al cerrar la sesión:', err);
-            return res.status(500).send('Error al cerrar la sesión');
+            console.error('Error al cerrar sesión:', err);
+            return res.status(500).send('Error al cerrar sesión');
         }
         res.redirect('/login');
     });
 });
-// API para cambiar la contraseña
+
+// API de usuarios
 app.put('/api/usuarios/cambiar-password', async (req, res) => {
     const { username, currentPassword, newPassword } = req.body;
 
     try {
-        // Verificar si el usuario existe
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ error: "Usuario no encontrado" });
         }
 
-        // Verificar si la contraseña actual es correcta
         if (user.password !== currentPassword) {
             return res.status(403).json({ error: "Contraseña actual incorrecta" });
         }
 
-        // Actualizar la contraseña
-        user.password = newPassword; // Aquí puedes agregar lógica para encriptar la contraseña
+        user.password = newPassword;
         await user.save();
-
         res.status(200).json({ message: "Contraseña actualizada correctamente" });
     } catch (error) {
-        console.error("Error al cambiar la contraseña:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: "Error al cambiar la contraseña" });
     }
 });
 
-// API para obtener productos
+// API de productos
 app.get('/api/productos', async (req, res) => {
     try {
         const productos = await Product.find();
         res.json(productos);
     } catch (error) {
-        console.error("Error al obtener productos:", error);
-        res.status(500).send("Error al obtener productos");
+        console.error("Error:", error);
+        res.status(500).json({ error: "Error al obtener productos" });
     }
 });
 
-// Ruta para agregar un producto
 app.post('/api/productos', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
-    const { nombre, precio, gramaje } = req.body;
-    const imagenUrl = `/uploads/${req.file.filename}`; // Guardar la URL de la imagen
-
-    const nuevoProducto = new Product({
-        nombre,
-        precio: Number(precio),
-        gramaje,
-        imagenUrl
-    });
-
     try {
+        const { nombre, precio, gramaje } = req.body;
+        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
+        const imagenUrl = '/ruta/a/imagen'; // Esto debe ser reemplazado con la URL real
+
+        const nuevoProducto = new Product({
+            nombre,
+            precio: Number(precio),
+            gramaje,
+            imagenUrl
+        });
+
         const productoGuardado = await nuevoProducto.save();
         res.status(201).json(productoGuardado);
     } catch (error) {
-        console.error("Error al agregar producto:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: "Error al agregar producto" });
     }
 });
 
-// API para actualizar un producto
 app.put('/api/productos/:id', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
-    const { id } = req.params;
-    const { nombre, precio, gramaje } = req.body;
-    let imagenUrl;
-
-    if (req.file) {
-        imagenUrl = `/uploads/${req.file.filename}`; // Actualizar URL si se sube una nueva imagen
-    }
-
     try {
+        const { id } = req.params;
+        const { nombre, precio, gramaje } = req.body;
+        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
+        const imagenUrl = req.file ? '/ruta/a/imagen' : undefined;
+
         const productoActualizado = await Product.findByIdAndUpdate(id, {
             nombre,
             precio: Number(precio),
             gramaje,
-            imagenUrl: imagenUrl || undefined // Mantener la URL anterior si no se sube una nueva imagen
+            ...(imagenUrl && { imagenUrl })
         }, { new: true });
 
         if (!productoActualizado) {
             return res.status(404).json({ error: "Producto no encontrado" });
         }
 
-        res.status(200).json(productoActualizado);
+        res.json(productoActualizado);
     } catch (error) {
-        console.error("Error al actualizar producto:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: "Error al actualizar producto" });
     }
 });
 
-// API para eliminar un producto
 app.delete('/api/productos/:id', verificarAutenticacion, async (req, res) => {
-    const { id } = req.params;
-
     try {
-        await Product.findByIdAndDelete(id);
-        res.sendStatus(204); // No Content
+        await Product.findByIdAndDelete(req.params.id);
+        res.sendStatus(204);
     } catch (error) {
-        console.error("Error al eliminar producto:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: "Error al eliminar producto" });
     }
 });
 
-// API para obtener recetas
+// API de recetas
 app.get('/api/recetas', async (req, res) => {
     try {
         const recetas = await Recipe.find();
         res.json(recetas);
     } catch (error) {
-        console.error("Error al obtener recetas:", error);
-        res.status(500).send("Error al obtener recetas");
+        console.error("Error:", error);
+        res.status(500).json({ error: "Error al obtener recetas" });
     }
 });
 
-// API para agregar una nueva receta
 app.post('/api/recetas', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
-    const { nombreReceta, descripcion, linkReceta } = req.body;
-    const imagenUrl = req.file ? `/uploads/${req.file.filename}` : ''; // Guardar la URL de la imagen
-
-    const nuevaReceta = new Recipe({
-        nombreReceta,
-        descripcion,
-        linkReceta,
-        imagenUrl
-    });
-
     try {
+        const { nombreReceta, descripcion, linkReceta } = req.body;
+        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
+        const imagenUrl = '/ruta/a/imagen'; // Esto debe ser reemplazado con la URL real
+
+        const nuevaReceta = new Recipe({
+            nombreReceta,
+            descripcion,
+            linkReceta,
+            imagenUrl
+        });
+
         const recetaGuardada = await nuevaReceta.save();
         res.status(201).json(recetaGuardada);
     } catch (error) {
-        console.error("Error al agregar receta:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: "Error al agregar receta" });
     }
 });
 
-// API para eliminar una receta
-app.delete('/api/recetas/:id', verificarAutenticacion, async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        await Recipe.findByIdAndDelete(id);
-        res.sendStatus(204); // No Content
-    } catch (error) {
-        console.error("Error al eliminar receta:", error);
-        res.status(500).json({ error: "Error al eliminar receta" });
-    }
-});
-
-// API para actualizar una receta
 app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
-    const { id } = req.params;
-    const { nombreReceta, descripcion, linkReceta } = req.body;
-    let imagenUrl;
-
-    if (req.file) {
-        imagenUrl = `/uploads/${req.file.filename}`; // Actualizar URL si se sube una nueva imagen
-    }
-
     try {
+        const { id } = req.params;
+        const { nombreReceta, descripcion, linkReceta } = req.body;
+        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
+        const imagenUrl = req.file ? '/ruta/a/imagen' : undefined;
+
         const recetaActualizada = await Recipe.findByIdAndUpdate(id, {
             nombreReceta,
             descripcion,
             linkReceta,
-            imagenUrl: imagenUrl || undefined // Mantener la URL anterior si no se sube una nueva imagen
+            ...(imagenUrl && { imagenUrl })
         }, { new: true });
 
         if (!recetaActualizada) {
             return res.status(404).json({ error: "Receta no encontrada" });
         }
 
-        res.status(200).json(recetaActualizada);
+        res.json(recetaActualizada);
     } catch (error) {
-        console.error("Error al actualizar receta:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: "Error al actualizar receta" });
     }
 });
 
-// Iniciar el servidor
+app.delete('/api/recetas/:id', verificarAutenticacion, async (req, res) => {
+    try {
+        await Recipe.findByIdAndDelete(req.params.id);
+        res.sendStatus(204);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: "Error al eliminar receta" });
+    }
+});
+
+// Middleware de manejo de errores global
+app.use((err, req, res, next) => {
+    console.error('Error no manejado:', err);
+    res.status(500).send('Error interno del servidor');
+});
+
+// Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+    console.log(`Servidor escuchando en puerto ${PORT}`);
 });
