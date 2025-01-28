@@ -64,7 +64,15 @@ const Product = mongoose.model('Product', productSchema);
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 // Configuración de Multer para manejo de archivos
-const storage = multer.memoryStorage(); // Cambiado a memoryStorage para Vercel
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, 'public/uploads')); // Ruta absoluta
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
 const upload = multer({ storage });
 
 // Middleware de autenticación
