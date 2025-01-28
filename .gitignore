@@ -70,3 +70,4 @@ node_modules/
 
 # Ignorar la carpeta de credenciales
 credentials/
+.vercel
