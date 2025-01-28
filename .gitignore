@@ -71,3 +71,4 @@ build/Release
 # Ignorar la carpeta de credenciales
 credentials/
 .vercel
+
