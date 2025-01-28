@@ -84,15 +84,14 @@ const verificarAutenticacion = (req, res, next) => {
     }
 };
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Asegúrate de que la carpeta 'views' esté bien definida
+
 
 
 // Rutas para renderizar las vistas
 app.get('/', (req, res) => {
     res.redirect('/inicio');
 });
-app.get('/inicio', (req, res) => res.render('index'));
+app.get('/inicio', (req, res) => res.render('index.ejs'));
 app.get('/productos', (req, res) => res.render('productos.ejs'));
 app.get('/login', (req, res) => {
     const usuarioAutenticado = req.session.usuarioAutenticado || false;
