@@ -16,7 +16,7 @@ app.use((req, res, next) => {
     // Comprobamos si ya estamos en https y con www
     if (req.protocol !== 'https' || !req.headers.host.startsWith('www.')) {
         // Si el dominio no tiene www (damabrava.com en lugar de www.damabrava.com)
-        if (req.headers.host === 'dama-brava.vercel.app/') {
+        if (req.headers.host === 'damabrava.com') {
             // Redirigir de http://damabrava.com a https://www.damabrava.com
             return res.redirect(301, `https://www.damabrava.com${req.url}`);
         }
