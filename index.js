@@ -168,7 +168,6 @@ app.post('/login', async (req, res) => {
         }
 
         req.session.usuarioAutenticado = true;
-        res.redirect('/adm');
         res.status(200).json({ message: 'Login exitoso' });
     } catch (error) {
         console.error('Error al autenticar:', error);
