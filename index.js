@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 
+
 // Configuración de vistas y middleware básico
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
