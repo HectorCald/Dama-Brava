@@ -29,7 +29,30 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000 // 24 horas
     }
 }));
+app.use((req, res, next) => {
+    const host = req.headers.host;
+    
+    // Lista de dominios que necesitan redirección
+    const redirectDomains = [
+        'https://dama-brava.vercel.app/inicio',
+        'damabrava.com',
+    ];
 
+    if (redirectDomains.includes(host)) {
+        // Asegurarse de que la URL de redirección sea segura
+        const secureUrl = `https://www.damabrava.com${req.url}`;
+        return res.redirect(301, secureUrl);
+    }
+
+    // Si estamos en el dominio correcto pero no en HTTPS, redirigir a HTTPS
+    if (host === 'damabrava.com' || host === 'www.damabrava.com') {
+        if (!req.secure && process.env.NODE_ENV === 'production') {
+            return res.redirect(301, `https://www.damabrava.com${req.url}`);
+        }
+    }
+
+    next();
+});
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
 }).then(() => {
