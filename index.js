@@ -13,12 +13,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
-    // Comprobamos si el dominio no tiene el prefijo www
-    if (req.headers.host === 'dama-brava.vercel.app') {
-        // Redirigimos a www.damabrava.com manteniendo el resto de la URL
+    const host = req.headers.host;
+    
+    // Redirigir solo si estás en "dama-brava.vercel.app"
+    if (host === 'dama-brava.vercel.app') {
         return res.redirect(301, `https://www.damabrava.com${req.url}`);
     }
-    // Continuamos con el siguiente middleware si no es necesario redirigir
+
+    // No redirigir si ya estás en el dominio correcto
     next();
 });
 
