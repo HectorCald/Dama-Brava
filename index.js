@@ -15,14 +15,14 @@ const PORT = process.env.PORT || 3000;
 app.use((req, res, next) => {
     const host = req.headers.host;
     
-    // Redirigir solo si estás en "dama-brava.vercel.app"
-    if (host === 'damabrava.com') {
-        return res.redirect(301, `https://www.damabrava.com${req.url}`);
+    // Verificar si el dominio del req es diferente al host actual
+    if (host !== 'damabrava.com') {
+        return res.redirect(301, `https://www.damabrava.com${req.origin}`);
     }
 
-    // No redirigir si ya estás en el dominio correcto
     next();
 });
+
 
 
 
