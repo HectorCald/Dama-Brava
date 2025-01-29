@@ -12,6 +12,30 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use((req, res, next) => {
+    const host = req.headers.host;
+    
+    // Lista de dominios que necesitan redirección
+    const redirectDomains = [
+        'dama-brava.vercel.app',
+        'damabrava.com',  // Sin el protocolo https://
+    ];
+
+    // Si el host actual está en la lista de redirección, redirige a la URL segura
+    if (redirectDomains.includes(host)) {
+        const secureUrl = `https://www.damabrava.com${req.url}`;  // Crear URL segura
+        return res.redirect(301, secureUrl);  // Redirección 301 (permanente)
+    }
+
+    // Si el dominio es el correcto pero no está en HTTPS, forzar la redirección a HTTPS
+    if ((host === 'damabrava.com' || host === 'www.damabrava.com') && !req.secure && process.env.NODE_ENV === 'production') {
+        return res.redirect(301, `https://www.damabrava.com${req.url}`);  // Redirección a HTTPS
+    }
+
+    // Continuar con el siguiente middleware
+    next();
+});
+
 // Configuración de vistas y middleware básico
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -29,30 +53,7 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000 // 24 horas
     }
 }));
-app.use((req, res, next) => {
-    const host = req.headers.host;
-    
-    // Lista de dominios que necesitan redirección
-    const redirectDomains = [
-        'https://dama-brava.vercel.app/inicio',
-        'https://damabrava.com',
-    ];
 
-    if (redirectDomains.includes(host)) {
-        // Asegurarse de que la URL de redirección sea segura
-        const secureUrl = `https://www.damabrava.com${req.url}`;
-        return res.redirect(301, secureUrl);
-    }
-
-    // Si estamos en el dominio correcto pero no en HTTPS, redirigir a HTTPS
-    if (host === 'damabrava.com' || host === 'www.damabrava.com') {
-        if (!req.secure && process.env.NODE_ENV === 'production') {
-            return res.redirect(301, `https://www.damabrava.com${req.url}`);
-        }
-    }
-
-    next();
-});
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
 }).then(() => {
