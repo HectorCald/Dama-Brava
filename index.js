@@ -35,7 +35,7 @@ app.use((req, res, next) => {
     // Lista de dominios que necesitan redirección
     const redirectDomains = [
         'https://dama-brava.vercel.app/inicio',
-        'damabrava.com',
+        'https://damabrava.com',
     ];
 
     if (redirectDomains.includes(host)) {
