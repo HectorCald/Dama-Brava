@@ -13,12 +13,19 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
-    // Comprobamos si el dominio no tiene el prefijo www
-    if (req.headers.host === 'damabrava.com') {
-        // Redirigimos a www.damabrava.com manteniendo el resto de la URL
-        return res.redirect(301, `https://www.damabrava.com${req.url}`);
+    // Comprobamos si ya estamos en https y con www
+    if (req.protocol !== 'https' || !req.headers.host.startsWith('www.')) {
+        // Si el dominio no tiene www (damabrava.com en lugar de www.damabrava.com)
+        if (req.headers.host === 'dama-brava.vercel.app/') {
+            // Redirigir de http://damabrava.com a https://www.damabrava.com
+            return res.redirect(301, `https://www.damabrava.com${req.url}`);
+        }
+        // Si la solicitud es http y tiene www, redirigir a https://
+        if (req.protocol === 'http') {
+            return res.redirect(301, `https://${req.headers.host}${req.url}`);
+        }
     }
-    // Continuamos con el siguiente middleware si no es necesario redirigir
+    // Si la solicitud ya es correcta, continuamos con el siguiente middleware
     next();
 });
 
