@@ -16,8 +16,8 @@ app.use((req, res, next) => {
     const host = req.headers.host;
     
     // Verificar si el dominio del req es diferente al host actual
-    if (host !== 'damabrava.com') {
-        return res.redirect(301, `https://www.damabrava.com${req.origin}`);
+    if (host !== 'www.damabrava.com') {
+        return res.redirect(301, `https://www.damabrava.com`);
     }
 
     next();
