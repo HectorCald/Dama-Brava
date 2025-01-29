@@ -16,7 +16,7 @@ app.use((req, res, next) => {
     const host = req.headers.host;
     
     // Redirigir solo si estás en "dama-brava.vercel.app"
-    if (host === 'dama-brava.vercel.app') {
+    if (host === 'damabrava.com') {
         return res.redirect(301, `https://www.damabrava.com${req.url}`);
     }
 
