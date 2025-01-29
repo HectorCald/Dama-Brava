@@ -21,11 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Configuración de sesión
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'mi-secreto',
-    resave: false,
+    secret: 'mi-secreto',
+    resave: true, // Cambiado a true
     saveUninitialized: false,
     cookie: { 
-        secure: process.env.NODE_ENV === 'production',
+        secure: false, // Cambia a true si usas HTTPS
         maxAge: 24 * 60 * 60 * 1000 // 24 horas
     }
 }));
@@ -77,12 +77,20 @@ const upload = multer({ storage });
 
 // Middleware de autenticación
 const verificarAutenticacion = (req, res, next) => {
-    if (req.session && req.session.usuarioAutenticado) {
+    console.log('Estado de autenticación:', req.session.usuarioAutenticado);
+    if (req.session && req.session.usuarioAutenticado === true) {
         next();
     } else {
-        res.redirect('/login');
+        res.status(401).json({ message: 'No autorizado' });
     }
 };
+
+app.get('/verificar-auth', (req, res) => {
+    res.json({ 
+        authenticated: req.session.usuarioAutenticado === true,
+        sessionID: req.sessionID
+    });
+});
 
 // Middleware de redirección HTTPS
 app.use((req, res, next) => {
@@ -163,14 +171,29 @@ app.post('/login', async (req, res) => {
 
     try {
         const user = await User.findOne({ username });
-        if (!user || user.password !== password) {
-            return res.status(401).json({ message: 'Credenciales inválidas' });
+        if (!user) {
+            return res.status(401).json({ message: 'Usuario no encontrado' });
         }
 
+        if (user.password !== password) {
+            return res.status(401).json({ message: 'Contraseña incorrecta' });
+        }
+
+        // Establece la sesión antes de enviar la respuesta
         req.session.usuarioAutenticado = true;
-        res.status(200).json({ message: 'Login exitoso' });
+        req.session.save((err) => {
+            if (err) {
+                console.error('Error al guardar la sesión:', err);
+                return res.status(500).json({ message: 'Error al iniciar sesión' });
+            }
+            // Envía la respuesta solo después de que la sesión se haya guardado
+            res.status(200).json({ 
+                message: 'Login exitoso',
+                authenticated: true
+            });
+        });
     } catch (error) {
-        console.error('Error al autenticar:', error);
+        console.error('Error al autenticar usuario:', error);
         res.status(500).json({ message: 'Error del servidor' });
     }
 });
