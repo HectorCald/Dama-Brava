@@ -13,28 +13,15 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
-    const host = req.headers.host;
-    
-    // Lista de dominios que necesitan redirección
-    const redirectDomains = [
-        'dama-brava.vercel.app',
-        'damabrava.com',  // Sin el protocolo https://
-    ];
-
-    // Si el host actual está en la lista de redirección, redirige a la URL segura
-    if (redirectDomains.includes(host)) {
-        const secureUrl = `https://www.damabrava.com${req.url}`;  // Crear URL segura
-        return res.redirect(301, secureUrl);  // Redirección 301 (permanente)
+    // Comprobamos si el dominio no tiene el prefijo www
+    if (req.headers.host === 'damabrava.com') {
+        // Redirigimos a www.damabrava.com manteniendo el resto de la URL
+        return res.redirect(301, `https://www.damabrava.com${req.url}`);
     }
-
-    // Si el dominio es el correcto pero no está en HTTPS, forzar la redirección a HTTPS
-    if ((host === 'damabrava.com' || host === 'www.damabrava.com') && !req.secure && process.env.NODE_ENV === 'production') {
-        return res.redirect(301, `https://www.damabrava.com${req.url}`);  // Redirección a HTTPS
-    }
-
-    // Continuar con el siguiente middleware
+    // Continuamos con el siguiente middleware si no es necesario redirigir
     next();
 });
+
 
 // Configuración de vistas y middleware básico
 app.set('view engine', 'ejs');
