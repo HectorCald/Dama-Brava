@@ -5,6 +5,8 @@ import session from 'express-session';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path';
+import MongoStore from 'connect-mongo';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,15 +22,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configuración de sesión
+
 app.use(session({
     secret: 'mi-secreto',
-    resave: true, // Cambiado a true
-    saveUninitialized: false,
+    resave: false,  // No guarda la sesión si no hay cambios
+    saveUninitialized: false, // No guarda sesiones vacías
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+        collectionName: 'sessions',
+        ttl: 24 * 60 * 60 
+    }),
     cookie: { 
-        secure: false, // Cambia a true si usas HTTPS
-        maxAge: 24 * 60 * 60 * 1000 // 24 horas
+        secure: false, // Cambiado a false para desarrollo en localhost
+        httpOnly: true, 
+        maxAge: 24 * 60 * 60 * 1000 
     }
 }));
+
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
@@ -263,11 +273,13 @@ app.post('/api/productos', verificarAutenticacion, upload.single('imagen'), asyn
     }
 });
 
+
+//APi de productos actualizacion
 app.put('/api/productos/:id', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
         const { id } = req.params;
         const { nombre, precio, gramaje } = req.body;
-        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
+        
         const imagenUrl = req.file ? '/ruta/a/imagen' : undefined;
 
         const productoActualizado = await Product.findByIdAndUpdate(id, {
