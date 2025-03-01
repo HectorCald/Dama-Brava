@@ -76,18 +76,23 @@ const Recipe = mongoose.model('Recipe', recipeSchema);
 // Configuración de Multer para manejo de archivos
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'public/uploads')); // Ruta absoluta
+        const uploadPath = path.join(__dirname, 'public/uploads');
+        console.log("Guardando en:", uploadPath); // Depuración
+        cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+        const filename = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname);
+        console.log("Nombre de archivo:", filename); // Depuración
+        cb(null, filename);
     }
 });
+
 const upload = multer({ storage });
 
 // Middleware de autenticación
 const verificarAutenticacion = (req, res, next) => {
-    console.log('Estado de autenticación:', req.session.usuarioAutenticado);
+    console.log('Estado de autenticación:', req.session);
     if (req.session && req.session.usuarioAutenticado === true) {
         next();
     } else {
