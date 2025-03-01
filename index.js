@@ -56,11 +56,11 @@ app.use(session({
         ttl: 24 * 60 * 60 
     }),
     cookie: { 
-        secure: true, // Las cookies solo se envían sobre HTTPS
+        secure: process.env.NODE_ENV || 'production'  === 'production', // true en producción (Vercel), false en local
         httpOnly: true, 
-        sameSite: 'none', // Necesario para que funcione en dominios distintos
+        sameSite: process.env.NODE_ENV || 'production' === 'production' ? 'none' : 'lax',
         maxAge: 24 * 60 * 60 * 1000 
-    }    
+    }   
 }));
 
 // Conexión a MongoDB
