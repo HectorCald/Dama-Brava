@@ -114,15 +114,6 @@ app.get('/verificar-auth', (req, res) => {
     });
 });
 
-// Middleware de redirección HTTPS
-app.use((req, res, next) => {
-    if (req.headers.host === 'damabrava-web-a396e1ccb037.herokuapp.com') {
-        res.redirect(301, 'https://www.damabrava.com' + req.url);
-    } else {
-        next();
-    }
-});
-
 // Rutas de vistas
 app.get('/', (req, res) => {
     res.redirect('/inicio');
@@ -262,6 +253,7 @@ app.get('/api/productos', async (req, res) => {
     }
 });
 
+//API de Agregar productos
 app.post('/api/productos', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
         const { nombre, precio, gramaje } = req.body;
@@ -286,6 +278,7 @@ app.post('/api/productos', verificarAutenticacion, upload.single('imagen'), asyn
     }
 });
 
+//API de actualizacion de Productos
 app.put('/api/productos/:id', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
         const { id } = req.params;
@@ -321,6 +314,8 @@ app.put('/api/productos/:id', verificarAutenticacion, upload.single('imagen'), a
     }
 });
 
+
+//API de eliminacion de productos
 app.delete('/api/productos/:id', verificarAutenticacion, async (req, res) => {
     try {
         const producto = await Product.findById(req.params.id);
@@ -352,6 +347,7 @@ app.get('/api/recetas', async (req, res) => {
     }
 });
 
+//Api de Agregar recetas
 app.post('/api/recetas', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
         const { nombreReceta, descripcion, linkReceta } = req.body;
@@ -376,6 +372,7 @@ app.post('/api/recetas', verificarAutenticacion, upload.single('imagen'), async 
     }
 });
 
+//API de actulizacion de recetas
 app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
         const { id } = req.params;
@@ -411,6 +408,7 @@ app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), asy
     }
 });
 
+//API de eliminacion de recetas
 app.delete('/api/recetas/:id', verificarAutenticacion, async (req, res) => {
     try {
         const receta = await Recipe.findById(req.params.id);
