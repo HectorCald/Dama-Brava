@@ -107,7 +107,8 @@ const verificarAutenticacion = (req, res, next) => {
     if (req.session && req.session.usuarioAutenticado === true) {
         next();
     } else {
-        res.status(401).json({ message: 'No autorizado' });
+        res.redirect('/login');
+
     }
 };
 
