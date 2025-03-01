@@ -6,10 +6,34 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path';
 import MongoStore from 'connect-mongo';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import dotenv from 'dotenv';
 
+// Load environment variables
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// Configure Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'due67qujm',
+    api_key: process.env.CLOUDINARY_API_KEY || '143896964264728',
+    api_secret: process.env.CLOUDINARY_API_SECRET || 'l2dkLSdQ05qrofCVVBQ1z2dT9tE'
+});
+
+// Configure Cloudinary storage
+const cloudinaryStorage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'damabrava',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'gif']
+    }
+});
+
+// Configure Multer with Cloudinary
+const upload = multer({ storage: cloudinaryStorage });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,31 +46,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configuración de sesión
-
 app.use(session({
-    secret: 'mi-secreto',
-    resave: false,  // No guarda la sesión si no hay cambios
-    saveUninitialized: false, // No guarda sesiones vacías
+    secret: process.env.SESSION_SECRET || 'mi-secreto',
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({
         mongoUrl: process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
         collectionName: 'sessions',
         ttl: 24 * 60 * 60 
     }),
     cookie: { 
-        secure: false, // Cambiado a false para desarrollo en localhost
+        secure: process.env.NODE_ENV === 'production',
         httpOnly: true, 
         maxAge: 24 * 60 * 60 * 1000 
     }
 }));
 
-
 // Conexión a MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-}).then(() => {
-    console.log('Conectado a MongoDB');
-}).catch((error) => {
-    console.error('Error al conectar a MongoDB:', error);
-});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+    .then(() => {
+        console.log('Conectado a MongoDB');
+    }).catch((error) => {
+        console.error('Error al conectar a MongoDB:', error);
+    });
 
 // Esquemas
 const userSchema = new mongoose.Schema({
@@ -59,6 +81,7 @@ const productSchema = new mongoose.Schema({
     precio: Number,
     gramaje: String,
     imagenUrl: String,
+    cloudinaryId: String
 });
 
 const recipeSchema = new mongoose.Schema({
@@ -66,6 +89,7 @@ const recipeSchema = new mongoose.Schema({
     descripcion: String,
     linkReceta: String,
     imagenUrl: String,
+    cloudinaryId: String
 });
 
 // Modelos
@@ -73,26 +97,9 @@ const User = mongoose.model('User', userSchema);
 const Product = mongoose.model('Product', productSchema);
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
-// Configuración de Multer para manejo de archivos
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, 'public/uploads');
-        console.log("Guardando en:", uploadPath); // Depuración
-        cb(null, uploadPath);
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const filename = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname);
-        console.log("Nombre de archivo:", filename); // Depuración
-        cb(null, filename);
-    }
-});
-
-const upload = multer({ storage });
-
 // Middleware de autenticación
 const verificarAutenticacion = (req, res, next) => {
-    console.log('Estado de autenticación:', req.session);
+    console.log('Estado de autenticación:', req.session.usuarioAutenticado);
     if (req.session && req.session.usuarioAutenticado === true) {
         next();
     } else {
@@ -194,14 +201,12 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Contraseña incorrecta' });
         }
 
-        // Establece la sesión antes de enviar la respuesta
         req.session.usuarioAutenticado = true;
         req.session.save((err) => {
             if (err) {
                 console.error('Error al guardar la sesión:', err);
                 return res.status(500).json({ message: 'Error al iniciar sesión' });
             }
-            // Envía la respuesta solo después de que la sesión se haya guardado
             res.status(200).json({ 
                 message: 'Login exitoso',
                 authenticated: true
@@ -224,7 +229,7 @@ app.post('/logout', (req, res) => {
 });
 
 // API de usuarios
-app.put('/api/usuarios/cambiar-password', async (req, res) => {
+app.put('/api/usuarios/cambiar-password', verificarAutenticacion, async (req, res) => {
     const { username, currentPassword, newPassword } = req.body;
 
     try {
@@ -259,57 +264,57 @@ app.get('/api/productos', async (req, res) => {
 
 app.post('/api/productos', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
-        console.log('Datos recibidos:', req.body); // Depuración
-
         const { nombre, precio, gramaje } = req.body;
-        if (!nombre || !precio || !gramaje) {
-            return res.status(400).json({ error: "Todos los campos son obligatorios" });
-        }
-
-        let imagenUrl = "";
-        if (req.file) {
-            imagenUrl = `/uploads/${req.file.filename}`; // Ruta correcta de la imagen
-        } else {
-            return res.status(400).json({ error: "La imagen es obligatoria" });
+        
+        if (!req.file) {
+            return res.status(400).json({ error: "No se ha proporcionado una imagen" });
         }
 
         const nuevoProducto = new Product({
             nombre,
             precio: Number(precio),
             gramaje,
-            imagenUrl
+            imagenUrl: req.file.path,
+            cloudinaryId: req.file.filename
         });
 
         const productoGuardado = await nuevoProducto.save();
         res.status(201).json(productoGuardado);
     } catch (error) {
-        console.error("Error al agregar producto:", error);
-        res.status(500).json({ error: "Error interno del servidor" });
+        console.error("Error:", error);
+        res.status(500).json({ error: "Error al agregar producto" });
     }
 });
 
-
-
-//APi de productos actualizacion
 app.put('/api/productos/:id', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
         const { id } = req.params;
         const { nombre, precio, gramaje } = req.body;
         
-        const imagenUrl = req.file ? '/ruta/a/imagen' : undefined;
-
-        const productoActualizado = await Product.findByIdAndUpdate(id, {
-            nombre,
-            precio: Number(precio),
-            gramaje,
-            ...(imagenUrl && { imagenUrl })
-        }, { new: true });
-
-        if (!productoActualizado) {
+        const producto = await Product.findById(id);
+        if (!producto) {
             return res.status(404).json({ error: "Producto no encontrado" });
         }
 
-        res.json(productoActualizado);
+        const productoActualizado = {
+            nombre,
+            precio: Number(precio),
+            gramaje
+        };
+
+        // Si hay una nueva imagen, actualiza la imagen
+        if (req.file) {
+            // Si existe una imagen previa en Cloudinary, la eliminamos
+            if (producto.cloudinaryId) {
+                await cloudinary.uploader.destroy(producto.cloudinaryId);
+            }
+            
+            productoActualizado.imagenUrl = req.file.path;
+            productoActualizado.cloudinaryId = req.file.filename;
+        }
+
+        const resultado = await Product.findByIdAndUpdate(id, productoActualizado, { new: true });
+        res.json(resultado);
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ error: "Error al actualizar producto" });
@@ -318,6 +323,16 @@ app.put('/api/productos/:id', verificarAutenticacion, upload.single('imagen'), a
 
 app.delete('/api/productos/:id', verificarAutenticacion, async (req, res) => {
     try {
+        const producto = await Product.findById(req.params.id);
+        if (!producto) {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
+
+        // Elimina la imagen de Cloudinary
+        if (producto.cloudinaryId) {
+            await cloudinary.uploader.destroy(producto.cloudinaryId);
+        }
+
         await Product.findByIdAndDelete(req.params.id);
         res.sendStatus(204);
     } catch (error) {
@@ -340,14 +355,17 @@ app.get('/api/recetas', async (req, res) => {
 app.post('/api/recetas', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
         const { nombreReceta, descripcion, linkReceta } = req.body;
-        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
-        const imagenUrl = '/ruta/a/imagen'; // Esto debe ser reemplazado con la URL real
+        
+        if (!req.file) {
+            return res.status(400).json({ error: "No se ha proporcionado una imagen" });
+        }
 
         const nuevaReceta = new Recipe({
             nombreReceta,
             descripcion,
             linkReceta,
-            imagenUrl
+            imagenUrl: req.file.path,
+            cloudinaryId: req.file.filename
         });
 
         const recetaGuardada = await nuevaReceta.save();
@@ -362,21 +380,31 @@ app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), asy
     try {
         const { id } = req.params;
         const { nombreReceta, descripcion, linkReceta } = req.body;
-        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
-        const imagenUrl = req.file ? '/ruta/a/imagen' : undefined;
-
-        const recetaActualizada = await Recipe.findByIdAndUpdate(id, {
-            nombreReceta,
-            descripcion,
-            linkReceta,
-            ...(imagenUrl && { imagenUrl })
-        }, { new: true });
-
-        if (!recetaActualizada) {
+        
+        const receta = await Recipe.findById(id);
+        if (!receta) {
             return res.status(404).json({ error: "Receta no encontrada" });
         }
 
-        res.json(recetaActualizada);
+        const recetaActualizada = {
+            nombreReceta,
+            descripcion,
+            linkReceta
+        };
+
+        // Si hay una nueva imagen, actualiza la imagen
+        if (req.file) {
+            // Si existe una imagen previa en Cloudinary, la eliminamos
+            if (receta.cloudinaryId) {
+                await cloudinary.uploader.destroy(receta.cloudinaryId);
+            }
+            
+            recetaActualizada.imagenUrl = req.file.path;
+            recetaActualizada.cloudinaryId = req.file.filename;
+        }
+
+        const resultado = await Recipe.findByIdAndUpdate(id, recetaActualizada, { new: true });
+        res.json(resultado);
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ error: "Error al actualizar receta" });
@@ -385,6 +413,16 @@ app.put('/api/recetas/:id', verificarAutenticacion, upload.single('imagen'), asy
 
 app.delete('/api/recetas/:id', verificarAutenticacion, async (req, res) => {
     try {
+        const receta = await Recipe.findById(req.params.id);
+        if (!receta) {
+            return res.status(404).json({ error: "Receta no encontrada" });
+        }
+
+        // Elimina la imagen de Cloudinary
+        if (receta.cloudinaryId) {
+            await cloudinary.uploader.destroy(receta.cloudinaryId);
+        }
+
         await Recipe.findByIdAndDelete(req.params.id);
         res.sendStatus(204);
     } catch (error) {
