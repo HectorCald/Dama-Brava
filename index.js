@@ -254,9 +254,19 @@ app.get('/api/productos', async (req, res) => {
 
 app.post('/api/productos', verificarAutenticacion, upload.single('imagen'), async (req, res) => {
     try {
+        console.log('Datos recibidos:', req.body); // Depuración
+
         const { nombre, precio, gramaje } = req.body;
-        // Aquí deberías implementar la lógica para subir la imagen a un servicio como S3 o Cloudinary
-        const imagenUrl = '/ruta/a/imagen'; // Esto debe ser reemplazado con la URL real
+        if (!nombre || !precio || !gramaje) {
+            return res.status(400).json({ error: "Todos los campos son obligatorios" });
+        }
+
+        let imagenUrl = "";
+        if (req.file) {
+            imagenUrl = `/uploads/${req.file.filename}`; // Ruta correcta de la imagen
+        } else {
+            return res.status(400).json({ error: "La imagen es obligatoria" });
+        }
 
         const nuevoProducto = new Product({
             nombre,
@@ -268,10 +278,11 @@ app.post('/api/productos', verificarAutenticacion, upload.single('imagen'), asyn
         const productoGuardado = await nuevoProducto.save();
         res.status(201).json(productoGuardado);
     } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: "Error al agregar producto" });
+        console.error("Error al agregar producto:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
     }
 });
+
 
 
 //APi de productos actualizacion
