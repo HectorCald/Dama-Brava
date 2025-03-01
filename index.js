@@ -47,20 +47,23 @@ app.use(express.urlencoded({ extended: true }));
 
 // Configuración de sesión
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'mi-secreto',
-    resave: false,
+    secret: 'mi-secreto',
+    resave: true, // Cambiado a true
     saveUninitialized: false,
+    resave: false,  // No guarda la sesión si no hay cambios
+    saveUninitialized: false, // No guarda sesiones vacías
     store: MongoStore.create({
         mongoUrl: process.env.MONGODB_URI || 'mongodb+srv://hector:hectorCald17@cluster0.nqszi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
         collectionName: 'sessions',
         ttl: 24 * 60 * 60 
     }),
     cookie: { 
-        secure: process.env.NODE_ENV || 'production'  === 'production', // true en producción (Vercel), false en local
+        secure: false, // Cambia a true si usas HTTPS
+        maxAge: 24 * 60 * 60 * 1000, // 24 horas
+        secure: false, // Cambiado a false para desarrollo en localhost
         httpOnly: true, 
-        sameSite: process.env.NODE_ENV || 'production' === 'production' ? 'none' : 'lax',
         maxAge: 24 * 60 * 60 * 1000 
-    }   
+    }
 }));
 
 // Conexión a MongoDB
