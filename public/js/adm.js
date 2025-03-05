@@ -61,11 +61,18 @@ function logout() {
     
 }
 async function agregarProducto(nombre, precio, gramaje, imagen) {
+    const carga= document.querySelector('.loadingScreen2');
+    const botones= document.querySelector('#recetaForm .botones');
+
     const formData = new FormData();
     formData.append('nombre', nombre);
     formData.append('precio', precio);
     formData.append('gramaje', gramaje);
     formData.append('imagen', imagen);
+    carga.style.display='flex';
+    botones.style.display='none';
+    
+
     try {
         const response = await fetch('/api/productos', {
         method: 'POST',
@@ -81,6 +88,8 @@ async function agregarProducto(nombre, precio, gramaje, imagen) {
     } catch (error) {
         console.error("Error al agregar producto:", error);
     }finally {
+        carga.style.display='none';
+        botones.style.display='flex';
         toggleVisibility2('hide');
     }
 
