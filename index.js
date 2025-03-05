@@ -28,7 +28,7 @@ const cloudinaryStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: 'damabrava',
-        allowed_formats: ['jpg', 'jpeg', 'png', 'gif']
+        allowed_formats: ['jpg', 'jpeg', 'png', 'gif','webp']
     }
 });
 
