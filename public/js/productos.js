@@ -325,7 +325,7 @@ function todosProductos(){
 }
 function enterosProductos(){
     const input = document.getElementById('busquedaInput');
-    input.value = 'entero';
+    input.value = 'ent.';
     filtrarPorTexto();
     input.value = '';
     const borrarInput = document.querySelector('.btn-borrar-input');
@@ -335,7 +335,7 @@ function enterosProductos(){
 }
 function molidosProductos(){
     const input = document.getElementById('busquedaInput');
-    input.value = 'molido';
+    input.value = 'mol.';
     filtrarPorTexto();
     input.value = '';
     const borrarInput = document.querySelector('.btn-borrar-input');

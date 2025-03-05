@@ -61,39 +61,38 @@ function logout() {
     
 }
 async function agregarProducto(nombre, precio, gramaje, imagen) {
-    const carga= document.querySelector('.loadingScreen2');
-    const botones= document.querySelector('#recetaForm .botones');
-
     const formData = new FormData();
     formData.append('nombre', nombre);
     formData.append('precio', precio);
     formData.append('gramaje', gramaje);
     formData.append('imagen', imagen);
-    carga.style.display='flex';
-    botones.style.display='none';
-    
+
+    document.getElementById("agregarBtn").style.display = 'none';
+    document.querySelector(".loadingScreen3").style.display = "flex"; 
 
     try {
+
         const response = await fetch('/api/productos', {
-        method: 'POST',
-        body: formData,
-    });
-    const data = await response.json();
-    if (response.ok) {
-        resetForm();
-        mostrarProductos();
-    } else {
-    console.error("Error al agregar producto:", data);
-    }
+            method: 'POST',
+            body: formData,
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            resetForm();
+            mostrarProductos();
+        } else {
+            console.error("Error al agregar producto:", data);
+        }
     } catch (error) {
         console.error("Error al agregar producto:", error);
-    }finally {
-        carga.style.display='none';
-        botones.style.display='flex';
+    } finally {
+        // ✅ Aquí puedes ocultar el loader si la petición ya terminó
+        document.querySelector(".loadingScreen3").style.display = "none";  
         toggleVisibility2('hide');
     }
-
 }
+
 async function mostrarProductos() {
     
     const response = await fetch('/api/productos');
